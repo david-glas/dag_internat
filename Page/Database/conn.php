@@ -12,7 +12,7 @@ class Conn
     public function __construct()
     {
         try {
-            $servername = "46.207.208.238";
+            $servername = "glasdavid.com";
             $username ="root";
             $password = "georgadnandavid";
             $schema = "dag";
