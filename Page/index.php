@@ -16,6 +16,8 @@
 
 <?php
 
+echo 'test adnan';
+
 include "Database/conn.php";
 include "Components/header.php";
 
