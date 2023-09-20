@@ -8,29 +8,34 @@ include "Database/conn.php";
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Bootstrap 5 -->
-  <!-- Latest compiled and minified CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Elements -->
+  <link href="assets/css/dashboard.css" rel="stylesheet">
+  <link href="assets/css/offcanvas-navbar.css" rel="stylesheet">
+  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/offcanvas-navbar.js"></script>
+
   <title>Document</title>
 </head>
 <?php
-  include "Components/header.php";
+  include "Components/nav.php";
 ?>
 <body>
-
-  <?php
-    echo 'test adnan';
-  ?>
+<?php
+  if(isset($_GET['page']))
+  {
+    switch($_GET['page'])
+    {
+      case 'dashboard':
+        include "Pages/dashboard.php";
+        break;
+      default:
+      include "Pages/landing.php";
+    }
+  } else { include "Pages/landing.php"; }
+?>
   
 </body>
 </html>
-
-<?php
-#$user = new User();
-
-#$user->AddUser("0205965818", "Horst", "Geberle", "saufen", 2);
-#$result = $user->CheckLogin("0205965818", "saufen");
-
-?>
