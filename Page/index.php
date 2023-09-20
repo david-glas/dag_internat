@@ -19,18 +19,20 @@ include "Database/conn.php";
   include "Components/header.php";
 ?>
 <body>
-
-  <?php
-    echo 'test adnan';
-  ?>
   
 </body>
 </html>
 
 <?php
-#$user = new User();
+$user = new User();
+$food = new Food();
+$menu = new Menu();
 
-#$user->AddUser("0205965818", "Horst", "Geberle", "saufen", 2);
+$date = date('2023-09-18');
+$menu->AddOrUpdMenuEntry(2, 2, $date);
+
+#$user->UpdateUser("0205965818", "Horst", "Geberle", "saufen", 2);
 #$result = $user->CheckLogin("0205965818", "saufen");
-
+#$result = $food->AddFood("Chicken", array(2, 2));
+#echo $result;
 ?>
