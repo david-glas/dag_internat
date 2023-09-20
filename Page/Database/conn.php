@@ -19,8 +19,6 @@ class Conn
 
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            #$this->connection = new mysqli($servername, $username, $password, $dbname);
         } 
         catch(Exception $e) 
         {
@@ -47,10 +45,35 @@ class User extends Conn
 {
 
     function AddUser($svnr, $firstname, $lastname, $password, $roleId){
-      $query = "insert into user(svnr, firstname, lastname, pw, role_id) values (?, ?, ?, ?, ?)";
-      $arr = array($svnr, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId);
-      $stmt = $this->makeStatement($query, $arr);
+        try
+        {
+            $query = "insert into user(svnr, firstname, lastname, pw, role_id) values (?, ?, ?, ?, ?)";
+            $arr = array($svnr, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId);
+            $stmt = $this->makeStatement($query, $arr);
+            
+            echo 'User inserted';
+        }
+        catch(Exception $e) 
+        {
+          echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
+        }
     }
+
+    function UpdateUser($svnr, $firstname, $lastname, $password, $roleId){
+        try
+        {
+            $query = "insert into user(svnr, firstname, lastname, pw, role_id) values (?, ?, ?, ?, ?)";
+            $arr = array($svnr, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId);
+            $stmt = $this->makeStatement($query, $arr);
+            
+            echo 'Updated inserted';
+        }
+        catch(Exception $e) 
+        {
+          echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
+        }
+    }
+
     function CheckLogin($svnr, $password){
 
         $query = "select * from user where svnr = ?";
