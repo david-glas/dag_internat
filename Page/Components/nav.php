@@ -8,7 +8,10 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link <?php setActive() ?>" aria-current="page" href="?page=dashboard">Dashboard</a>
+          <a class="nav-link" href="?page=menu">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php setActive('dashboard') ?>" aria-current="page" href="?page=dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Notifications</a>
@@ -19,24 +22,13 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Switch account</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="?page=menu">Menu</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
       </ul>
     </div>
   </div>
 </nav>
 <?php function setActive($page) {
   if(isset($_GET['page'])) {
-    if($_GET['page'] == "dashboard") {
+    if($_GET['page'] == $page) {
       echo "active";
     } 
   }
