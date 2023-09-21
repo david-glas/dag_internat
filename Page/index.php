@@ -2,7 +2,7 @@
 include "Database/conn.php";
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,6 +37,7 @@ include "Database/conn.php";
       include "Pages/landing.php";
     }
   } else { include "Pages/landing.php"; }
+  include "Components/footer.php";
 ?>
   
 </body>
