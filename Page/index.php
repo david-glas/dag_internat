@@ -31,6 +31,8 @@ include "Database/conn.php";
       case 'dashboard':
         include "Pages/dashboard.php";
         break;
+      case 'menu':
+        include "Pages/menu.php";
       default:
       include "Pages/landing.php";
     }
