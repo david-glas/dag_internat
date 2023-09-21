@@ -1,78 +1,108 @@
-<link rel="stylesheet" href="assets/css/menu.css">
-<div class="container text-center my-3">
-	<h2 class="font-weight-light">Bootstrap Multi Slide Carousel</h2>
-	<div class="row mx-auto my-auto justify-content-center">
-		<div id="recipeCarousel" class="carousel slide" data-bs-ride="carousel">
-			<div class="carousel-inner" role="listbox" data-wrap="false" interval="false"> 
-				<div class="carousel-item active">
-					<div class="col-md-3">
-						<div class="card">
-							<div class="card-img">
-								<img src="//via.placeholder.com/500x400/31f?text=1" class="img-fluid">
-							</div>
-							<div class="card-img-overlay">Slide 1</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="col-md-3">
-						<div class="card">
-							<div class="card-img">
-								<img src="//via.placeholder.com/500x400/e66?text=2" class="img-fluid">
-							</div>
-							<div class="card-img-overlay">Slide 2</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="col-md-3">
-						<div class="card">
-							<div class="card-img">
-								<img src="//via.placeholder.com/500x400/7d2?text=3" class="img-fluid">
-							</div>
-							<div class="card-img-overlay">Slide 3</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="col-md-3">
-						<div class="card">
-							<div class="card-img">
-								<img src="//via.placeholder.com/500x400?text=4" class="img-fluid">
-							</div>
-							<div class="card-img-overlay">Slide 4</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="col-md-3">
-						<div class="card">
-							<div class="card-img">
-								<img src="//via.placeholder.com/500x400/aba?text=5" class="img-fluid">
-							</div>
-							<div class="card-img-overlay">Slide 5</div>
-						</div>
-					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="col-md-3">
-						<div class="card">
-							<div class="card-img">
-								<img src="//via.placeholder.com/500x400/fc0?text=6" class="img-fluid">
-							</div>
-							<div class="card-img-overlay">Slide 6</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			</a>
-			<a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel" role="button" data-bs-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			</a>
-		</div>
-	</div>
-	<h5 class="mt-2 fw-light">advances one slide at a time</h5>
+<?php
+function getLastMonday()
+{
+  $today = date('N'); // Gibt den aktuellen Wochentag als Zahl (1 für Montag, 7 für Sonntag) zurück
+
+  if ($today === '1') {
+    return date('Y.m.d');
+  } else {
+    return date('Y.m.d', strtotime('last Monday'));
+  }
+}
+
+$lastMonday = getLastMonday();
+function getDate($day)
+{
+
+  $germanDays = array(
+    1 => 'Montag',
+    2 => 'Dienstag',
+    3 => 'Mittwoch',
+    4 => 'Donnerstag',
+    5 => 'Freitag',
+    6 => 'Samstag',
+    7 => 'Sonntag'
+  );
+
+  if ($day === '1') {
+    return $germanDays[$day] . ' ' . date('Y.m.d');
+  } else {
+    return $germanDays[$day] . ' ' . date('Y.m.d', strtotime('last Monday'));
+  }
+}
+?>
+
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-5 g-4">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+            <small class="text-muted"><?php echo $date; ?></small>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">This is card 1.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+            <small class="text-muted">Montag 21.09.2023</small>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">This is card 1.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+            <small class="text-muted">Montag 21.09.2023</small>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">This is card 1.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+            <small class="text-muted">Montag 21.09.2023</small>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">This is card 1.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+            <small class="text-muted">Montag 21.09.2023</small>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">This is card 1.</p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<script src="assets/js/menu.js"></script>
