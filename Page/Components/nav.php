@@ -8,7 +8,7 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link <?php if($_GET['page'] == "dashboard") { echo ("active"); } ?>" aria-current="page" href="?page=dashboard">Dashboard</a>
+          <a class="nav-link <?php setActive() ?>" aria-current="page" href="?page=dashboard">Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Notifications</a>
@@ -28,7 +28,13 @@
           </ul>
         </li>
       </ul>
-
     </div>
   </div>
 </nav>
+<?php function setActive($page) {
+  if(isset($_GET['page'])) {
+    if($_GET['page'] == "dashboard") {
+      echo "active";
+    } 
+  }
+}
