@@ -20,35 +20,35 @@ include "Database/conn.php";
   <title>Document</title>
 </head>
 <?php
-  include "Components/nav.php";
+include "Components/nav.php";
 ?>
 <body>
 <?php
-  if(isset($_GET['page']))
-  {
-    switch($_GET['page'])
-    {
-      case 'dashboard':
-        include "Pages/dashboard.php";
-        break;
-      case 'menu':
-        include "Pages/menu.php";
-      default:
+if (isset($_GET['page'])) {
+  switch ($_GET['page']) {
+    case 'dashboard':
+      include "Pages/dashboard.php";
+      break;
+    case 'menu':
+      include "Pages/menu.php";
+    default:
       include "Pages/landing.php";
-    }
-  } else { include "Pages/landing.php"; }
+  }
+} else {
+  include "Pages/landing.php";
+}
 ?>
   
 </body>
 </html>
 
 <?php
-$user = new User();
-$food = new Food();
-$menu = new Menu();
+#$user = new User();
+#$food = new Food();
+#$menu = new Menu();
 
-$date = date('2023-09-18');
-$menu->AddOrUpdMenuEntry(2, 2, $date);
+#$date = date('2023-09-18');
+#$menu->AddOrUpdMenuEntry(2, 2, $date);
 
 #$user->UpdateUser("0205965818", "Horst", "Geberle", "saufen", 2);
 #$result = $user->CheckLogin("0205965818", "saufen");
