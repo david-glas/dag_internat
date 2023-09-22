@@ -168,28 +168,31 @@ class Menu extends Conn
                     order by meal_id";
         $stmt = $Menu->makeStatement($query, array(date('Y-m-d', $date)));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) == 0){
+            return null;
+        }
         foreach($result as $food){
             switch ($food["meal_id"]){
                 case "1":
-                $Menu->Breakfast = $food["name"];
+                $Menu->Breakfast = $food;
                     break;
                 case "2":
-                $Menu->Starter = $food["name"];
+                $Menu->Starter = $food;
                     break;  
                 case "3":
-                $Menu->FirstMainMeal = $food["name"];
+                $Menu->FirstMainMeal = $food;
                     break;
                 case "4":
-                $Menu->SecondMainMeal = $food["name"];
+                $Menu->SecondMainMeal = $food;
                     break;
                 case "5":
-                $Menu->Dessert = $food["name"];   
+                $Menu->Dessert = $food;   
                     break;  
                 case "6":
-                $Menu->FirstDinner = $food["name"];
+                $Menu->FirstDinner = $food;
                     break;
                 case "7":
-                $Menu->SecondDinner = $food["name"];
+                $Menu->SecondDinner = $food;
                     break;
                 default:
                     break;

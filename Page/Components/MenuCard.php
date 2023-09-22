@@ -45,14 +45,99 @@ function GetCardsByWeek ($week){
      $string = getDateString($currDate, $i);
      $Menu = Menu::GetMenuByDate($currDate);
 
-     $cards = $cards .
+    if (isset($Menu))
+    {
+      $cards = $cards .
       '<div class="col">
           <div class="card">
             <div class="card-header">
               <small class="text-muted">' . $string . '</small>
                 </div>
                 <div class="card-body">
-                  <h5 class="card-title">' . nvl($Menu->Breakfast) . '</h5>
+                  <h5 id="xy" class="card-title">Frühstück</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button id="btn" type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+              <hr class="hr" />
+              <div class="card-body">
+                  <h5 id="xy" class="card-title">Vorspeise</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+              <hr class="hr" />
+              <div class="card-body">
+                  <h5 id="xy" class="card-title">1. Mittagessen</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+              <hr class="hr" />
+              <div class="card-body">
+                  <h5 id="xy" class="card-title">2. Mittagessen</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+              <hr class="hr" />
+              <div class="card-body">
+                  <h5 id="xy" class="card-title">Nachspeise</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+              <hr class="hr" />
+              <div class="card-body">
+                  <h5 id="xy" class="card-title">1. Abendessen</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+              <hr class="hr" />
+              <div class="card-body">
+                  <h5 id="xy" class="card-title">2. Abendessen</h5>
+                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
+                  <button type="button" class="btn btn-success custom-btn-size"  
+                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
+                      data-user-id="' . "USERID" .'">
+                    Anmelden
+                  </button>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">' . $string . '</small>
+                </div>
+              </div>
+            </div>';
+    }
+    else
+    {
+      $cards = $cards .
+      '<div class="col">
+          <div class="card">
+            <div class="card-header">
+              <small class="text-muted">' . $string . '</small>
+                </div>
+                <div class="card-body">
+                  <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' .'">' . 'No Meal' . '</h5>
                   <p class="card-text">This is card .</p>
                 </div>
                 <div class="card-footer">
@@ -60,6 +145,8 @@ function GetCardsByWeek ($week){
                 </div>
               </div>
             </div>';
+    }
+
    }
    return $cards;
 }

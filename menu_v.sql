@@ -1,5 +1,5 @@
 CREATE VIEW menu_v AS
-	SELECT f.*, me.meal_id, me.type, tod.description, m.day, 
+	SELECT m.menu_id, f.*, me.meal_id, me.type, tod.description, m.day, 
 		   DAYNAME(m.day) AS day_name, 
            WEEKDAY(m.day) AS weekday
 		FROM food f

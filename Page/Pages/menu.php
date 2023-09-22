@@ -14,6 +14,29 @@ function IsActive($tab, $week){
 $week = intval($_GET['week']);
 
 ?>
+    <style>
+
+        /* Style for the parent div */
+        .card-body {
+            position: relative; /* Required for positioning the button */
+        }
+        /* Style for the button */
+        button {
+            width: 30%; /* Set the button to be half the width of the parent */
+            position: absolute; /* Position it absolutely within the parent */
+            bottom: 5px; /* Margin from the bottom */
+            right: 5px; /* Margin from the right */
+            opacity: 50%;
+        }
+        .custom-btn-size {
+            font-size: 10px;  
+        }
+        hr {
+          margin: 0rem;
+          color: grey;
+          opacity: 0.25;
+        }
+    </style>
 
 <div class="container">
 <ul class="nav nav-pills card-header-pills">
@@ -35,3 +58,29 @@ $week = intval($_GET['week']);
    ?>
   </div>
 </div>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+
+
+
+  document.getElementById("btn").addEventListener("click", function() {
+
+
+    let file = "http://localhost:8000/test.php"
+
+  fetch (file).then((response) => response.json()).then(json => alert(json.Test));
+
+     //let tmpObj =JSON.parse(x);
+
+     //alert(tmpObj.test);
+
+  
+
+  });
+
+})
+
+</script>
