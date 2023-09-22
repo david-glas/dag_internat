@@ -1,31 +1,33 @@
 <?php
-function getLastMonday(){
-$today = date('N'); // Gibt den aktuellen Wochentag als Zahl (1 für Montag, 7 für Sonntag) zurück
+function getLastMonday()
+{
+  $today = date('N'); // Gibt den aktuellen Wochentag als Zahl (1 für Montag, 7 für Sonntag) zurück
 
-if ($today === '1') {
+  if ($today === '1') {
     return date('Y.m.d');
-} else {
+  } else {
     return date('Y.m.d', strtotime('last Monday'));
-}
+  }
 }
 
 $lastMonday = getLastMonday();
-function getDate($day){
+function getDate($day)
+{
 
   $germanDays = array(
-      1 => 'Montag',
-      2 => 'Dienstag',
-      3 => 'Mittwoch',
-      4 => 'Donnerstag',
-      5 => 'Freitag',
-      6 => 'Samstag',
-      7 => 'Sonntag'
+    1 => 'Montag',
+    2 => 'Dienstag',
+    3 => 'Mittwoch',
+    4 => 'Donnerstag',
+    5 => 'Freitag',
+    6 => 'Samstag',
+    7 => 'Sonntag'
   );
 
   if ($day === '1') {
-      return $germanDays[$day] . ' ' . date('Y.m.d');
+    return $germanDays[$day] . ' ' . date('Y.m.d');
   } else {
-      return $germanDays[$day] . ' ' . date('Y.m.d', strtotime('last Monday'));
+    return $germanDays[$day] . ' ' . date('Y.m.d', strtotime('last Monday'));
   }
 }
 ?>
@@ -35,7 +37,7 @@ function getDate($day){
     <div class="col">
       <div class="card">
         <div class="card-header">
-            <small class="text-muted"><?php echo $date;  ?></small>
+            <small class="text-muted"><?php echo $date; ?></small>
         </div>
         <div class="card-body">
           <h5 class="card-title">Card 1</h5>

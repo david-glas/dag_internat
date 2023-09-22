@@ -1,5 +1,5 @@
 <?php
- include "Database/conn.php"; 
+include "Database/conn.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="bright">
@@ -17,26 +17,26 @@
   <title>Document</title>
 </head>
 <?php
-  include "Components/nav.php";
+include "Components/nav.php";
 ?>
 <body>
 <?php
-  if(isset($_GET['page']))
-  {
-    switch($_GET['page'])
-    {
-      case 'dashboard':
-        include "Pages/dashboard.php";
-        break;
-      case 'menu':
-        include "Pages/menu.php";
-        break;
-      default:
-        include "Pages/landing.php";
-        break;
-    }
-  } else { include "Pages/landing.php"; }
-  include "Components/footer.php";
+if (isset($_GET['page'])) {
+  switch ($_GET['page']) {
+    case 'dashboard':
+      include "Pages/dashboard.php";
+      break;
+    case 'menu':
+      include "Pages/menu.php";
+      break;
+    default:
+      include "Pages/landing.php";
+      break;
+  }
+} else {
+  include "Pages/landing.php";
+}
+include "Components/footer.php";
 ?>
   
 </body>
