@@ -2,66 +2,59 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-if (!isset($_SESSION["user"])){
+if (!isset($_SESSION["user"])) {
     $_SESSION["user"] = "webuser";
 }
 
 class Conn
 {
-  var $conn;
+    var $conn;
     public function __construct()
     {
         try {
             $servername = "glasdavid.com";
-            $username ="root";
+            $username = "root";
             $password = "georgadnandavid";
             $schema = "dag";
 
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } 
-        catch(Exception $e) 
-        {
-          echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
         }
     }
 
     public function makeStatement($query, $arrayValues = null)
     {
-      try
-      {
-        $stmt = $this->conn->prepare($query); 
-        $stmt->execute($arrayValues);
-        return $stmt;
-      }
-      catch(Exception $e) 
-      {
-        echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
-      }
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute($arrayValues);
+            return $stmt;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
     }
 }
 
 class User extends Conn
 {
-    function AddUser($svnr, $firstname, $lastname, $password, $roleId){
-        try
-        {
+    function AddUser($svnr, $firstname, $lastname, $password, $roleId)
+    {
+        try {
             $query = "insert into user(svnr, firstname, lastname, pw, role_id) values (?, ?, ?, ?, ?)";
             $arr = array($svnr, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId);
             $stmt = $this->makeStatement($query, $arr);
-            
+
             return true;
-        }
-        catch(Exception $e) 
-        {
-          echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
-          return false;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
         }
     }
 
-    function UpdateUser($svnr, $firstname, $lastname, $password, $roleId){
-        try
-        {
+    function UpdateUser($svnr, $firstname, $lastname, $password, $roleId)
+    {
+        try {
             $query = "update user 
                         set firstname = ?, 
                             lastName = ?, 
@@ -70,17 +63,16 @@ class User extends Conn
                         where svnr = ?;";
             $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $svnr);
             $stmt = $this->makeStatement($query, $arr);
-            
+
             return true;
-        }
-        catch(Exception $e) 
-        {
-          echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
-          return false;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
         }
     }
 
-    function CheckLogin($svnr, $password){
+    function CheckLogin($svnr, $password)
+    {
 
         $query = "select u.pw, r.name 
                     from user u left join role r using (role_id)
@@ -88,55 +80,46 @@ class User extends Conn
         $stmt = $this->makeStatement($query, array($svnr));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         /* If there is a result, check if the password matches using password_verify(). */
-        if (is_array($result))
-        {
-          if (password_verify($password, $result['pw']))
-          {
-            /* The password is correct. */
-            if (isset($result["name"]) and $result["name"] != "")
-            {
-                return $result["name"];
+        if (is_array($result)) {
+            if (password_verify($password, $result['pw'])) {
+                /* The password is correct. */
+                if (isset($result["name"]) and $result["name"] != "") {
+                    return $result["name"];
+                }
+                return "webuser";
             }
-            return "webuser";
-          }
         }
-    } 
+    }
 }
 
 class Food extends Conn
 {
 
-    function AddFood($name, $mealArr){
+    function AddFood($name, $mealArr)
+    {
         $foodId = 0;
         # Insert the food
-        try
-        {
+        try {
             $query = "insert into food(name) values (?)";
             $arr = array($name);
             $stmt = $this->makeStatement($query, $arr);
             $foodId = $this->conn->lastInsertId();
-        }
-        catch(Exception $e) 
-        {
-          echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
-          return false;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
         }
 
         # Insert the food_meal relationship
-        try
-        {
-            foreach($mealArr as $mealId)
-            {
+        try {
+            foreach ($mealArr as $mealId) {
                 $query = "insert into food_meal(food_id, meal_id) values (?, ?)";
                 $arr = array($foodId, $mealId);
                 $stmt = $this->makeStatement($query, $arr);
             }
 
             return true;
-        }
-        catch(Exception $e) 
-        {
-            echo 'Fehler - ' . $e->getCode(). ': ' . $e->getMessage() . '<br>';
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
             return false;
         }
     }
@@ -144,8 +127,15 @@ class Food extends Conn
 
 class Menu extends Conn
 {
-
-    function AddOrUpdMenuEntry($foodId, $mealId, $date){
+    var $Breakfast;
+    var $Starter;
+    var $FirstMainMeal;
+    var $SecondMainMeal;
+    var $Dessert;
+    var $FirstDinner;
+    var $SecondDinner;
+    function AddOrUpdMenuEntry($foodId, $mealId, $date)
+    {
 
         $query = "select menu_id 
                     from menu 
@@ -154,11 +144,10 @@ class Menu extends Conn
         $stmt = $this->makeStatement($query, array($mealId, $date));
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         /* Check if menu entry exists */
-        if (!is_array($result))
-        {
+        if (!is_array($result)) {
             $query = "insert into menu (meal_id, day)
                         values (?, ?)";
-            for ($i = 1; $i <= 7; $i++){
+            for ($i = 1; $i <= 7; $i++) {
                 $stmt = $this->makeStatement($query, array($i, $date));
             }
         }
@@ -168,169 +157,13 @@ class Menu extends Conn
                       and day = ?";
         $stmt = $this->makeStatement($query, array($foodId, $mealId, $date));
     }
-}
 
-
-
-
-/* Template */
-class DbCon
-{
-    public $connection = null;
-
-    public function __construct()
+    function GetMenuByDate($date)
     {
-        try {
-            $servername = "localhost";
-            $username = $_SESSION["user"];
-            $password = "";
-            $dbname = "streaming";
-            $this->connection = new mysqli($servername, $username, $password, $dbname);
-
-            if (mysqli_connect_errno()) {
-                throw new Exception("Could not connect to database.");
-            }
-
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
+        $query = "select menu_id 
+                    from menu_v
+                    where day = ?";
+        $stmt = $this->makeStatement($query, array($mealId, $date));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }
-
-class UserOld extends DbCon
-{
-    function CheckLogin($user, $password){
-        $sql = "select * from user where name ='$user' and password = '$password'";
-        $result = $this->connection->query($sql);
-        if ($result->num_rows == 1){
-            return mysqli_fetch_assoc($result)["name"];
-        }
-        return "invalid";
-    } 
-
-}
-
-class Kategorien extends DbCon
-{
-
-    function GetAllCategories()
-    {
-
-        $sql = "select * from kategorien";
-        return $this->connection->query($sql);
-
-    }
-
-    function GetCategoryById($id)
-    {
-        $sql = 'SELECT * FROM Kategorien where id =' . $id . ';';
-
-        return mysqli_fetch_assoc($this->connection->query($sql));
-    }
-}
-
-class Filme extends DbCon
-{
-
-    function GetAllMovies()
-    {
-
-        $sql = "SELECT * FROM filme order by id desc limit 9";
-
-        return $this->connection->query($sql);;
-    }
-
-    function GetMovieById($id)
-    {
-
-        $sql = 'SELECT * FROM filme where id =' . $id . ';';
-
-        return mysqli_fetch_assoc($this->connection->query($sql));
-    }
-
-    function GetMoviesByNameAndCategory($moviename, $category, $amount)
-    {
-
-        $sql = 'select * from (
-				                select f.* from filme f join kategorien k on f.kategorie_id = k.id where upper(f.title) like upper("%' . $moviename . '%") and k.title like ("%' . $category . '%")
-                                union
-                                 select f.* from filme f join kategorien k on f.kategorie_id = k.id where k.title like ("%' . $category . '%")
-                                union
-                                select * from filme as T1
-	                             ) as T3 
-                    limit ' . $amount;
-
-        $this->SearchLog($sql);
-        return $this->connection->query($sql);;
-    }
-
-    function SearchLog($query)
-    {
-        $sql = 'INSERT INTO search_logs (user_id, msg) VALUES ((SELECT user_id from USER WHERE name = "' . $_SESSION["user"] . '"), "' . addslashes($query) . '");';
-        $this->connection->query($sql);
-    }
-
-    function AddMovie($moviename, $category, $anbieter, $kurztext, $langtext, $bild_url)
-    {
-
-        $sql = 'insert into filme (title, kategorie_id, kurztext, langtext, bild_url) values 
-                ("' . $moviename . '", (Select id from kategorien where title = "' . $category . '"),"' . $kurztext . '" , "' . $langtext . '", "' . $bild_url . '");';
-        $this->connection->query($sql);
-
-        $film_id = $this->connection->insert_id;
-        foreach ($anbieter as $firma)
-        {
-            $sql = 'insert into anbieter_filme(film_id, anbieter_id) values ("' . $film_id . '" * 1, (select id from anbieter where title = "' . $firma . '"));';
-            $this->connection->query($sql);
-        }
-        return $film_id;
-    }
-
-    function UpdateMovie($movieid, $moviename, $category, $anbieter, $kurztext, $langtext, $bild_url)
-    {
-        $sql = 'update filme set title = "' . $moviename . '", kurztext = "' . $kurztext . '", langtext = "' . $langtext . '",
-	        bild_url = "' . $bild_url . '", kategorie_id = (select id from kategorien where title = "' . $category . '") 
-	        where id = "' . $movieid . '" * 1;';
-        $this->connection->query($sql);
-
-        $sql = 'delete from anbieter_filme where film_id = "' . $movieid . '";';
-        $this->connection->query($sql);
-
-
-        foreach ($anbieter as $firma)
-        {
-            $sql = 'insert into anbieter_filme(film_id, anbieter_id) values ("' . $movieid . '" * 1, (select id from anbieter where title = "' . $firma . '"));';
-            $this->connection->query($sql);
-        }
-        return $movieid;
-    }
-
-    function GetAnbieterByMovieId($id)
-    {
-
-        $sql = 'SELECT anbieter_id FROM anbieter_filme where film_id ="' . $id . '"*1;';
-
-        $anbieter = array();
-
-        $result = $this->connection->query($sql);
-        while($row = $result->fetch_assoc() ){
-            $anbieter[] = $row["anbieter_id"];
-        }
-        return $anbieter;
-    }
-}
-
-class Anbieter extends DbCon
-{
-
-    function GetAll()
-    {
-
-        $sql = "SELECT * FROM anbieter";
-
-        return $this->connection->query($sql);;
-    }
-}
-
-?>
-
