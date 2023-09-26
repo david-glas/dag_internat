@@ -1,19 +1,3 @@
-<?php
-
-include "Components/MenuCard.php";
-
-function IsActive($tab, $week)
-{
-  if ($tab == $week) {
-    return "active";
-  } else {
-    return "";
-  }
-}
-
-$week = intval($_GET['week']);
-
-?>
 <style>
   /* Style for the parent div */
   .card-body {
@@ -55,27 +39,66 @@ $week = intval($_GET['week']);
 <div class="container">
   <ul class="nav nav-pills card-header-pills">
     <li class="nav-item">
-      <a class="nav-link <?php IsActive(0, $week) ?>" href="?page=menu&week=0" style="color: #565656">Today</a>
+      <a id="0" class="nav-link" style="color: #565656">Aktuelle
+        Woche</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link <?php IsActive(0, $week) ?>" href="?page=menu&week=1" style="color: #565656">Next Week</a>
+      <a id="1" class="nav-link" style="color: #565656">Nächste
+        Woche</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link <?php IsActive(0, $week) ?>" href="?page=menu&week=2" style="color: #565656">Next Next Week</a>
+      <a id="2" class="nav-link" style="color: #565656">Übernächste
+        Woche</a>
+    </li>
+    <li id="spinner" class="nav-item">
+      <div class="spinner-border text-secondary" role="status">
+      </div>
     </li>
   </ul>
   <br>
-  <div class="row row-cols-1 row-cols-md-5 g-4">
-
-    <?php
-    echo GetCardsByWeek($week);
-    ?>
+  <div id="card-container" class="row row-cols-1 row-cols-md-5 g-4">
   </div>
 </div>
 
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
+    var spinner = document.getElementById("spinner");
+    spinner.style.display = "none";
+    const tabs = document.querySelectorAll('a');
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () {
+        var spinner = document.getElementById("spinner");
+        spinner.style.display = "block";
+        const url = 'Components/MenuCard.php';
+        const method = 'getCardsByWeek';
+        const requestData = {
+          method: method,
+          week: tab.getAttribute("id")
+        };
+
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(requestData),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.text())
+          .then(data => {
+            var container = document.getElementById("card-container");
+            container.innerHTML = data;
+            var spinner = document.getElementById("spinner");
+            spinner.style.display = "none";
+          })
+          .catch(error => {
+            console.error('Fehler beim Abrufen der Daten:', error);
+          });
+      })
+    });
+
+
     const buttons = document.querySelectorAll('button');
 
     buttons.forEach(function (button, index) {
@@ -122,5 +145,4 @@ $week = intval($_GET['week']);
       });
     });
   });
-
 </script>

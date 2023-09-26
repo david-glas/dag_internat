@@ -1,5 +1,14 @@
 <?php
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  include "../Database/conn.php";
+  $requestData = json_decode(file_get_contents('php://input'));
+
+  if ($requestData->method == "getCardsByWeek") {
+    $result = getCardsByWeek($requestData->week);
+    echo $result;
+  }
+}
 function nvl($var, $default = "")
 {
   return isset($var) ? $var
