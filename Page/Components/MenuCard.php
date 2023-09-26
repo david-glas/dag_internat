@@ -2,8 +2,8 @@
 
 function nvl($var, $default = "")
 {
-    return isset($var) ? $var
-                       : $default;
+  return isset($var) ? $var
+    : $default;
 }
 function getLastMonday($week)
 {
@@ -16,8 +16,15 @@ function getLastMonday($week)
   }
 }
 
-function getCurrentDay($lastMonday, $addedDays){  
+function getCurrentDay($lastMonday, $addedDays)
+{
   return strtotime("+ {$addedDays} day", $lastMonday);
+}
+
+function tooLateToOrder($date)
+{
+  #return false;
+  return $date >= strtotime("today + 7 days");
 }
 
 function getDateString($day, $index)
@@ -36,118 +43,103 @@ function getDateString($day, $index)
   return $germanDays[$index] . ' ' . date('d.m.Y', $day);
 }
 
-function GetCardsByWeek ($week){
-   # 0 This Week, 1 Next Week, 2 Next Next Week
-   $lastMonday = getLastMonday($week);
-   $cards = "";
-   for ($i = 0; $i < 5; $i++) {
-     $currDate = getCurrentDay($lastMonday, $i);
-     $string = getDateString($currDate, $i);
-     $Menu = Menu::GetMenuByDate($currDate);
+function getCardByUser($Meal, $day)
+{
+  $tooLate = tooLateToOrder($day);
+  if (is_null($Meal["user_id"]) and !$tooLate) {
+    return
+      '<div class="card-body">
+    <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+    <p class="card-text">' . nvl($Meal["name"]) . '</p>
+    <button type="button" class="btn btn-success custom-btn-size"  
+        data-menu-id="' . nvl($Meal["menu_id"]) . '"
+        data-user-id="1">
+      Anmelden
+    </button>
+  </div>';
+  } else if (!is_null($Meal["user_id"]) and !$tooLate) {
+    return
+      '<div class="card-body">
+        <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+        <p class="card-text">' . nvl($Meal["name"]) . '</p>
+        <button type="button" class="btn btn-danger custom-btn-size"  
+            data-menu-id="' . nvl($Meal["menu_id"]) . '"
+            data-user-id="1">
+          Abmelden
+        </button>
+      </div>';
+  } else if (is_null($Meal["user_id"]) and $tooLate) {
+    return
+      '<div class="card-body">
+        <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+        <p class="card-text">' . nvl($Meal["name"]) . '</p>
+        <button disabled type="button" class="btn btn-secondary custom-btn-size"  
+            data-menu-id="' . nvl($Meal["menu_id"]) . '"
+            data-user-id="1">
+          nicht bestellt
+        </button>
+      </div>';
+  } else if (!is_null($Meal["user_id"]) and $tooLate) {
+    return
+      '<div class="card-body">
+        <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+        <p class="card-text">' . nvl($Meal["name"]) . '</p>
+        <button disabled type="button" class="btn btn-primary custom-btn-size"  
+            data-menu-id="' . nvl($Meal["menu_id"]) . '"
+            data-user-id="1">
+          bestellt
+        </button>
+      </div>';
+  }
+}
 
-    if (isset($Menu))
-    {
+function GetCardsByWeek($week)
+{
+  # 0 This Week, 1 Next Week, 2 Next Next Week
+  $lastMonday = getLastMonday($week);
+  $cards = "";
+  for ($i = 0; $i < 5; $i++) {
+    $currDate = getCurrentDay($lastMonday, $i);
+    $day = getDateString($currDate, $i);
+    $Menu = Menu::GetMenuByDateAndUser($currDate, 1);
+
+    if (isset($Menu)) {
       $cards = $cards .
-      '<div class="col">
+        '<div class="col">
           <div class="card">
             <div class="card-header">
-              <small class="text-muted">' . $string . '</small>
-                </div>
-                <div class="card-body">
-                  <h5 id="xy" class="card-title">Frühstück</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button id="btn" type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-              <hr class="hr" />
-              <div class="card-body">
-                  <h5 id="xy" class="card-title">Vorspeise</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-              <hr class="hr" />
-              <div class="card-body">
-                  <h5 id="xy" class="card-title">1. Mittagessen</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-              <hr class="hr" />
-              <div class="card-body">
-                  <h5 id="xy" class="card-title">2. Mittagessen</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-              <hr class="hr" />
-              <div class="card-body">
-                  <h5 id="xy" class="card-title">Nachspeise</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-              <hr class="hr" />
-              <div class="card-body">
-                  <h5 id="xy" class="card-title">1. Abendessen</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-              <hr class="hr" />
-              <div class="card-body">
-                  <h5 id="xy" class="card-title">2. Abendessen</h5>
-                  <p class="card-text">' . nvl($Menu->Breakfast["name"]) . '</p>
-                  <button type="button" class="btn btn-success custom-btn-size"  
-                      data-menu-id="' . nvl($Menu->Breakfast["menu_id"]) .'
-                      data-user-id="' . "USERID" .'">
-                    Anmelden
-                  </button>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">' . $string . '</small>
+              <small class="text-muted">' . $day . '</small>
+              </div>' .
+        getCardByUser($Menu->Breakfast, $day) . '<hr class="hr" />' .
+        getCardByUser($Menu->Starter, $day) . '<hr class="hr" />' .
+        getCardByUser($Menu->FirstMainMeal, $day) . '<hr class="hr" />' .
+        getCardByUser($Menu->SecondMainMeal, $day) . '<hr class="hr" />' .
+        getCardByUser($Menu->Dessert, $day) . '<hr class="hr" />' .
+        getCardByUser($Menu->FirstDinner, $day) . '<hr class="hr" />' .
+        getCardByUser($Menu->SecondDinner, $day) .
+        '<div class="card-footer">
+                  <small class="text-muted">' . $day . '</small>
                 </div>
               </div>
             </div>';
-    }
-    else
-    {
+    } else {
       $cards = $cards .
-      '<div class="col">
+        '<div class="col">
           <div class="card">
             <div class="card-header">
-              <small class="text-muted">' . $string . '</small>
+              <small class="text-muted">' . $day . '</small>
                 </div>
                 <div class="card-body">
-                  <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' .'">' . 'No Meal' . '</h5>
-                  <p class="card-text">This is card .</p>
+                  <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' . '">Es wurde noch kein Essen hinzugefügt.</h5>
                 </div>
                 <div class="card-footer">
-                  <small class="text-muted">Last updated 3 mins ago</small>
+                  <small class="text-muted">' . $day . '</small>
                 </div>
               </div>
             </div>';
     }
 
-   }
-   return $cards;
+  }
+  return $cards;
 }
 ?>

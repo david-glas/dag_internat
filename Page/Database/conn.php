@@ -168,36 +168,96 @@ class Menu extends Conn
                     order by meal_id";
         $stmt = $Menu->makeStatement($query, array(date('Y-m-d', $date)));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (count($result) == 0){
+        if (count($result) == 0) {
             return null;
         }
-        foreach($result as $food){
-            switch ($food["meal_id"]){
+        foreach ($result as $food) {
+            switch ($food["meal_id"]) {
                 case "1":
-                $Menu->Breakfast = $food;
+                    $Menu->Breakfast = $food;
                     break;
                 case "2":
-                $Menu->Starter = $food;
-                    break;  
+                    $Menu->Starter = $food;
+                    break;
                 case "3":
-                $Menu->FirstMainMeal = $food;
+                    $Menu->FirstMainMeal = $food;
                     break;
                 case "4":
-                $Menu->SecondMainMeal = $food;
+                    $Menu->SecondMainMeal = $food;
                     break;
                 case "5":
-                $Menu->Dessert = $food;   
-                    break;  
+                    $Menu->Dessert = $food;
+                    break;
                 case "6":
-                $Menu->FirstDinner = $food;
+                    $Menu->FirstDinner = $food;
                     break;
                 case "7":
-                $Menu->SecondDinner = $food;
+                    $Menu->SecondDinner = $food;
                     break;
                 default:
                     break;
             }
         }
         return $Menu;
+    }
+
+    static function GetMenuByDateAndUser($date, $userId)
+    {
+
+        $Menu = new Menu();
+        $query = "select * 
+                    from menu_v mv left join user_menu um using (menu_id)
+                    where day = ?
+                      and (user_id = ?
+                           or user_id is null)
+                    order by meal_id";
+        $stmt = $Menu->makeStatement($query, array(date('Y-m-d', $date), $userId));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) == 0) {
+            return null;
+        }
+        foreach ($result as $food) {
+            switch ($food["meal_id"]) {
+                case "1":
+                    $Menu->Breakfast = $food;
+                    break;
+                case "2":
+                    $Menu->Starter = $food;
+                    break;
+                case "3":
+                    $Menu->FirstMainMeal = $food;
+                    break;
+                case "4":
+                    $Menu->SecondMainMeal = $food;
+                    break;
+                case "5":
+                    $Menu->Dessert = $food;
+                    break;
+                case "6":
+                    $Menu->FirstDinner = $food;
+                    break;
+                case "7":
+                    $Menu->SecondDinner = $food;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return $Menu;
+    }
+
+    function AddUserToMenu($menuId, $userId)
+    {
+
+        $query = "insert into user_menu
+                    values (?, ?);";
+        $stmt = $this->makeStatement($query, array($menuId, $userId));
+    }
+
+    function RemoveUserFromMenu($menuId, $userId)
+    {
+        $query = "delete from user_menu
+                    where menu_id = ? and user_id = ?";
+        $stmt = $this->makeStatement($query, array($menuId, $userId));
     }
 }

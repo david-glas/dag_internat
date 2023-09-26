@@ -3,6 +3,7 @@ include "Database/conn.php";
 ?>
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="bright">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,25 +20,27 @@ include "Database/conn.php";
 <?php
 include "Components/nav.php";
 ?>
+
 <body>
-<?php
-if (isset($_GET['page'])) {
-  switch ($_GET['page']) {
-    case 'dashboard':
-      include "Pages/dashboard.php";
-      break;
-    case 'menu':
-      include "Pages/menu.php";
-      break;
-    default:
-      include "Pages/landing.php";
-      break;
+  <?php
+  if (isset($_GET['page'])) {
+    switch ($_GET['page']) {
+      case 'dashboard':
+        include "Pages/dashboard.php";
+        break;
+      case 'menu':
+        include "Pages/menu.php";
+        break;
+      default:
+        include "Pages/landing.php";
+        break;
+    }
+  } else {
+    include "Pages/landing.php";
   }
-} else {
-  include "Pages/landing.php";
-}
-include "Components/footer.php";
-?>
-  
+  include "Components/footer.php";
+  ?>
+
 </body>
+
 </html>
