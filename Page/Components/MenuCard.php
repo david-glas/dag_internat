@@ -105,9 +105,9 @@ function getCardByUser($Meal, $day)
   }
 }
 
-function getCardByAdmin($Meal, $day)
+function getCardByAdmin($Meal, $day, $Menu)
 {
-  $Food = Food::GetFoodByMeal($Meal["meal_id"]);
+  $Food = Food::GetFoodByMeal($Meal["meal_id"], $Menu);
   $string =
     '<div class="card-body">
       <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
@@ -137,12 +137,13 @@ function GetCardsByWeek($week)
   # 0 This Week, 1 Next Week, 2 Next Next Week
   $lastMonday = getLastMonday($week);
   $cards = "";
+  $Menu = new Menu();
   for ($i = 0; $i < 5; $i++) {
     $currDate = getCurrentDay($lastMonday, $i);
     $day = getDateString($currDate, $i);
-    $Menu = Menu::GetMenuByDateAndUser($currDate, 1);
+    $Menu = $Menu->GetMenuByDateAndUser($currDate, 1);
 
-    if (isset($Menu)) {
+    if (isset($Menu->Breakfast)) {
       $cards = $cards .
         '<div class="col">
           <div class="card">
@@ -187,25 +188,26 @@ function GetCardsByWeekAdmin($week)
   # 0 This Week, 1 Next Week, 2 Next Next Week
   $lastMonday = getLastMonday($week);
   $cards = "";
+  $Menu = new Menu();
   for ($i = 0; $i < 5; $i++) {
     $currDate = getCurrentDay($lastMonday, $i);
     $day = getDateString($currDate, $i);
-    $Menu = Menu::GetMenuByDateAdmin($currDate);
+    $Menu = $Menu->GetMenuByDateAdmin($currDate);
 
-    if (isset($Menu)) {
+    if (isset($Menu->Breakfast)) {
       $cards = $cards .
         '<div class="col">
           <div class="card">
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
               </div>' .
-        getCardByAdmin($Menu->Breakfast, $day) . '<hr class="hr" />' .
-        getCardByAdmin($Menu->Starter, $day) . '<hr class="hr" />' .
-        getCardByAdmin($Menu->FirstMainMeal, $day) . '<hr class="hr" />' .
-        getCardByAdmin($Menu->SecondMainMeal, $day) . '<hr class="hr" />' .
-        getCardByAdmin($Menu->Dessert, $day) . '<hr class="hr" />' .
-        getCardByAdmin($Menu->FirstDinner, $day) . '<hr class="hr" />' .
-        getCardByAdmin($Menu->SecondDinner, $day) .
+        getCardByAdmin($Menu->Breakfast, $day, $Menu) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->Starter, $day, $Menu) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->FirstMainMeal, $day, $Menu) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->SecondMainMeal, $day, $Menu) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->Dessert, $day, $Menu) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->FirstDinner, $day, $Menu) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->SecondDinner, $day, $Menu) .
         '<div class="card-footer">
                   <small class="text-muted">' . $day . '</small>
                 </div>
@@ -220,7 +222,7 @@ function GetCardsByWeekAdmin($week)
                 </div>
                 <div class="card-body">
                   <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' . '">Es wurde noch kein Essen hinzugefügt.</h5>
-                  <button disabled type="button" class="btn btn-secondary custom-btn-size"  
+                  <button name="addday" id="' . $currDate . '" type="button" class="btn btn-secondary custom-btn-size"  
                   data-date="' . $currDate . '">
                 Hinzufügen
               </button>

@@ -107,6 +107,7 @@ class User extends Conn
 class Food extends Conn
 {
 
+
     function AddFood($name, $mealArr)
     {
         $foodId = 0;
@@ -136,22 +137,23 @@ class Food extends Conn
         }
     }
 
-    static function GetFoodByMeal($mealId)
+    static function GetFoodByMeal($mealId, $dbCon)
     {
-        $Food = new Food();
-        # Insert the food
         try {
             $query = "select * 
                         from food f, food_meal fm
                         where fm.meal_id = ?
                           and fm.food_id = f.food_id";
             $arr = array($mealId);
-            $stmt = $Food->makeStatement($query, $arr);
+            $stmt = $dbCon->makeStatement($query, $arr);
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         } catch (Exception $e) {
             echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
             return false;
         }
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
     }
     function GetFoodByTod($timeOfDay)
     {
@@ -192,17 +194,23 @@ class Menu extends Conn
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         /* Check if menu entry exists */
         if (!is_array($result)) {
-            $query = "insert into menu (meal_id, day)
-                        values (?, ?)";
-            for ($i = 1; $i <= 7; $i++) {
-                $stmt = $this->makeStatement($query, array($i, $date));
-            }
+            $this->AddMenuDay($date);
         }
 
         $query = "update menu set food_id = ?
                     where meal_id = ?
                       and day = ?";
         $stmt = $this->makeStatement($query, array($foodId, $mealId, $date));
+    }
+
+    function AddMenuDay($date)
+    {
+        $day = date('Y-m-d', $date);
+        $query = "insert into menu (meal_id, day)
+                    values (?, ?)";
+        for ($i = 1; $i <= 7; $i++) {
+            $stmt = $this->makeStatement($query, array($i, $day));
+        }
     }
 
     function AddFoodToMenu($foodId, $menuId)
@@ -261,91 +269,91 @@ class Menu extends Conn
         return $Menu;
     }
 
-    static function GetMenuByDateAndUser($date, $userId)
+    function GetMenuByDateAndUser($date, $userId)
     {
 
-        $Menu = new Menu();
         $query = "select * 
                     from menu_v mv left join user_menu um using (menu_id)
                     where day = ?
                       and (user_id = ?
                            or user_id is null)
                     order by meal_id";
-        $stmt = $Menu->makeStatement($query, array(date('Y-m-d', $date), $userId));
+        $stmt = $this->makeStatement($query, array(date('Y-m-d', $date), $userId));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($result) == 0) {
-            return null;
+            $this->Breakfast = null;
+            return $this;
         }
         foreach ($result as $food) {
             switch ($food["meal_id"]) {
                 case "1":
-                    $Menu->Breakfast = $food;
+                    $this->Breakfast = $food;
                     break;
                 case "2":
-                    $Menu->Starter = $food;
+                    $this->Starter = $food;
                     break;
                 case "3":
-                    $Menu->FirstMainMeal = $food;
+                    $this->FirstMainMeal = $food;
                     break;
                 case "4":
-                    $Menu->SecondMainMeal = $food;
+                    $this->SecondMainMeal = $food;
                     break;
                 case "5":
-                    $Menu->Dessert = $food;
+                    $this->Dessert = $food;
                     break;
                 case "6":
-                    $Menu->FirstDinner = $food;
+                    $this->FirstDinner = $food;
                     break;
                 case "7":
-                    $Menu->SecondDinner = $food;
+                    $this->SecondDinner = $food;
                     break;
                 default:
                     break;
             }
         }
-        return $Menu;
+        return $this;
     }
-    static function GetMenuByDateAdmin($date)
+    function GetMenuByDateAdmin($date)
     {
 
-        $Menu = new Menu();
         $query = "select * 
                     from menu_v mv left join user_menu um using (menu_id)
                     where day = ?
                     order by meal_id";
-        $stmt = $Menu->makeStatement($query, array(date('Y-m-d', $date)));
+        $stmt = $this->makeStatement($query, array(date('Y-m-d', $date)));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($result) == 0) {
-            return null;
+            $this->Breakfast = null;
+            return $this;
         }
         foreach ($result as $food) {
             switch ($food["meal_id"]) {
                 case "1":
-                    $Menu->Breakfast = $food;
+                    $this->Breakfast = $food;
                     break;
                 case "2":
-                    $Menu->Starter = $food;
+                    $this->Starter = $food;
                     break;
                 case "3":
-                    $Menu->FirstMainMeal = $food;
+                    $this->FirstMainMeal = $food;
                     break;
                 case "4":
-                    $Menu->SecondMainMeal = $food;
+                    $this->SecondMainMeal = $food;
                     break;
                 case "5":
-                    $Menu->Dessert = $food;
+                    $this->Dessert = $food;
                     break;
                 case "6":
-                    $Menu->FirstDinner = $food;
+                    $this->FirstDinner = $food;
                     break;
                 case "7":
-                    $Menu->SecondDinner = $food;
+                    $this->SecondDinner = $food;
                     break;
                 default:
                     break;
             }
         }
-        return $Menu;
+        return $this;
     }
 
     function AddUserToMenu($menuId, $userId)

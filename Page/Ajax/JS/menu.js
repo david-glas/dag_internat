@@ -121,4 +121,36 @@ item.addEventListener('click', function () {
 });
 });
 
+const adds = document.querySelectorAll('[name="addday"]');
+
+adds.forEach(function (add, index) {
+add.addEventListener('click', function () {
+
+  const day = add.getAttribute('data-date');
+  const url = 'Database/MenuHandling.php';
+  const method = 'addMenuDay';
+
+
+  const requestData = {
+    method: method,
+    day: day,
+  };
+
+  fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(requestData),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+
+    })
+    .catch(error => {
+      console.error('Fehler beim Abrufen der Daten:', error);
+    });
+});
+});
+
 };

@@ -12,6 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($requestData->method == "addFoodToMenu") {
         $result = addFoodToMenu($requestData->foodId, $requestData->menuId);
     }
+    else if ($requestData->method == "addMenuDay") {
+        $result = addMenuDay($requestData->day);
+    }
     // Hier deine gewünschte Methode ausführen
 
     // Das Ergebnis als JSON zurückgeben
@@ -40,6 +43,14 @@ function addFoodToMenu($foodId, $menuId)
     $result = $Menu->AddFoodToMenu($foodId, $menuId);
 
     return $result["name"];
+}
+
+function addMenuDay($day)
+{
+    $Menu = new Menu();
+    $Menu->AddMenuDay($day);
+
+    return 1;
 }
 
 
