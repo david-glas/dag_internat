@@ -71,6 +71,18 @@ class User extends Conn
         }
     }
 
+    function GetAllUsers()
+    {
+        try {
+            $query = "select user_id, firstname, lastname, svnr, `name` `role` from user inner join role using(role_id)";
+            $stmt = $this->makeStatement($query);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
+    }
+
     function CheckLogin($svnr, $password)
     {
 
@@ -140,6 +152,23 @@ class Food extends Conn
             return false;
         }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function GetFoodByTod($timeOfDay)
+    {
+        try {
+            $query =    "select food_id, `name` ".
+                        "from food ".
+                        "inner join food_meal using(food_id) ".
+                        "inner join meal using(meal_id) ".
+                        "inner join time_of_day using(tod_id) ".
+                        "where tod_id = ?";
+            $arr  = array($timeOfDay);
+            $stmt = $this->makeStatement($query, $arr);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
     }
 }
 
