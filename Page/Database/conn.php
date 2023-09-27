@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION["user"])) {
-    $_SESSION["user"] = "webuser";
+    $_SESSION["user"] = ["account" => "webuser"];
 }
 
 class Conn
@@ -98,9 +98,9 @@ class User extends Conn
                 if (isset($result["name"]) and $result["name"] != "") {
                     return $result["name"];
                 }
-                return "webuser";
             }
         }
+        return "webuser";
     }
 }
 

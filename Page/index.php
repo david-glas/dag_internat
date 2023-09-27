@@ -18,7 +18,10 @@ include "Database/conn.php";
   <title>Document</title>
 </head>
 <?php
-include "Components/nav.php";
+if (($_SESSION["user"]["account"] == "student")) {
+  include "Components/nav.php";
+}
+
 ?>
 
 <body>

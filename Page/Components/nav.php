@@ -28,6 +28,9 @@
         <li class="nav-item">
           <a class="nav-link <?php setActive('about') ?>" href="?page=about">About</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Components/logout.php">Logout</a>
+        </li>
       </ul>
     </div>
   </div>
