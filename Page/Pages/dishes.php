@@ -6,7 +6,7 @@
   <h4>Vormittag</h4>
 </div>
 <div class="container">
-  <table class="table">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -23,7 +23,7 @@
   <h4>Mittag</h4>
 </div>
 <div class="container">
-  <table class="table">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -40,7 +40,7 @@
   <h4>Abends</h4>
 </div>
 <div class="container">
-  <table class="table">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
