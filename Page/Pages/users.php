@@ -1,17 +1,18 @@
+
 <div class="container">
   <h4>Users</h4>
 </div>
 
-<div class="container">
-  <table class="table table-striped table-hover">
+<div class="container table-responsive">
+  <table class="table table-striped table-hover table-responsive">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Vorname</th>
-        <th scope="col">Nachname</th>
-        <th scope="col">Sozialversicherungsnummer</th>
-        <th scope="col">Rolle</th>
-        <th scope="col"></th>
+        <th scope="col" style="width: 5%;">#</th>
+        <th scope="col" style="width: 20%;">Vorname</th>
+        <th scope="col" style="width: 20%;">Nachname</th>
+        <th scope="col" style="width: 25%;">SV-Nr</th>
+        <th scope="col" style="width: 20%;">Rolle</th>
+        <th scope="col" style="width: 10%; text-align: right;"></th>
       </tr>
     </thead>
     <tbody>
