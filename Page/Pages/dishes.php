@@ -6,11 +6,13 @@
   <h4>Vormittag</h4>
 </div>
 <div class="container">
-  <table class="table">
+  <table class="table table-striped table-hover table-responsive">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
+        <th scope="col" style="width: 5%;">#</th>
+        <th scope="col" style="width: 55%;">Name</th>
+        <th scope="col" style="width: 30%;">Menüs</th> 
+        <th scope="col" style="width: 10%; text-align: right;"></th>
       </tr>
     </thead>
     <tbody>
@@ -23,11 +25,13 @@
   <h4>Mittag</h4>
 </div>
 <div class="container">
-  <table class="table">
+  <table class="table table-striped table-hover table-responsive">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
+        <th scope="col" style="width: 5%;">#</th>
+        <th scope="col" style="width: 55%;">Name</th>
+        <th scope="col" style="width: 30%;">Menüs</th> 
+        <th scope="col" style="width: 10%; text-align: right;"></th>
       </tr>
     </thead>
     <tbody>
@@ -40,12 +44,13 @@
   <h4>Abends</h4>
 </div>
 <div class="container">
-  <table class="table">
+  <table class="table table-striped table-hover table-responsive">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col"></th>
+        <th scope="col" style="width: 5%;">#</th>
+        <th scope="col" style="width: 55%;">Name</th>
+        <th scope="col" style="width: 30%;">Menüs</th> 
+        <th scope="col" style="width: 10%; text-align: right;"></th>
       </tr>
     </thead>
     <tbody>
@@ -64,6 +69,7 @@
         echo  '<tr>'.
                 '<th scope="row">'. $food['food_id'] . '</th>'.
                 '<td>'. $food['name'] .'</td>'.
+                '<td>'. $food['menu_name'] .'</td>'.
                 '<td><button type="button" class="btn btn-warning btn-sm" id='. $timeOfDay . $food['food_id'] .'>Ändern</button></td>'.
               '</tr>';
       }

@@ -158,12 +158,14 @@ class Food extends Conn
     function GetFoodByTod($timeOfDay)
     {
         try {
-            $query =    "select food_id, `name` ".
+            $query =    "select food_id, `name`, trim(group_concat(' ', `type`)) menu_name ".
                         "from food ".
                         "inner join food_meal using(food_id) ".
                         "inner join meal using(meal_id) ".
                         "inner join time_of_day using(tod_id) ".
-                        "where tod_id = ?";
+                        "where tod_id = ? ".
+                        "group by food_id ".
+                        "order by food_id";
             $arr  = array($timeOfDay);
             $stmt = $this->makeStatement($query, $arr);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
