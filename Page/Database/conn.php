@@ -153,20 +153,38 @@ class Food extends Conn
             echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
             return false;
         }
-        
+
+    }
+
+    static function GetAllFoodByMeal($dbCon)
+    {
+        try {
+            $query = "select * 
+                        from food f, food_meal fm
+                        where fm.food_id = f.food_id
+                        order by meal_id asc";
+            $stmt = $dbCon->makeStatement($query);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
+        }
+
     }
     function GetFoodByTod($timeOfDay)
     {
         try {
-            $query =    "select food_id, `name`, trim(group_concat(' ', `type`)) menu_name ".
-                        "from food ".
-                        "inner join food_meal using(food_id) ".
-                        "inner join meal using(meal_id) ".
-                        "inner join time_of_day using(tod_id) ".
-                        "where tod_id = ? ".
-                        "group by food_id ".
-                        "order by food_id";
-            $arr  = array($timeOfDay);
+            $query = "select food_id, `name`, trim(group_concat(' ', `type`)) menu_name " .
+                "from food " .
+                "inner join food_meal using(food_id) " .
+                "inner join meal using(meal_id) " .
+                "inner join time_of_day using(tod_id) " .
+                "where tod_id = ? " .
+                "group by food_id " .
+                "order by food_id";
+            $arr = array($timeOfDay);
             $stmt = $this->makeStatement($query, $arr);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;

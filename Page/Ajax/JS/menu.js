@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function () {
   var spinner = document.getElementById("spinner");
   spinner.style.display = "none";
   const tabs = document.querySelectorAll('a');
-
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
       var spinner = document.getElementById("spinner");
@@ -38,119 +37,122 @@ document.addEventListener('DOMContentLoaded', function () {
           console.error('Fehler beim Abrufen der Daten:', error);
         });
     })
-  })
-});
-
-function updateButtons(){
-const buttons = document.querySelectorAll('[name="userbutton"]');
-
-buttons.forEach(function (button, index) {
-button.addEventListener('click', function () {
-  const menuId = button.getAttribute('data-menu-id');
-  const userId = button.getAttribute('data-user-id');
-  const url = 'Database/MenuHandling.php';
-  var method;
-
-  if (button.classList.contains('btn-success')) {
-    button.classList.remove('btn-success');
-    button.classList.add('btn-danger');
-    button.innerHTML = 'Abmelden';
-    method = 'addUserToMenu';
-  }
-  else {
-    button.classList.remove('btn-danger');
-    button.classList.add('btn-success');
-    button.innerHTML = 'Anmelden';
-    method = 'removeUserFromMenu';
-  }
-
-  const requestData = {
-    method: method,
-    menuId: menuId,
-    userId: userId
-  };
-
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(requestData),
-    headers: {
-      'Content-Type': 'application/json'
+    if (tab.getAttribute("id") == 0) {
+      tab.click();
     }
   })
-    .then(response => response.json())
-    .then(data => {
-    })
-    .catch(error => {
-      console.error('Fehler beim Abrufen der Daten:', error);
+});
+
+function updateButtons() {
+  const buttons = document.querySelectorAll('[name="userbutton"]');
+
+  buttons.forEach(function (button, index) {
+    button.addEventListener('click', function () {
+      const menuId = button.getAttribute('data-menu-id');
+      const userId = button.getAttribute('data-user-id');
+      const url = 'Database/MenuHandling.php';
+      var method;
+
+      if (button.classList.contains('btn-success')) {
+        button.classList.remove('btn-success');
+        button.classList.add('btn-danger');
+        button.innerHTML = 'Abmelden';
+        method = 'addUserToMenu';
+      }
+      else {
+        button.classList.remove('btn-danger');
+        button.classList.add('btn-success');
+        button.innerHTML = 'Anmelden';
+        method = 'removeUserFromMenu';
+      }
+
+      const requestData = {
+        method: method,
+        menuId: menuId,
+        userId: userId
+      };
+
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
     });
-});
-});
+  });
 
-const items = document.querySelectorAll('.dropdown-item');
+  const items = document.querySelectorAll('.dropdown-item');
 
-items.forEach(function (item, index) {
-item.addEventListener('click', function () {
+  items.forEach(function (item, index) {
+    item.addEventListener('click', function () {
 
-  const menuId = item.getAttribute('data-menu-id');
-  const foodId = item.getAttribute('data-food-id');
-  const url = 'Database/MenuHandling.php';
-  const method = 'addFoodToMenu';
+      const menuId = item.getAttribute('data-menu-id');
+      const foodId = item.getAttribute('data-food-id');
+      const url = 'Database/MenuHandling.php';
+      const method = 'addFoodToMenu';
 
 
-  const requestData = {
-    method: method,
-    menuId: menuId,
-    foodId: foodId
-  };
+      const requestData = {
+        method: method,
+        menuId: menuId,
+        foodId: foodId
+      };
 
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(requestData),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
-      var text = document.getElementById('Meal' + menuId);
-      text.innerHTML = data["result"];
-    })
-    .catch(error => {
-      console.error('Fehler beim Abrufen der Daten:', error);
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          var text = document.getElementById('Menu' + menuId);
+          text.innerHTML = data["result"];
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
     });
-});
-});
+  });
 
-const adds = document.querySelectorAll('[name="addday"]');
+  const adds = document.querySelectorAll('[name="addday"]');
 
-adds.forEach(function (add, index) {
-add.addEventListener('click', function () {
+  adds.forEach(function (add, index) {
+    add.addEventListener('click', function () {
 
-  const day = add.getAttribute('data-date');
-  const url = 'Database/MenuHandling.php';
-  const method = 'addMenuDay';
+      const day = add.getAttribute('data-date');
+      const url = 'Database/MenuHandling.php';
+      const method = 'addMenuDay';
 
 
-  const requestData = {
-    method: method,
-    day: day,
-  };
+      const requestData = {
+        method: method,
+        day: day,
+      };
 
-  fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(requestData),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(response => response.json())
-    .then(data => {
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
 
-    })
-    .catch(error => {
-      console.error('Fehler beim Abrufen der Daten:', error);
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
     });
-});
-});
+  });
 
 };

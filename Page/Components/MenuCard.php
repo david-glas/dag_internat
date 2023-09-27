@@ -111,19 +111,19 @@ function getCardByAdmin($Meal, $day, $Menu)
   $string =
     '<div class="card-body">
       <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-      <p id="Meal' . nvl($Meal["meal_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
+      <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
       <div id="dropdown" class="dropdown">
         <button id="drop" class="btn btn-primary dropdown-toggle custom-btn-size" 
         type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Mahlzeit ändern
         </button>
         <ul class="dropdown-menu">';
-        foreach ($Food as $entry) {
-          $string .= '<li><button id="drop" class="dropdown-item" type="button"  
+  foreach ($Food as $entry) {
+    $string .= '<li><button id="drop" class="dropdown-item" type="button"  
           data-menu-id="' . nvl($Meal["menu_id"]) . '" data-food-id="' . nvl($entry["food_id"]) . '">'
-          . $entry["name"] .
-          '</button></li>';
-        }
+      . $entry["name"] .
+      '</button></li>';
+  }
   $string .= '        
             </ul>
           </div>
@@ -189,6 +189,9 @@ function GetCardsByWeekAdmin($week)
   $lastMonday = getLastMonday($week);
   $cards = "";
   $Menu = new Menu();
+  #Falls Performance schlecht, Food extra laden, und dann bei Cards von hier aus einfügen,
+  #damit man in Cards nicht jedes mal zur DB muss.
+  #$Food = Food::GetAllFoodByMeal($Menu);
   for ($i = 0; $i < 5; $i++) {
     $currDate = getCurrentDay($lastMonday, $i);
     $day = getDateString($currDate, $i);
