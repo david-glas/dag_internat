@@ -37,9 +37,9 @@ function removeUserFromMenu($menuId, $userId)
 function addFoodToMenu($foodId, $menuId)
 {
     $Menu = new Menu();
-    $Menu->AddFoodToMenu($foodId, $menuId);
+    $result = $Menu->AddFoodToMenu($foodId, $menuId);
 
-    return 1;
+    return $result["name"];
 }
 
 

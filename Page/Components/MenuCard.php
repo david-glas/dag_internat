@@ -111,7 +111,7 @@ function getCardByAdmin($Meal, $day)
   $string =
     '<div class="card-body">
       <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-      <p id="' . nvl($Meal["meal_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
+      <p id="Meal' . nvl($Meal["meal_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
       <div id="dropdown" class="dropdown">
         <button id="drop" class="btn btn-primary dropdown-toggle custom-btn-size" 
         type="button" data-bs-toggle="dropdown" aria-expanded="false">

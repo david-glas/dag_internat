@@ -181,6 +181,12 @@ class Menu extends Conn
         $query = "update menu set food_id = ?
                     where menu_id = ?";
         $stmt = $this->makeStatement($query, array($foodId, $menuId));
+
+        $query = "select * from food where food_id = ?";
+        $stmt = $this->makeStatement($query, array($foodId));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+
     }
 
     static function GetMenuByDate($date)

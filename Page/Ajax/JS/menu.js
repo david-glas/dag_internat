@@ -112,6 +112,8 @@ item.addEventListener('click', function () {
   })
     .then(response => response.json())
     .then(data => {
+      var text = document.getElementById('Meal' + menuId);
+      text.innerHTML = data["result"];
     })
     .catch(error => {
       console.error('Fehler beim Abrufen der Daten:', error);
