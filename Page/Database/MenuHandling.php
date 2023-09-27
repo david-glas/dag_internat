@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = addUserToMenu($requestData->menuId, $requestData->userId);
     } else if ($requestData->method == "removeUserFromMenu") {
         $result = removeUserFromMenu($requestData->menuId, $requestData->userId);
+    } else if ($requestData->method == "addFoodToMenu") {
+        $result = addFoodToMenu($requestData->foodId, $requestData->menuId);
     }
     // Hier deine gewünschte Methode ausführen
 
@@ -28,6 +30,14 @@ function removeUserFromMenu($menuId, $userId)
 {
     $Menu = new Menu();
     $Menu->RemoveUserFromMenu($menuId, $userId);
+
+    return 1;
+}
+
+function addFoodToMenu($foodId, $menuId)
+{
+    $Menu = new Menu();
+    $Menu->AddFoodToMenu($foodId, $menuId);
 
     return 1;
 }

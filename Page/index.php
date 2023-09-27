@@ -40,7 +40,6 @@ include "Components/nav.php";
   }
   include "Components/footer.php";
   ?>
-
 </body>
 
 </html>
