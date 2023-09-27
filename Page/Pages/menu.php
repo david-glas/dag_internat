@@ -7,8 +7,8 @@
   }
 
   /* Style for the button */
-  button {
-    width: 30%;
+  [type=button]:not(#drop) {
+    size: 45%;
     /* Set the button to be half the width of the parent */
     position: absolute;
     /* Position it absolutely within the parent */
@@ -16,9 +16,23 @@
     bottom: 5px;
     /* Margin from the bottom */
     right: 5px;
+    width: 45%;
     /* Margin from the right */
     opacity: 50%;
-    width: 40%;
+  }
+
+    /* Style for the button */
+    .dropdown {
+
+    /* Set the button to be half the width of the parent */
+    position: absolute;
+    /* Position it absolutely within the parent */
+    bottom: 5px;
+    /* Margin from the bottom */
+    left: 5px;
+    /* Margin from the right */
+    opacity: 100%;
+
   }
 
   .custom-btn-size {
@@ -59,90 +73,4 @@
   <div id="card-container" class="row row-cols-1 row-cols-md-5 g-4">
   </div>
 </div>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var spinner = document.getElementById("spinner");
-    spinner.style.display = "none";
-    const tabs = document.querySelectorAll('a');
-    tabs.forEach(function (tab, index) {
-      tab.addEventListener('click', function () {
-        var spinner = document.getElementById("spinner");
-        spinner.style.display = "block";
-        const url = 'Components/MenuCard.php';
-        const method = 'getCardsByWeek';
-        const requestData = {
-          method: method,
-          week: tab.getAttribute("id")
-        };
-
-
-        fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(requestData),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => response.text())
-          .then(data => {
-            var container = document.getElementById("card-container");
-            container.innerHTML = data;
-            var spinner = document.getElementById("spinner");
-            spinner.style.display = "none";
-          })
-          .catch(error => {
-            console.error('Fehler beim Abrufen der Daten:', error);
-          });
-      })
-    });
-
-
-    const buttons = document.querySelectorAll('button');
-
-    buttons.forEach(function (button, index) {
-      button.addEventListener('click', function () {
-
-
-        const menuId = button.getAttribute('data-menu-id');
-        const userId = button.getAttribute('data-user-id');
-        const url = 'Database/MenuHandling.php';
-        var method
-
-        if (button.classList.contains('btn-success')) {
-          button.classList.remove('btn-success');
-          button.classList.add('btn-danger');
-          button.innerHTML = 'Abmelden';
-          method = 'addUserToMenu';
-        }
-        else {
-          button.classList.remove('btn-danger');
-          button.classList.add('btn-success');
-          button.innerHTML = 'Anmelden';
-          method = 'removeUserFromMenu';
-        }
-
-        const requestData = {
-          method: method,
-          menuId: menuId,
-          userId: userId
-        };
-
-        fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(requestData),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => response.json())
-          .then(data => {
-          })
-          .catch(error => {
-            console.error('Fehler beim Abrufen der Daten:', error);
-          });
-      });
-    });
-  });
-</script>
+<script src="Ajax/JS/menu.js"></script>

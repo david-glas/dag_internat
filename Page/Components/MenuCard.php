@@ -7,6 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($requestData->method == "getCardsByWeek") {
     $result = getCardsByWeek($requestData->week);
     echo $result;
+  } else if ($requestData->method == "getCardsByWeekAdmin") {
+    $result = getCardsByWeekAdmin($requestData->week);
+    echo $result;
   }
 }
 function nvl($var, $default = "")
@@ -32,8 +35,8 @@ function getCurrentDay($lastMonday, $addedDays)
 
 function tooLateToOrder($date)
 {
-  #return false;
-  return $date >= strtotime("today + 7 days");
+  return false;
+  #return $date >= strtotime("today + 7 days");
 }
 
 function getDateString($day, $index)
@@ -60,7 +63,7 @@ function getCardByUser($Meal, $day)
       '<div class="card-body">
     <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
     <p class="card-text">' . nvl($Meal["name"]) . '</p>
-    <button type="button" class="btn btn-success custom-btn-size"  
+    <button name="userbutton" type="button" class="btn btn-success custom-btn-size"  
         data-menu-id="' . nvl($Meal["menu_id"]) . '"
         data-user-id="1">
       Anmelden
@@ -71,7 +74,7 @@ function getCardByUser($Meal, $day)
       '<div class="card-body">
         <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
         <p class="card-text">' . nvl($Meal["name"]) . '</p>
-        <button type="button" class="btn btn-danger custom-btn-size"  
+        <button name="userbutton" type="button" class="btn btn-danger custom-btn-size"  
             data-menu-id="' . nvl($Meal["menu_id"]) . '"
             data-user-id="1">
           Abmelden
@@ -82,7 +85,7 @@ function getCardByUser($Meal, $day)
       '<div class="card-body">
         <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
         <p class="card-text">' . nvl($Meal["name"]) . '</p>
-        <button disabled type="button" class="btn btn-secondary custom-btn-size"  
+        <button name="userbutton" disabled type="button" class="btn btn-secondary custom-btn-size"  
             data-menu-id="' . nvl($Meal["menu_id"]) . '"
             data-user-id="1">
           nicht bestellt
@@ -93,13 +96,40 @@ function getCardByUser($Meal, $day)
       '<div class="card-body">
         <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
         <p class="card-text">' . nvl($Meal["name"]) . '</p>
-        <button disabled type="button" class="btn btn-primary custom-btn-size"  
+        <button name="userbutton" disabled type="button" class="btn btn-primary custom-btn-size"  
             data-menu-id="' . nvl($Meal["menu_id"]) . '"
             data-user-id="1">
           bestellt
         </button>
       </div>';
   }
+}
+
+function getCardByAdmin($Meal, $day)
+{
+  $Food = Food::GetFoodByMeal($Meal["meal_id"]);
+  $string =
+    '<div class="card-body">
+      <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+      <p id="' . nvl($Meal["meal_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
+      <div id="dropdown" class="dropdown">
+        <button id="drop" class="btn btn-primary dropdown-toggle custom-btn-size" 
+        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Mahlzeit ändern
+        </button>
+        <ul class="dropdown-menu">';
+        foreach ($Food as $entry) {
+          $string .= '<li><button id="drop" class="dropdown-item" type="button"  
+          data-menu-id="' . nvl($Meal["menu_id"]) . '" data-food-id="' . nvl($entry["food_id"]) . '">'
+          . $entry["name"] .
+          '</button></li>';
+        }
+  $string .= '        
+            </ul>
+          </div>
+        </div>';
+  return $string;
+
 }
 
 function GetCardsByWeek($week)
@@ -140,6 +170,60 @@ function GetCardsByWeek($week)
                 </div>
                 <div class="card-body">
                   <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' . '">Es wurde noch kein Essen hinzugefügt.</h5>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">' . $day . '</small>
+                </div>
+              </div>
+            </div>';
+    }
+
+  }
+  return $cards;
+}
+
+function GetCardsByWeekAdmin($week)
+{
+  # 0 This Week, 1 Next Week, 2 Next Next Week
+  $lastMonday = getLastMonday($week);
+  $cards = "";
+  for ($i = 0; $i < 5; $i++) {
+    $currDate = getCurrentDay($lastMonday, $i);
+    $day = getDateString($currDate, $i);
+    $Menu = Menu::GetMenuByDateAdmin($currDate);
+
+    if (isset($Menu)) {
+      $cards = $cards .
+        '<div class="col">
+          <div class="card">
+            <div class="card-header">
+              <small class="text-muted">' . $day . '</small>
+              </div>' .
+        getCardByAdmin($Menu->Breakfast, $day) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->Starter, $day) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->FirstMainMeal, $day) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->SecondMainMeal, $day) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->Dessert, $day) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->FirstDinner, $day) . '<hr class="hr" />' .
+        getCardByAdmin($Menu->SecondDinner, $day) .
+        '<div class="card-footer">
+                  <small class="text-muted">' . $day . '</small>
+                </div>
+              </div>
+            </div>';
+    } else {
+      $cards = $cards .
+        '<div class="col">
+          <div class="card">
+            <div class="card-header">
+              <small class="text-muted">' . $day . '</small>
+                </div>
+                <div class="card-body">
+                  <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' . '">Es wurde noch kein Essen hinzugefügt.</h5>
+                  <button disabled type="button" class="btn btn-secondary custom-btn-size"  
+                  data-date="' . $currDate . '">
+                Hinzufügen
+              </button>
                 </div>
                 <div class="card-footer">
                   <small class="text-muted">' . $day . '</small>
