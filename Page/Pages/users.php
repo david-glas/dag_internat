@@ -1,4 +1,3 @@
-
 <div class="container">
   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Neuen Benutzer hinzufügen</button>
 </div>
@@ -30,7 +29,7 @@
         </div>
         <div class="form-floating mb-2">
           <select class="form-select" id="role_select" name="role_select">
-            <?php fillRoleSelect(2) ?>
+            <?php fillRoleSelect(3) ?>
           </select>
           <label for="role_select">Rolle</label>
         </div>
@@ -104,12 +103,13 @@
                       '</div>'.
                       '<div class="form-floating mb-2">'.
                         '<select class="form-select" id="role_select" name="role_select">';
-                          fillRoleSelect($user['role']);
+                          fillRoleSelect($user['role_id']);
           echo          '</select>'.
                         '<label for="role_select">Rolle</label>'.
                       '</div>'.
                     '<div class="form-floating mb-3">'.
                       '<button type="submit" name="action" value="change" class="btn btn-warning">Benutzer ändern</button>'.
+                      '   '.
                       '<button type="submit" name="action" value="delete" class="btn btn-danger">Benutzer löschen</button>'.
                     '</div>'.
                   '</form>'.
@@ -126,9 +126,11 @@
 
     if ($roles != null) {
       for($i=0; $i < count($roles); $i++) {
-        echo '<option ';
-        if ($role_id == $i) { echo 'selected'; }
-        echo ' value="'. $roles[$i]['role_id'] .'">'. $roles[$i]['name'] .'</option>';
+        echo '<option value="'. $roles[$i]['role_id'] .'"';
+        if ($role_id == $i+1) { 
+          echo ' selected'; 
+        }
+        echo '>'. $roles[$i]['name'] .'</option>';
       }
     }
   }
