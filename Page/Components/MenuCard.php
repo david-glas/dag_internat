@@ -35,8 +35,8 @@ function getCurrentDay($lastMonday, $addedDays)
 
 function tooLateToOrder($date)
 {
-  return false;
-  #return $date >= strtotime("today + 7 days");
+  #return false;
+  return $date <= strtotime("today + 7 days");
 }
 
 function getDateString($day, $index)
@@ -55,54 +55,42 @@ function getDateString($day, $index)
   return $germanDays[$index] . ' ' . date('d.m.Y', $day);
 }
 
-function getCardByUser($Meal, $day)
+function getCardByUser($Meal, $day, $tooLate)
 {
-  $tooLate = tooLateToOrder($day);
+  $button = "";
+  $text = "";
+
   if (is_null($Meal["user_id"]) and !$tooLate) {
-    return
-      '<div class="card-body">
-    <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-    <p class="card-text">' . nvl($Meal["name"]) . '</p>
-    <button name="userbutton" type="button" class="btn btn-success custom-btn-size"  
-        data-menu-id="' . nvl($Meal["menu_id"]) . '"
-        data-user-id="1">
-      Anmelden
-    </button>
-  </div>';
+    $button = '<button name="userbutton" type="button" class="btn btn-success custom-btn-size" ';
+    $text = "Anmelden";
   } else if (!is_null($Meal["user_id"]) and !$tooLate) {
-    return
-      '<div class="card-body">
-        <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-        <p class="card-text">' . nvl($Meal["name"]) . '</p>
-        <button name="userbutton" type="button" class="btn btn-danger custom-btn-size"  
-            data-menu-id="' . nvl($Meal["menu_id"]) . '"
-            data-user-id="1">
-          Abmelden
-        </button>
-      </div>';
+    $button = '<button name="userbutton" type="button" class="btn btn-danger custom-btn-size" ';
+    $text = "Abmelden";
   } else if (is_null($Meal["user_id"]) and $tooLate) {
-    return
-      '<div class="card-body">
-        <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-        <p class="card-text">' . nvl($Meal["name"]) . '</p>
-        <button name="userbutton" disabled type="button" class="btn btn-secondary custom-btn-size"  
-            data-menu-id="' . nvl($Meal["menu_id"]) . '"
-            data-user-id="1">
-          nicht bestellt
-        </button>
-      </div>';
-  } else if (!is_null($Meal["user_id"]) and $tooLate) {
-    return
-      '<div class="card-body">
-        <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-        <p class="card-text">' . nvl($Meal["name"]) . '</p>
-        <button name="userbutton" disabled type="button" class="btn btn-primary custom-btn-size"  
-            data-menu-id="' . nvl($Meal["menu_id"]) . '"
-            data-user-id="1">
-          bestellt
-        </button>
-      </div>';
+    $button = '<button name="userbutton" disabled type="button" class="btn btn-secondary custom-btn-size" ';
+    $text = "nicht angemeldet";
+  }else if (!is_null($Meal["user_id"]) and $tooLate) {
+    $button = '<button name="userbutton" disabled type="button" class="btn btn-primary custom-btn-size" ';
+    $text = "angemeldet";
   }
+
+  $string =
+  '<div class="card-body">
+    <div style="width:100%">
+      <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+      <p class="card-text">' . nvl($Meal["name"]) . '</p>
+    </div>
+    <div>'.
+          $button . 
+          'data-menu-id="' . nvl($Meal["menu_id"]) . '"
+           data-meal-id="' . nvl($Meal["meal_id"]) . '"
+           data-user-id="1">
+    '. $text .'
+    </button>
+    </div>
+    </div>';
+
+    return $string;
 }
 
 function getCardByAdmin($Meal, $day, $Menu)
@@ -140,6 +128,7 @@ function GetCardsByWeek($week)
   $Menu = new Menu();
   for ($i = 0; $i < 5; $i++) {
     $currDate = getCurrentDay($lastMonday, $i);
+    $tooLate = tooLateToOrder($currDate);
     $day = getDateString($currDate, $i);
     $Menu = $Menu->GetMenuByDateAndUser($currDate, 1);
 
@@ -150,13 +139,13 @@ function GetCardsByWeek($week)
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
               </div>' .
-        getCardByUser($Menu->Breakfast, $day) . '<hr class="hr" />' .
-        getCardByUser($Menu->Starter, $day) . '<hr class="hr" />' .
-        getCardByUser($Menu->FirstMainMeal, $day) . '<hr class="hr" />' .
-        getCardByUser($Menu->SecondMainMeal, $day) . '<hr class="hr" />' .
-        getCardByUser($Menu->Dessert, $day) . '<hr class="hr" />' .
-        getCardByUser($Menu->FirstDinner, $day) . '<hr class="hr" />' .
-        getCardByUser($Menu->SecondDinner, $day) .
+        getCardByUser($Menu->Breakfast, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->Starter, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->FirstMainMeal, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->SecondMainMeal, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->Dessert, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->FirstDinner, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->SecondDinner, $currDate, $tooLate) .
         '<div class="card-footer">
                   <small class="text-muted">' . $day . '</small>
                 </div>

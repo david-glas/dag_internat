@@ -1,0 +1,57 @@
+  /* Style for the parent div */
+  .card-body {
+    position: relative;
+    height: 100px;
+    /* Required for positioning the button */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* To push the h3 and p to the top and button to the bottom */
+    align-items: flex-start; /* Align h3 and p to the left */
+  }
+
+  /* Style for the button */
+  [type=button]:not(#drop) {
+    position: absolute;
+    /* Position it absolutely within the parent */
+    top: 10%;
+    width: 45%;
+    height: 30%;
+    /* Margin from the bottom */
+    right: 5px;
+    /* Margin from the right */
+    opacity: 50%;
+  }
+
+    /* Style for the button */
+    .dropdown {
+      position: absolute;
+      /* Position it absolutely within the parent */
+      top: 10%;
+      width: 45%;
+      height: 30%;
+      /* Margin from the bottom */
+      right: 5px;
+      /* Margin from the right */
+      opacity: 100%;
+  }
+
+  .custom-btn-size {
+    font-size: 10px;
+  }
+
+  hr {
+    margin: 0rem;
+    color: grey;
+    opacity: 0.25;
+  }
+
+  .card-text {
+    padding-bottom: 0px;
+    font-size: 13px;
+    display: inline;
+  }
+
+  .card-title {
+    padding-bottom: 0px;
+    font-size: 15px;
+  }
