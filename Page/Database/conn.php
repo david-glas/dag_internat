@@ -71,6 +71,19 @@ class User extends Conn
         }
     }
 
+    function DeleteUser($svnr) {
+        try {
+            $query = "delete from user where svnr = ?;";
+            $arr = array($svnr);
+            $stmt = $this->makeStatement($query, $arr);
+
+            return true;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
+        }
+    }
+
     function GetAllUsers()
     {
         try {
@@ -101,6 +114,16 @@ class User extends Conn
             }
         }
         return "webuser";
+    }
+    function GetAllRoles() {
+        try {
+            $query = "select role_id, name from role";
+            $stmt = $this->makeStatement($query);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
     }
 }
 
