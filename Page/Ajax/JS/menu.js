@@ -1,46 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-  var spinner = document.getElementById("spinner");
-  spinner.style.display = "none";
-  const tabs = document.querySelectorAll('a');
-  tabs.forEach(function (tab, index) {
-    tab.addEventListener('click', function () {
-      var spinner = document.getElementById("spinner");
-      spinner.style.display = "block";
-      const url = 'Components/MenuCard.php';
-      var method = 'getCardsByWeek';
-      if (1 == 1 /*admin*/) {
-        method = 'getCardsByWeekAdmin';
-      }
-      const requestData = {
-        method: method,
-        week: tab.getAttribute("id")
-      };
-
-
-      fetch(url, {
-        method: 'POST',
-        body: JSON.stringify(requestData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.text())
-        .then(data => {
-          var container = document.getElementById("card-container");
-          container.innerHTML = data;
-          var spinner = document.getElementById("spinner");
-          spinner.style.display = "none";
-          updateButtons();
-        })
-        .catch(error => {
-          console.error('Fehler beim Abrufen der Daten:', error);
-        });
-    })
-    if (tab.getAttribute("id") == 0) {
-      tab.click();
-    }
+  fetch('Components/getUser.php')
+  .then(response => response.text())
+  .then(data => {
+      updateTabs(data);
   })
+  .catch(error => {
+      console.error('Error:', error);
+  });
 });
 
 function updateButtons() {
@@ -50,6 +17,7 @@ function updateButtons() {
     button.addEventListener('click', function () {
       const menuId = button.getAttribute('data-menu-id');
       const userId = button.getAttribute('data-user-id');
+      const mealId = button.getAttribute('data-meal-id');
       const url = 'Database/MenuHandling.php';
       var method;
 
@@ -58,6 +26,7 @@ function updateButtons() {
         button.classList.add('btn-danger');
         button.innerHTML = 'Abmelden';
         method = 'addUserToMenu';
+        resetOtherMeal(parseInt(menuId), userId, mealId);
       }
       else {
         button.classList.remove('btn-danger');
@@ -156,3 +125,66 @@ function updateButtons() {
   });
 
 };
+
+function updateTabs(user){
+  
+  var spinner = document.getElementById("spinner");
+  spinner.style.display = "none";
+  const tabs = document.querySelectorAll('a');
+  var user;
+
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener('click', function () {
+      var spinner = document.getElementById("spinner");
+      spinner.style.display = "block";
+      const url = 'Components/MenuCard.php';
+      var method = 'getCardsByWeek';
+      if (user == "admin") {
+        method = 'getCardsByWeekAdmin';
+      }
+      const requestData = {
+        method: method,
+        week: tab.getAttribute("id")
+      };
+
+
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.text())
+        .then(data => {
+          var container = document.getElementById("card-container");
+          container.innerHTML = data;
+          var spinner = document.getElementById("spinner");
+          spinner.style.display = "none";
+          updateButtons();
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
+    })
+    if (tab.getAttribute("id") == 0) {
+      tab.click();
+    }
+  })
+}
+
+function resetOtherMeal(menuId, userId, mealId){
+  var otherMenu;
+  if (mealId == 3 || mealId == 6){
+    otherMenu = menuId + 1;
+  } else if (mealId == 4 || mealId == 7){
+    otherMenu = menuId - 1;
+  } 
+
+  if (otherMenu){
+    button = document.querySelector(`button[data-menu-id="${otherMenu}"]`);
+    if (button.innerHTML == "Abmelden"){
+      button.click();
+    }
+  }
+}
