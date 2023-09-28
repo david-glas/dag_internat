@@ -2,7 +2,7 @@
 include "Database/conn.php";
 ?>
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="bright">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
