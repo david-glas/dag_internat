@@ -6,7 +6,7 @@
   }
 </style>
 
-<nav class="navbar nav-pills navbar-expand-lg">
+<nav class="navbar sticky-top nav-pills navbar-expand-lg">
   <div class="container">
     <a class="navbar-brand" href="?page=landing" style="background-color: transparent">Test Title</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
