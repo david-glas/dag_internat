@@ -4,5 +4,9 @@ body {
 
 .navbar {
   margin-bottom: 10px;
-  background-color: rgba(42, 42, 40, 0.442);
+  background-color: rgba(240, 206, 93, 0.793);
+}
+
+.navbar-brand {
+  color: #3b3b3b;
 }
