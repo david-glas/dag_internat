@@ -18,7 +18,7 @@ include "Database/conn.php";
   <title>Document</title>
 </head>
 <?php
-if (($_SESSION["user"]["account"] == "student")) {
+if (($_SESSION["user"]["account"] != "webuser")) {
   include "Components/nav.php";
 }
 
@@ -44,5 +44,4 @@ if (($_SESSION["user"]["account"] == "student")) {
   include "Components/footer.php";
   ?>
 </body>
-
 </html>
