@@ -13,6 +13,8 @@ include "Database/conn.php";
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-element-bundle.min.js"></script>
+
   <!-- Navbar -->
   <link href="assets/css/navbars.css" rel="stylesheet">
 
@@ -45,4 +47,5 @@ if (($_SESSION["user"]["account"] != "webuser")) {
   include "Components/footer.php";
   ?>
 </body>
+
 </html>

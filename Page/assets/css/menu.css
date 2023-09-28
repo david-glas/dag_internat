@@ -1,3 +1,8 @@
+  .card,
+  .card-header {
+    border-color: rgb(70, 68, 68);
+  }
+
   /* Style for the parent div */
   .card-body {
     position: relative;
@@ -42,8 +47,8 @@
 
   hr {
     margin: 0rem;
-    color: grey;
-    opacity: 0.25;
+    border-color: rgb(70, 68, 68);
+    opacity: 1;
   }
 
   .card-text {
@@ -55,4 +60,12 @@
   .card-title {
     padding-bottom: 0px;
     font-size: 15px;
+  }
+
+  swiper-container {
+    width: 100%;
+  }
+
+  swiper-slide {
+    width: 50%;
   }
