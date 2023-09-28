@@ -10,7 +10,7 @@
     align-items: center;
   }
   .navbar{
-    background-color: rgba(42, 42, 40, 0.442);
+    background-color: rgba(42, 42, 40, 0.92);
     height: 78px;
   }
 </style>

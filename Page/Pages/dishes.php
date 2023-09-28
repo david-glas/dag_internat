@@ -14,7 +14,7 @@
           <input type="text" class="form-control" id="firstname_input" name="firstname_input">
           <label for="firstname_input">Name</label>
         </div>
-        <?php fillMealChecks() ?>
+        <?php fillMealChecks(array()) ?>
         <div class="form-floating mt-4">
           <button type="submit" name="action" value="create" class="btn btn-success">Gericht anlegen</button>
         </div>
@@ -90,18 +90,39 @@
         echo  '<tr>
                 <th scope="row">'. $food['food_id'] . '</th>
                 <td>'. $food['name'] .'</td>
-                <td>'. $food['menu_name'] .'</td>
+                <td>'. $food['menu_names'] .'</td>
                 <td>
                   <button type="button" class="btn btn-warning btn-sm float-end" id='. $timeOfDay . $food['food_id'] .'>
                     <i class="bi bi-gear-fill"></i><span>  Ändern</span>
                   </button>
                 </td>
               </tr>';
+
+        echo  '<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasRightLabel"><i class="bi bi-cup-hot-fill"></i>  Gericht hinzufügen</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <div class="container">
+                    <form class="form-floating" method="POST" action="Components/dish_functions.php">
+                      <div class="form-floating mb-2">
+                        <input type="text" class="form-control" id="firstname_input" name="firstname_input">
+                        <label for="firstname_input">Name</label>
+                      </div>';
+                        fillMealChecks($food['meal_ids']);
+        echo          '<div class="form-floating mt-4">
+                      <button type="submit" name="action" value="create" class="btn btn-success">Gericht anlegen</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>';
       }
     }
   }
 
-  function fillMealChecks() {
+  function fillMealChecks($meal_ids) {
     $foodCon = new Food();
     $menus = $foodCon->GetAllMeals();
 
@@ -115,6 +136,8 @@
               </div>';
       }
     }
+
+    function getChecked
 
 
   }
