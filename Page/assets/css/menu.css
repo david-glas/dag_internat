@@ -1,16 +1,30 @@
   /* Style for the parent div */
   .card-body {
     position: relative;
-    height: 100px;
+    height: 80px;
     /* Required for positioning the button */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* To push the h3 and p to the top and button to the bottom */
-    align-items: flex-start; /* Align h3 and p to the left */
+    justify-content: space-between;
+    /* To push the h3 and p to the top and button to the bottom */
+    align-items: flex-start;
+    /* Align h3 and p to the left */
   }
 
   /* Style for the button */
   [type=menubutton]:not(#drop) {
+    /* Position it absolutely within the parent */
+    top: 10%;
+    width: 45%;
+    height: 30%;
+    /* Margin from the bottom */
+    right: 5px;
+    /* Margin from the right */
+    opacity: 0%;
+  }
+
+  /* Style for the button */
+  #dropi {
     position: absolute;
     /* Position it absolutely within the parent */
     top: 10%;
@@ -19,20 +33,7 @@
     /* Margin from the bottom */
     right: 5px;
     /* Margin from the right */
-    opacity: 50%;
-  }
-
-    /* Style for the button */
-    #dropi {
-      position: absolute;
-      /* Position it absolutely within the parent */
-      top: 10%;
-      width: 45%;
-      height: 30%;
-      /* Margin from the bottom */
-      right: 5px;
-      /* Margin from the right */
-      opacity: 100%;
+    opacity: 100%;
   }
 
   .custom-btn-size {

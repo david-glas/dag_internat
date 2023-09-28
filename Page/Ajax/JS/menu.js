@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   fetch('Components/getUser.php')
-  .then(response => response.text())
-  .then(data => {
+    .then(response => response.text())
+    .then(data => {
       updateTabs(data);
-  })
-  .catch(error => {
+    })
+    .catch(error => {
       console.error('Error:', error);
-  });
+    });
 });
 
 function updateButtons() {
@@ -21,18 +21,18 @@ function updateButtons() {
       const url = 'Database/MenuHandling.php';
       var method;
 
-      if (button.classList.contains('btn-success')) {
-        button.classList.remove('btn-success');
-        button.classList.add('btn-danger');
-        button.innerHTML = 'Abmelden';
+      var card = document.getElementById(menuId);
+      var ordered = card.getAttribute('data-ordered');
+      if (ordered == "1") {
+        card.style.backgroundColor = "transparent";
+        card.setAttribute('data-ordered', "0");
+        method = 'removeUserFromMenu';
+
+      } else {
+        card.style.backgroundColor = "rgba(154, 211, 154, 0.51)";
+        card.setAttribute('data-ordered', "1");
         method = 'addUserToMenu';
         resetOtherMeal(parseInt(menuId), userId, mealId);
-      }
-      else {
-        button.classList.remove('btn-danger');
-        button.classList.add('btn-success');
-        button.innerHTML = 'Anmelden';
-        method = 'removeUserFromMenu';
       }
 
       const requestData = {
@@ -126,8 +126,8 @@ function updateButtons() {
 
 };
 
-function updateTabs(user){
-  
+function updateTabs(user) {
+
   var spinner = document.getElementById("spinner");
   spinner.style.display = "none";
   const tabs = document.querySelectorAll('a');
@@ -173,17 +173,19 @@ function updateTabs(user){
   })
 }
 
-function resetOtherMeal(menuId, userId, mealId){
+function resetOtherMeal(menuId, userId, mealId) {
   var otherMenu;
-  if (mealId == 3 || mealId == 6){
+  if (mealId == 3 || mealId == 6) {
     otherMenu = menuId + 1;
-  } else if (mealId == 4 || mealId == 7){
+  } else if (mealId == 4 || mealId == 7) {
     otherMenu = menuId - 1;
-  } 
+  }
 
-  if (otherMenu){
-    button = document.querySelector(`button[data-menu-id="${otherMenu}"]`);
-    if (button.innerHTML == "Abmelden"){
+  if (otherMenu) {
+    var card = document.getElementById(otherMenu);
+    var ordered = card.getAttribute('data-ordered');
+    if (ordered == "1") {
+      var button = document.querySelector(`[data-menu-id="${otherMenu}"]`);
       button.click();
     }
   }

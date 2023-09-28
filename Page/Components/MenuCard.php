@@ -59,38 +59,38 @@ function getCardByUser($Meal, $day, $tooLate)
 {
   $button = "";
   $text = "";
+  $card = '<div class="card-body position-relative"';
 
   if (is_null($Meal["user_id"]) and !$tooLate) {
-    $button = '<button name="userbutton" type="menubutton" class="btn btn-success custom-btn-size" ';
-    $text = "Anmelden";
+    $card = '<div class="card-body position-relative"
+              data-ordered="0"';
+    $button = '<button name="userbutton" type="menubutton" class="stretched-link" ';
   } else if (!is_null($Meal["user_id"]) and !$tooLate) {
-    $button = '<button name="userbutton" type="menubutton" class="btn btn-danger custom-btn-size" ';
-    $text = "Abmelden";
+    $card = '<div class="card-body position-relative" style="background-color: rgba(154, 211, 154, 0.51);"
+              data-ordered="1"';
+    $button = '<button name="userbutton" type="menubutton" class="stretched-link" ';
   } else if (is_null($Meal["user_id"]) and $tooLate) {
-    $button = '<button name="userbutton" disabled type="menubutton" class="btn btn-secondary custom-btn-size" ';
+    $button = '<button hidden name="userbutton" disabled type="menubutton" class="btn btn-secondary stretched-link custom-btn-size" ';
     $text = "nicht angemeldet";
-  }else if (!is_null($Meal["user_id"]) and $tooLate) {
-    $button = '<button name="userbutton" disabled type="menubutton" class="btn btn-primary custom-btn-size" ';
-    $text = "angemeldet";
+  } else if (!is_null($Meal["user_id"]) and $tooLate) {
+    $button = '<button hidden name="userbutton" disabled type="menubutton" class="btn btn-primary stretched-link custom-btn-size" ';
+    $card = '<div class="card-body position-relative" style="background-color: rgba(173, 216, 230, 0.558);"';
   }
 
   $string =
-  '<div class="card-body">
-    <div style="width:100%">
-      <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
-      <p class="card-text">' . nvl($Meal["name"]) . '</p>
-    </div>
-    <div>'.
-          $button . 
-          'data-menu-id="' . nvl($Meal["menu_id"]) . '"
+    $card .
+    'id="' . nvl($Meal["menu_id"]) . '">
+    <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+      <p class="card-text">' . nvl($Meal["name"]) . '</p>' .
+    $button .
+    'data-menu-id="' . nvl($Meal["menu_id"]) . '"
            data-meal-id="' . nvl($Meal["meal_id"]) . '"
            data-user-id="1">
-    '. $text .'
+    ' . $text . '
     </button>
-    </div>
     </div>';
 
-    return $string;
+  return $string;
 }
 
 function getCardByAdmin($Meal, $day, $Menu)
