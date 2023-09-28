@@ -4,6 +4,15 @@
     color: #fff;
     background-color: #858585;
   }
+  .navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 0;
+    align-items: center;
+  }
+  .navbar{
+    background-color: rgba(42, 42, 40, 0.442);
+    height: 78px;
+  }
 </style>
 
 <nav class="navbar sticky-top nav-pills navbar-expand-lg">
@@ -14,8 +23,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExample07">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="collapse navbar-collapse justify-content-end" id="navbarsExample07">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end">
         <li class="nav-item">
           <a class="nav-link btn-secondary <?php setActive('menu') ?>" href="?page=menu">Menu</a>
         </li>
