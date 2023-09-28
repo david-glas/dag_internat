@@ -1,10 +1,10 @@
 <div class="d-flex justify-content-center align-items-center mb-3">
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Neues Gericht hinzufügen</button>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cup-hot-fill"></i>  Neues Gericht hinzufügen</button>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Gericht hinzufügen</h5>
+    <h5 class="offcanvas-title" id="offcanvasRightLabel"><i class="bi bi-cup-hot-fill"></i>  Gericht hinzufügen</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
@@ -31,9 +31,9 @@
     <thead>
       <tr>
         <th scope="col" style="width: 5%;">#</th>
-        <th scope="col" style="width: 55%;">Name</th>
+        <th scope="col" style="width: 50%;">Name</th>
         <th scope="col" style="width: 30%;">Menüs</th> 
-        <th scope="col" style="width: 10%; text-align: right;"></th>
+        <th scope="col" style="width: 15%; text-align: right;"></th>
       </tr>
     </thead>
     <tbody>
@@ -50,9 +50,9 @@
     <thead>
       <tr>
         <th scope="col" style="width: 5%;">#</th>
-        <th scope="col" style="width: 55%;">Name</th>
+        <th scope="col" style="width: 50%;">Name</th>
         <th scope="col" style="width: 30%;">Menüs</th> 
-        <th scope="col" style="width: 10%; text-align: right;"></th>
+        <th scope="col" style="width: 15%; text-align: right;"></th>
       </tr>
     </thead>
     <tbody>
@@ -69,9 +69,9 @@
     <thead>
       <tr>
         <th scope="col" style="width: 5%;">#</th>
-        <th scope="col" style="width: 55%;">Name</th>
+        <th scope="col" style="width: 50%;">Name</th>
         <th scope="col" style="width: 30%;">Menüs</th> 
-        <th scope="col" style="width: 10%; text-align: right;"></th>
+        <th scope="col" style="width: 15%;"></th>
       </tr>
     </thead>
     <tbody>
@@ -91,7 +91,11 @@
                 <th scope="row">'. $food['food_id'] . '</th>
                 <td>'. $food['name'] .'</td>
                 <td>'. $food['menu_name'] .'</td>
-                <td><button type="button" class="btn btn-warning btn-sm" id='. $timeOfDay . $food['food_id'] .'>Ändern</button></td>
+                <td>
+                  <button type="button" class="btn btn-warning btn-sm float-end" id='. $timeOfDay . $food['food_id'] .'>
+                    <i class="bi bi-gear-fill"></i><span>  Ändern</span>
+                  </button>
+                </td>
               </tr>';
       }
     }

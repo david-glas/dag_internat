@@ -50,7 +50,7 @@
         <th scope="col" style="width: 20%;">Nachname</th>
         <th scope="col" style="width: 25%;">SV-Nr</th>
         <th scope="col" style="width: 20%;">Rolle</th>
-        <th scope="col" style="width: 15%; text-align: right;"></th>
+        <th scope="col" style="width: 15%;"></th>
       </tr>
     </thead>
     <tbody>
@@ -73,14 +73,14 @@
                 <td>'. $user['lastname'] .'</td>
                 <td>'. $user['svnr'] .'</td>
                 <td>'. $user['role'] .'</td>
-                <td><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="offcanvas" data-bs-target="#change'. $user['user_id']  .'" aria-controls="change'. $user['user_id']  .'" id="'. $user['user_id'] .'">
-                  <i class="bi bi-gear-fill d-inline"></i><span>  Ändern</span>
+                <td><button type="button" class="btn btn-warning btn-sm float-end" data-bs-toggle="offcanvas" data-bs-target="#change'. $user['user_id']  .'" aria-controls="change'. $user['user_id']  .'" id="'. $user['user_id'] .'">
+                  <i class="bi bi-gear-fill"></i><span>  Ändern</span>
                 </button></td>
               </tr>';
         
         echo '<div class="offcanvas offcanvas-end" tabindex="-1" id="change'. $user['user_id']  .'" aria-labelledby="change'. $user['user_id']  .'">
                 <div class="offcanvas-header">
-                  <h5 class="offcanvas-title" id="change'. $user['user_id']  .'"><i class="bi bi-gear-fill d-inline"></i>  Benutzer ändern</h5>
+                  <h5 class="offcanvas-title" id="change'. $user['user_id']  .'"><i class="bi bi-gear-fill"></i>  Benutzer ändern</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
