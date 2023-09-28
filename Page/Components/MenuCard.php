@@ -61,16 +61,16 @@ function getCardByUser($Meal, $day, $tooLate)
   $text = "";
 
   if (is_null($Meal["user_id"]) and !$tooLate) {
-    $button = '<button name="userbutton" type="button" class="btn btn-success custom-btn-size" ';
+    $button = '<button name="userbutton" type="menubutton" class="btn btn-success custom-btn-size" ';
     $text = "Anmelden";
   } else if (!is_null($Meal["user_id"]) and !$tooLate) {
-    $button = '<button name="userbutton" type="button" class="btn btn-danger custom-btn-size" ';
+    $button = '<button name="userbutton" type="menubutton" class="btn btn-danger custom-btn-size" ';
     $text = "Abmelden";
   } else if (is_null($Meal["user_id"]) and $tooLate) {
-    $button = '<button name="userbutton" disabled type="button" class="btn btn-secondary custom-btn-size" ';
+    $button = '<button name="userbutton" disabled type="menubutton" class="btn btn-secondary custom-btn-size" ';
     $text = "nicht angemeldet";
   }else if (!is_null($Meal["user_id"]) and $tooLate) {
-    $button = '<button name="userbutton" disabled type="button" class="btn btn-primary custom-btn-size" ';
+    $button = '<button name="userbutton" disabled type="menubutton" class="btn btn-primary custom-btn-size" ';
     $text = "angemeldet";
   }
 
@@ -100,9 +100,9 @@ function getCardByAdmin($Meal, $day, $Menu)
     '<div class="card-body">
       <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
       <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
-      <div id="dropdown" class="dropdown">
+      <div id="dropi" class="dropdown">
         <button id="drop" class="btn btn-primary dropdown-toggle custom-btn-size" 
-        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        type="menubutton" data-bs-toggle="dropdown" aria-expanded="false">
           Mahlzeit ändern
         </button>
         <ul class="dropdown-menu">';
