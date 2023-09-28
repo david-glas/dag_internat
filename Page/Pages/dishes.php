@@ -15,7 +15,7 @@
           <label for="firstname_input">Name</label>
         </div>
         <?php fillMealChecks() ?>
-        <div class="form-floating mb-2">
+        <div class="form-floating mt-4">
           <button type="submit" name="action" value="create" class="btn btn-success">Gericht anlegen</button>
         </div>
       </form>
@@ -107,7 +107,7 @@
 
     if ($menus != null) {
       for($i=0; $i < count($menus); $i++) {
-        echo '<div class="form-check mb-2">
+        echo '<div class="form-check mb-1">
                 <input class="form-check-input" type="checkbox" name="meal'. $menus[$i]['meal_id'] .'" value="">
                 <label class="form-check-label" for="'. $menus[$i]['meal_id'] .'">'
                   .$menus[$i]['type'].

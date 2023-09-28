@@ -109,10 +109,9 @@
           echo          '</select>
                         <label for="role_select">Rolle</label>
                       </div>
-                    <div class="form-floating mb-3">
-                      <button type="submit" name="action" value="change" class="btn btn-success"><i class="bi bi-check-lg"></i>  Benutzer ändern</button>'.
-                      '   '.
-                      '<button type="submit" name="action" value="delete" class="btn btn-danger"><i class="bi bi-trash-fill"></i>  Benutzer löschen</button>
+                    <div class="form-floating mt-4">
+                      <button type="submit" name="action" value="change" class="btn btn-success me-1"><i class="bi bi-check-lg"></i>  Benutzer ändern</button>
+                      <button type="submit" name="action" value="delete" class="btn btn-danger"><i class="bi bi-trash-fill"></i>  Benutzer löschen</button>
                     </div>
                   </form>
                 </div>
