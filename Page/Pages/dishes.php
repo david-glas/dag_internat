@@ -1,5 +1,26 @@
 <div class="container">
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Neues Gericht hinzufügen</button>
+</div>
 
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">Gericht hinzufügen</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container">
+      <form class="form-floating" method="POST" action="Components/dish_functions.php">
+        <div class="form-floating mb-2">
+          <input type="text" class="form-control" id="firstname_input" name="firstname_input">
+          <label for="firstname_input">Name</label>
+        </div>
+        <?php fillMealChecks() ?>
+        <div class="form-floating mb-2">
+          <button type="submit" name="action" value="create" class="btn btn-success">Gericht anlegen</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 <div class="container">
@@ -74,4 +95,22 @@
               '</tr>';
       }
     }
+  }
+
+  function fillMealChecks() {
+    $foodCon = new Food();
+    $menus = $foodCon->GetAllMeals();
+
+    if ($menus != null) {
+      for($i=0; $i < count($menus); $i++) {
+        echo '<div class="form-check mb-2">'.
+                '<input class="form-check-input" type="checkbox" name="meal'. $menus[$i]['meal_id'] .'" value="">'.
+                '<label class="form-check-label" for="'. $menus[$i]['meal_id'] .'">'.
+                  $menus[$i]['type'].
+                '</label>'.
+              '</div>';
+      }
+    }
+
+
   }

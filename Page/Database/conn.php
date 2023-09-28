@@ -87,7 +87,7 @@ class User extends Conn
     function GetAllUsers()
     {
         try {
-            $query = "select user_id, firstname, lastname, svnr, `name` `role` from user inner join role using(role_id)";
+            $query = "select user_id, firstname, lastname, svnr, `name` `role`, role_id from user inner join role using(role_id)";
             $stmt = $this->makeStatement($query);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
@@ -209,6 +209,16 @@ class Food extends Conn
                 "order by food_id";
             $arr = array($timeOfDay);
             $stmt = $this->makeStatement($query, $arr);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
+    }
+    function GetAllMeals() {
+        try {
+            $query = "select meal_id, type from meal";
+            $stmt = $this->makeStatement($query);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         } catch (Exception $e) {
