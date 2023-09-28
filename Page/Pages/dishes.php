@@ -1,4 +1,4 @@
-<div class="container">
+<div class="d-flex justify-content-center align-items-center mb-3">
   <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Neues Gericht hinzufügen</button>
 </div>
 
@@ -87,12 +87,12 @@
 
     if ($foods != null) {
       foreach ($foods as $food) {
-        echo  '<tr>'.
-                '<th scope="row">'. $food['food_id'] . '</th>'.
-                '<td>'. $food['name'] .'</td>'.
-                '<td>'. $food['menu_name'] .'</td>'.
-                '<td><button type="button" class="btn btn-warning btn-sm" id='. $timeOfDay . $food['food_id'] .'>Ändern</button></td>'.
-              '</tr>';
+        echo  '<tr>
+                <th scope="row">'. $food['food_id'] . '</th>
+                <td>'. $food['name'] .'</td>
+                <td>'. $food['menu_name'] .'</td>
+                <td><button type="button" class="btn btn-warning btn-sm" id='. $timeOfDay . $food['food_id'] .'>Ändern</button></td>
+              </tr>';
       }
     }
   }
@@ -103,12 +103,12 @@
 
     if ($menus != null) {
       for($i=0; $i < count($menus); $i++) {
-        echo '<div class="form-check mb-2">'.
-                '<input class="form-check-input" type="checkbox" name="meal'. $menus[$i]['meal_id'] .'" value="">'.
-                '<label class="form-check-label" for="'. $menus[$i]['meal_id'] .'">'.
-                  $menus[$i]['type'].
-                '</label>'.
-              '</div>';
+        echo '<div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="meal'. $menus[$i]['meal_id'] .'" value="">
+                <label class="form-check-label" for="'. $menus[$i]['meal_id'] .'">'
+                  .$menus[$i]['type'].
+                '</label>
+              </div>';
       }
     }
 
