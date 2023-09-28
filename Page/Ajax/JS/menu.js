@@ -162,6 +162,7 @@ function updateTabs(user) {
           var spinner = document.getElementById("spinner");
           spinner.style.display = "none";
           updateButtons();
+          updateSwiper();
         })
         .catch(error => {
           console.error('Fehler beim Abrufen der Daten:', error);
@@ -189,4 +190,28 @@ function resetOtherMeal(menuId, userId, mealId) {
       button.click();
     }
   }
+}
+
+function updateSwiper() {
+  // swiper element
+  const swiperEl = document.querySelector('swiper-container');
+
+  // swiper parameters
+  const swiperParams = {
+    slidesPerView: "auto",
+    spaceBetween: 15,
+    mousewheel: {
+      forceToAxis: true,
+    },
+    on: {
+      init() {
+      },
+    },
+  };
+
+  // now we need to assign all parameters to Swiper element
+  Object.assign(swiperEl, swiperParams);
+
+  // and now initialize it
+  swiperEl.initialize();
 }

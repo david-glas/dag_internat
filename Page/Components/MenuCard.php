@@ -134,7 +134,7 @@ function GetCardsByWeek($week)
 
     if (isset($Menu->Breakfast)) {
       $cards = $cards .
-        '<div class="col">
+        '<swiper-slide class="w-fit"><div class="col">
           <div class="card">
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
@@ -149,8 +149,8 @@ function GetCardsByWeek($week)
         '<div class="card-footer">
                   <small class="text-muted">' . $day . '</small>
                 </div>
-              </div>
-            </div>';
+                </div>
+            </div></swiper-slide>';
     } else {
       $cards = $cards .
         '<div class="col">
@@ -169,6 +169,10 @@ function GetCardsByWeek($week)
     }
 
   }
+  $cards =
+    '<swiper-container>'
+    . $cards .
+    '</swiper-container>';
   return $cards;
 }
 
