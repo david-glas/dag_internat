@@ -134,7 +134,8 @@ function GetCardsByWeek($week)
 
     if (isset($Menu->Breakfast)) {
       $cards = $cards .
-        '<swiper-slide class="w-fit"><div class="col">
+        '<div class="swiper-slide">
+        <div class="col">
           <div class="card">
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
@@ -150,7 +151,7 @@ function GetCardsByWeek($week)
                   <small class="text-muted">' . $day . '</small>
                 </div>
                 </div>
-            </div></swiper-slide>';
+            </div></div>';
     } else {
       $cards = $cards .
         '<div class="col">
@@ -169,10 +170,6 @@ function GetCardsByWeek($week)
     }
 
   }
-  $cards =
-    '<swiper-container>'
-    . $cards .
-    '</swiper-container>';
   return $cards;
 }
 
@@ -192,7 +189,8 @@ function GetCardsByWeekAdmin($week)
 
     if (isset($Menu->Breakfast)) {
       $cards = $cards .
-        '<div class="col">
+      '<div class="swiper-slide">
+        <div class="col">
           <div class="card">
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
@@ -205,14 +203,13 @@ function GetCardsByWeekAdmin($week)
         getCardByAdmin($Menu->FirstDinner, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->SecondDinner, $day, $Menu) .
         '<div class="card-footer">
-                  <small class="text-muted">' . $day . '</small>
+                  <small class="te  xt-muted">' . $day . '</small>
                 </div>
               </div>
-            </div>';
+            </div></div>';
     } else {
       $cards = $cards .
-        '<div class="col">
-          <div class="card">
+          '<div class="card">
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
                 </div>
@@ -226,10 +223,8 @@ function GetCardsByWeekAdmin($week)
                 <div class="card-footer">
                   <small class="text-muted">' . $day . '</small>
                 </div>
-              </div>
-            </div>';
+              </div>>';
     }
-
   }
   return $cards;
 }

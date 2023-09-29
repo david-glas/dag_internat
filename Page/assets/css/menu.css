@@ -62,10 +62,20 @@
     font-size: 15px;
   }
 
-  swiper-container {
+  .swiper-container {
     width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
   }
 
-  swiper-slide {
-    width: 50%;
+  .swiper-wrapper {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
   }
+
+  .swiper-slide{
+    width: fit-content;
+   }

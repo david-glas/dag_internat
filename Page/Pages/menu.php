@@ -19,7 +19,9 @@
     </li>
   </ul>
   <br>
-  <div id="card-container" class="row row-cols-1 row-cols-md-5 g-4">
-  </div>
+  <div class="swiper">
+      <div id="card-container" class="swiper-wrapper">
+        </div>  
+    </div>
 </div>
 <script src="Ajax/JS/menu.js"></script>
