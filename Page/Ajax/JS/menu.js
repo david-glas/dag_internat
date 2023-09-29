@@ -193,25 +193,29 @@ function resetOtherMeal(menuId, userId, mealId) {
 }
 
 function updateSwiper() {
-  // swiper element
-  const swiperEl = document.querySelector('swiper-container');
-
-  // swiper parameters
-  const swiperParams = {
-    slidesPerView: "auto",
-    spaceBetween: 15,
-    mousewheel: {
-      forceToAxis: true,
+  const swiper = new Swiper('.swiper', {
+    slidesPerView: 1,
+    spaceBetween: 25,
+    breakpoints:{
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 3,
+        },
+        1200: {
+          slidesPerView: 4,
+        },
+        1400: {
+          slidesPerView: 5,
+       }
     },
-    on: {
-      init() {
-      },
-    },
-  };
-
-  // now we need to assign all parameters to Swiper element
-  Object.assign(swiperEl, swiperParams);
-
-  // and now initialize it
-  swiperEl.initialize();
+    loop: false,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+  });
 }
