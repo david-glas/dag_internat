@@ -13,8 +13,8 @@
   /* Hintergrundfarbe und Höhe der Navbar*/
   .navbar{
     background: rgb(63,62,68);
-background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);
-height: 84px;
+    background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);
+    height: 84px;
   }
 
   /* Weißer Text für Links und Überschrift */
@@ -37,11 +37,21 @@ height: 84px;
     font-weight: bold; /* Fetter Text */
     font-family: 'Arial', sans-serif; /* Schriftart, ersetzen Sie 'Arial' durch die gewünschte Schriftart */ 
   }
+  @media (max-width: 768px) {
+  .navbar-collapse{
+    background: rgb(63,62,68);
+    background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);
+    box-shadow: 100px;
+  }
+  .navbar>.container{
+    padding: 0px;
+  }
+  }
 </style>
 
 
 
-<nav class="navbar sticky-top nav-pills navbar-expand-lg">
+<nav class="navbar sticky-top nav-pills navbar-expand-md">
   <div class="container">
     <a class="navbar-brand" href="?page=landing" style="background-color: transparent">DAG GmbH</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
@@ -70,6 +80,7 @@ height: 84px;
     </div>
   </div>
 </nav>
+
 
 
 <?php function setActive($page)
