@@ -52,16 +52,17 @@ class User extends Conn
         }
     }
 
-    function UpdateUser($svnr, $firstname, $lastname, $password, $roleId)
+    function UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $roleId)
     {
         try {
             $query = "update user 
                         set firstname = ?, 
                             lastName = ?, 
                             pw = ?,
-                            role_id = ?
-                        where svnr = ?;";
-            $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $svnr);
+                            role_id = ?,
+                            svnr = ?
+                        where user_id = ?;";
+            $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $svnr, $user_id);
             $stmt = $this->makeStatement($query, $arr);
 
             return true;
@@ -71,11 +72,15 @@ class User extends Conn
         }
     }
 
-    function DeleteUser($svnr) {
+    function DeleteUser($user_id) {
         try {
-            $query = "delete from user where svnr = ?;";
-            $arr = array($svnr);
+            $query = "delete from user_menu where user_id = ?;";
+            $arr = array($user_id);
             $stmt = $this->makeStatement($query, $arr);
+
+            $query1 = "delete from user where user_id = ?;";
+            $arr1 = array($user_id);
+            $stmt = $this->makeStatement($query1, $arr1);
 
             return true;
         } catch (Exception $e) {
@@ -152,6 +157,45 @@ class Food extends Conn
                 $arr = array($foodId, $mealId);
                 $stmt = $this->makeStatement($query, $arr);
             }
+
+            return true;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
+        }
+    }
+    function UpdateFood($food_id, $food_name, $mealArr) {
+        try {
+            $query = "update food set name = ? where food_id = ?";
+            $arr = array($food_name, $food_id);
+            $stmt = $this->makeStatement($query, $arr);
+            
+            $query1 = "delete from food_meal where food_id = ?;";
+            $arr1 = array($food_id);
+            $stmt = $this->makeStatement($query1, $arr1);
+        
+            foreach ($mealArr as $meal) {
+                $query2 = "insert into food_meal(food_id, meal_id) values (?, ?)";
+                $arr2 = array($food_id, $meal);
+                $stmt = $this->makeStatement($query2, $arr2);
+            }
+
+            return true;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
+        }
+    }
+
+    function DeleteFood($food_id) {
+        try {
+            $query = "delete from food_meal where food_id = ?;";
+            $arr = array($food_id);
+            $stmt = $this->makeStatement($query, $arr);
+
+            $query1 = "delete from food where food_id = ?;";
+            $arr1 = array($food_id);
+            $stmt = $this->makeStatement($query1, $arr1);
 
             return true;
         } catch (Exception $e) {

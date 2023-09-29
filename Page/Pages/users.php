@@ -87,16 +87,20 @@
                   <div class="container">
                     <form class="form-floating" method="POST" action="Components/user_functions.php">
                       <div class="form-floating mb-2">
-                        <input type="hidden" value='. $user['svnr'] .' class="form-control" id="svnr_input" name="svnr_input">
-                        <input type="text" value='. $user['svnr'] .' class="form-control" id="svnr_inputhidden" name="svnr_inputhidden" disabled readonly>
-                        <label for="svnr_inputhidden">Sozialversicherungsnummer</label>
+                        <input type="hidden" value="'. $user['user_id'] .'" class="form-control" id="userID_input" name="userID_input">
+                        <input type="text" value="'. $user['user_id'] .'" class="form-control" id="userID_inputhidden" name="userID_inputhidden" disabled readonly>
+                        <label for="userID_inputhidden">Benutzer ID</label>
                       </div>
                       <div class="form-floating mb-2">
-                        <input type="text" value='. $user['firstname'] .' class="form-control" id="firstname_input" name="firstname_input">
+                        <input type="text" value="'. $user['svnr'] .'" class="form-control" id="svnr_input" name="svnr_input">
+                        <label for="svnr_input">Sozialversicherungsnummer</label>
+                      </div>
+                      <div class="form-floating mb-2">
+                        <input type="text" value="'. $user['firstname'] .'" class="form-control" id="firstname_input" name="firstname_input">
                         <label for="firstname_input">Vorname</label>
                       </div>
                       <div class="form-floating mb-2">
-                        <input type="text" value='. $user['lastname'] .'  class="form-control" id="lastname_input" name="lastname_input">
+                        <input type="text" value="'. $user['lastname'] .'"  class="form-control" id="lastname_input" name="lastname_input">
                         <label for="lastname_input">Nachname</label>
                       </div>
                       <div class="form-floating mb-2">

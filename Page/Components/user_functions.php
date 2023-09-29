@@ -2,6 +2,7 @@
 include "../Database/conn.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (array_key_exists('userID_input', $_POST)) { $user_id = $_POST['userID_input']; }
   $firstname = $_POST['firstname_input'];
   $lastname = $_POST['lastname_input'];
   $svnr = $_POST['svnr_input'];
@@ -14,10 +15,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user->AddUser($svnr, $firstname, $lastname, $password, $role_id);
   }
   else if ($action == 'change') {
-    $user->UpdateUser($svnr, $firstname, $lastname, $password, $role_id);
+    $user->UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $role_id);
   }
   else if ($action == 'delete') {
-    $user->DeleteUser($svnr);
+    $user->DeleteUser($user_id);
   }
 }
 
