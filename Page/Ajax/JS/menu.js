@@ -196,6 +196,7 @@ function updateSwiper() {
   const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
     spaceBetween: 25,
+
     breakpoints:{
         0: {
             slidesPerView: 1,
