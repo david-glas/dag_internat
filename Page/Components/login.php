@@ -14,7 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Validation successful
         // Set the user data in $_SESSION
         $_SESSION["user"] = [
-            "account" => $result
+            "account" => $result["name"],
+            "userid" => $result["userid"]
             // You can add more user data here
         ];
 

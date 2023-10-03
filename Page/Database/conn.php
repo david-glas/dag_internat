@@ -12,9 +12,9 @@ class Conn
     public function __construct()
     {
         try {
-            $servername = "mysql.glasdavid.com";
+            $servername = "127.0.0.1"; #$servername = "mysql.glasdavid.com";
             $username = "root";
-            $password = "georgadnandavid";
+            $password = "admin"; #georgadnanadavid
             $schema = "dag";
 
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
@@ -72,6 +72,23 @@ class User extends Conn
         }
     }
 
+    function VerifyUser($user_id, $password, $roleId)
+    {
+        try {
+            $query = "update user set
+                            pw = ?,
+                            role_id = ?
+                        where user_id = ?;";
+            $arr = array(password_hash($password, PASSWORD_DEFAULT), $roleId, $user_id);
+            $stmt = $this->makeStatement($query, $arr);
+
+            return true;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+            return false;
+        }
+    }
+
     function DeleteUser($user_id) {
         try {
             $query = "delete from user_menu where user_id = ?;";
@@ -104,7 +121,7 @@ class User extends Conn
     function CheckLogin($svnr, $password)
     {
 
-        $query = "select u.pw, r.name 
+        $query = "select u.user_id, u.pw, r.name 
                     from user u left join role r using (role_id)
                     where svnr = ?";
         $stmt = $this->makeStatement($query, array($svnr));
@@ -114,7 +131,10 @@ class User extends Conn
             if (password_verify($password, $result['pw'])) {
                 /* The password is correct. */
                 if (isset($result["name"]) and $result["name"] != "") {
-                    return $result["name"];
+                    return array(
+                          "name" => $result["name"],
+                          "userid" => $result["user_id"]
+                    );
                 }
             }
         }
@@ -421,10 +441,11 @@ class Menu extends Conn
     function GetMenuByDateAdmin($date)
     {
 
-        $query = "select * 
+        $query = "select mv.*, count(user_id) amount
                     from menu_v mv left join user_menu um using (menu_id)
                     where day = ?
-                    order by meal_id";
+                    group by menu_id
+                    order by meal_id;";
         $stmt = $this->makeStatement($query, array(date('Y-m-d', $date)));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($result) == 0) {

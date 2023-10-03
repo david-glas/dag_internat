@@ -3,6 +3,11 @@
     border-color: rgb(70, 68, 68);
   }
 
+  .card-title{
+    font-size: 13px!important;
+    margin-left: -10px!important;
+  }
+
   /* Style for the parent div */
   .card-body {
     position: relative;
