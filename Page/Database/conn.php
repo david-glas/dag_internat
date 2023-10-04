@@ -14,7 +14,7 @@ class Conn
         try {
             $servername = "mysql.glasdavid.com";
             $username = "root";
-            $password = "georgadnanadavid";
+            $password = "georgadnandavid";
             $schema = "dag";
 
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
