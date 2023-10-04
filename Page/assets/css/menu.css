@@ -1,6 +1,11 @@
   .card,
   .card-header {
     border-color: rgb(70, 68, 68);
+
+  }
+
+  .blabla{
+    background-color:  rgb(196, 196, 196);
   }
 
   .card-title{
@@ -46,6 +51,17 @@
     opacity: 100%;
   }
 
+  .dropdown-custom{
+    position: fixed;
+    overflow-y: visible;
+    z-index: 9999!important; /* Adjust this value as needed */
+  }
+
+  .dropdown-item {
+    z-index: 9999!important; /* Adjust this value as needed */
+    overflow-y: visible;
+  }
+
   .custom-btn-size {
     font-size: 10px;
   }
@@ -59,7 +75,8 @@
   .card-text {
     padding-bottom: 0px;
     font-size: 13px;
-    display: inline;
+    display: block;
+    text-align: left;
   }
 
   .card-title {

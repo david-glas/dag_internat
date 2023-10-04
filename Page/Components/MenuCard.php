@@ -39,6 +39,19 @@ function tooLateToOrder($date)
   return $date <= strtotime("today + 7 days");
 }
 
+function pastStyle($date)
+{
+  $arr = array(
+    "card" => "",
+    "header" => ""
+  );
+  if($date < strtotime("today")){
+    $arr["card"] = 'style="background-color: rgba(196, 196, 196, 0.686);"';
+    $arr["header"] = 'style="background-color:  rgb(196, 196, 196);"';
+  }
+  return $arr;
+}
+
 function getDateString($day, $index)
 {
 
@@ -70,7 +83,8 @@ function getCardByUser($Meal, $day, $tooLate)
               data-ordered="1"';
     $button = '<button name="userbutton" type="menubutton" class="stretched-link" ';
   } else if (is_null($Meal["user_id"]) and $tooLate) {
-    $button = '<button hidden name="userbutton" disabled type="menubutton" class="btn btn-secondary stretched-link custom-btn-size" ';
+    $button = '<button hidden name="userbutton" disabled type="menubutton" style="background-color:  rgb(196, 196, 196);"
+                class="btn btn-secondary stretched-link custom-btn-size" ';
     $text = "nicht angemeldet";
   } else if (!is_null($Meal["user_id"]) and $tooLate) {
     $button = '<button hidden name="userbutton" disabled type="menubutton" class="btn btn-primary stretched-link custom-btn-size" ';
@@ -100,17 +114,17 @@ function getCardByAdmin($Meal, $day, $Menu)
     '<div class="card-body">
       <h5 id="xy" class="card-title">' . $Meal["type"] . ' (' . $Meal["amount"] . ')</h5>
       <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
-      <div id="dropi" class="dropdown">
+      <div id="dropi" class="dropdown-center">
         <button id="drop" class="btn btn-warning dropdown-toggle custom-btn-size" 
         type="menubutton" data-bs-toggle="dropdown" aria-expanded="false">
           Mahlzeit ändern
         </button>
-        <ul class="dropdown-menu">';
+        <ul class="dropdown-menu dropdown-custom">';
   foreach ($Food as $entry) {
-    $string .= '<li><button id="drop" class="dropdown-item" type="button"  
+    $string .= '<li><a id="drop" class="dropdown-item" type="button"
           data-menu-id="' . nvl($Meal["menu_id"]) . '" data-food-id="' . nvl($entry["food_id"]) . '">'
       . $entry["name"] .
-      '</button></li>';
+      '</a></li>';
   }
   $string .= '        
             </ul>
@@ -129,6 +143,7 @@ function GetCardsByWeek($week)
   for ($i = 0; $i < 5; $i++) {
     $currDate = getCurrentDay($lastMonday, $i);
     $tooLate = tooLateToOrder($currDate);
+    $pastStyle = pastStyle($currDate);
     $day = getDateString($currDate, $i);
     $Menu = $Menu->GetMenuByDateAndUser($currDate, 1);
 
@@ -136,18 +151,18 @@ function GetCardsByWeek($week)
       $cards = $cards .
         '<div class="swiper-slide">
         <div class="col">
-          <div class="card">
-            <div class="card-header">
+          <div class="card" '. $pastStyle["card"] .' style="z-index:-1;">
+            <div class="card-header" '. $pastStyle["header"] .'>
               <small class="text-muted">' . $day . '</small>
               </div>' .
-        getCardByUser($Menu->Breakfast, $currDate, $tooLate) . '<hr class="hr" />' .
+        getCardByUser($Menu->Breakfast, $currDate, $tooLate, ) . '<hr class="hr" />' .
         getCardByUser($Menu->Starter, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->FirstMainMeal, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->SecondMainMeal, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->Dessert, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->FirstDinner, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->SecondDinner, $currDate, $tooLate) .
-        '<div class="card-footer">
+        '<div class="card-footer" '. $pastStyle["header"] .'>
                   <small class="text-muted">' . $day . '</small>
                 </div>
                 </div>
@@ -162,7 +177,7 @@ function GetCardsByWeek($week)
                 <div class="card-body">
                   <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' . '">Es wurde noch kein Essen hinzugefügt.</h5>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer"'. $pastStyle["header"] .'>
                   <small class="text-muted">' . $day . '</small>
                 </div>
               </div>
@@ -185,14 +200,15 @@ function GetCardsByWeekAdmin($week)
   for ($i = 0; $i < 5; $i++) {
     $currDate = getCurrentDay($lastMonday, $i);
     $day = getDateString($currDate, $i);
+    $pastStyle = pastStyle($currDate);
     $Menu = $Menu->GetMenuByDateAdmin($currDate);
 
     if (isset($Menu->Breakfast)) {
       $cards = $cards .
       '<div class="swiper-slide">
         <div class="col">
-          <div class="card">
-            <div class="card-header">
+        <div class="card" '. $pastStyle["card"] .'>
+          <div class="card-header" '. $pastStyle["header"] .'>
               <small class="text-muted">' . $day . '</small>
               </div>' .
         getCardByAdmin($Menu->Breakfast, $day, $Menu) . '<hr class="hr" />' .
@@ -202,15 +218,17 @@ function GetCardsByWeekAdmin($week)
         getCardByAdmin($Menu->Dessert, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->FirstDinner, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->SecondDinner, $day, $Menu) .
-        '<div class="card-footer">
+        '<div class="card-footer" '. $pastStyle["header"] .'>
                   <small class="te  xt-muted">' . $day . '</small>
                 </div>
               </div>
             </div></div>';
     } else {
       $cards = $cards .
-          '<div class="card">
-            <div class="card-header">
+      '<div class="swiper-slide">
+      <div class="col">
+      <div class="card" '. $pastStyle["card"] .'>
+      <div class="card-header" '. $pastStyle["header"] .'>
               <small class="text-muted">' . $day . '</small>
                 </div>
                 <div class="card-body">
@@ -220,10 +238,11 @@ function GetCardsByWeekAdmin($week)
                 Hinzufügen
               </button>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" '. $pastStyle["header"] .'>
                   <small class="text-muted">' . $day . '</small>
                 </div>
-              </div>>';
+              </div>
+              </div></div>';
     }
   }
   return $cards;

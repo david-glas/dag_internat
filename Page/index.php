@@ -32,6 +32,9 @@ include "Components/nav.php";
 ?>
 
 <body>
+<!--button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button-->
   <?php
   if (isset($_GET['page'])) {
     switch ($_GET['page']) {
@@ -57,6 +60,7 @@ include "Components/nav.php";
     include "Pages/landing.php";
   }
   include "Components/footer.php";
+  include "Components/Modal.php";
   ?>
 </body>
 
