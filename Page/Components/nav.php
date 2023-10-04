@@ -53,7 +53,9 @@
 
 <nav class="navbar sticky-top nav-pills navbar-expand-md">
   <div class="container">
-    <a class="navbar-brand" href="?page=landing" style="background-color: transparent">DAG GmbH</a>
+    <a class="navbar-brand">
+      <img class="me-3" src="assets\img\DAG72.png" alt="Dagobert DAG">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
       aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
