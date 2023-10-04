@@ -61,21 +61,41 @@
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarsExample07">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end">
+        <?php 
+        if ($_SESSION["user"]["account"] != "webuser") {
+          echo
+          '<li class="nav-item">
+            <a class="nav-link btn-secondary'. setActive('menu') .'" href="?page=menu">Menu</a>
+          </li>';
+
+          if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
+            echo
+            '<li class="nav-item">
+              <a class="nav-link'. setActive('dashboard') .'" href="?page=dashboard">Dashboard</a>
+            </li>';
+          }
+        }
+        ?>
         <li class="nav-item">
-          <a class="nav-link btn-secondary <?php setActive('menu') ?>" href="?page=menu">Menu</a>
+          <a class="<?php echo 'nav-link'. setActive('instructions') ?>" href="?page=instructions">Instructions</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php setActive('dashboard') ?>" href="?page=dashboard">Dashboard</a>
+          <a class="<?php echo 'nav-link'. setActive('about') ?>" href="?page=about">About</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link <?php setActive('instructions') ?>" href="?page=instructions">Instructions</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link <?php setActive('about') ?>" href="?page=about">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="Components/logout.php">Logout</a>
-        </li>
+        <?php
+        if ($_SESSION["user"]["account"] != "webuser") {
+          echo
+          '<li class="nav-item">
+            <a class="nav-link" href="Components/logout.php">Logout</a>
+          </li>';
+        }
+        else {
+          echo
+          '<li class="nav-item">
+            <a class="nav-link" href="index.php">Login</a>
+          </li>';
+        }
+        ?>
       </ul>
     </div>
   </div>
@@ -87,7 +107,7 @@
 {
   if (isset($_GET['page'])) {
     if ($_GET['page'] == $page) {
-      echo "active";
+      return " active";
     }
   }
 }
