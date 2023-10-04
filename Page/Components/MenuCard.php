@@ -114,17 +114,17 @@ function getCardByAdmin($Meal, $day, $Menu)
     '<div class="card-body">
       <h5 id="xy" class="card-title">' . $Meal["type"] . ' (' . $Meal["amount"] . ')</h5>
       <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
-      <div id="dropi" class="dropdown">
+      <div id="dropi" class="dropdown-center">
         <button id="drop" class="btn btn-warning dropdown-toggle custom-btn-size" 
         type="menubutton" data-bs-toggle="dropdown" aria-expanded="false">
           Mahlzeit ändern
         </button>
-        <ul class="dropdown-menu">';
+        <ul class="dropdown-menu dropdown-custom">';
   foreach ($Food as $entry) {
-    $string .= '<li><button id="drop" class="dropdown-item" type="button"  
+    $string .= '<li><a id="drop" class="dropdown-item" type="button"
           data-menu-id="' . nvl($Meal["menu_id"]) . '" data-food-id="' . nvl($entry["food_id"]) . '">'
       . $entry["name"] .
-      '</button></li>';
+      '</a></li>';
   }
   $string .= '        
             </ul>
@@ -151,7 +151,7 @@ function GetCardsByWeek($week)
       $cards = $cards .
         '<div class="swiper-slide">
         <div class="col">
-          <div class="card" '. $pastStyle["card"] .'>
+          <div class="card" '. $pastStyle["card"] .' style="z-index:-1;">
             <div class="card-header" '. $pastStyle["header"] .'>
               <small class="text-muted">' . $day . '</small>
               </div>' .

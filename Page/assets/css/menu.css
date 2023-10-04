@@ -51,9 +51,15 @@
     opacity: 100%;
   }
 
-  .dropdown-menu{
-    position: relative;
-    z-index: 99999!important;
+  .dropdown-custom{
+    position: fixed;
+    overflow-y: visible;
+    z-index: 9999!important; /* Adjust this value as needed */
+  }
+
+  .dropdown-item {
+    z-index: 9999!important; /* Adjust this value as needed */
+    overflow-y: visible;
   }
 
   .custom-btn-size {
