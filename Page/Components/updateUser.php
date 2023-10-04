@@ -2,7 +2,7 @@
 include "../Database/conn.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $requestData = json_decode(file_get_contents('php://input'));
-  $userId = $_SESSION["us r"]["userid"];
+  $userId = $_SESSION["user"]["userid"];
   $pw = $requestData->pw;
 
   $user = new User();
