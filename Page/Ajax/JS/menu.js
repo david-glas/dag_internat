@@ -201,7 +201,7 @@ function updateSwiper() {
   const swiper = new Swiper('.swiper', {
     slidesPerView: 1,
     spaceBetween: 25,
-
+    initialSlide: (new Date()).getDay() - 1,
     breakpoints:{
         0: {
             slidesPerView: 1,
@@ -226,6 +226,67 @@ function updateSwiper() {
   });
 }
 
+function getModal(){
+  var myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"), {});
+  myModal.show();
+
+  var btn = document.getElementById("savepw");
+  btn.addEventListener('click', function(){
+    var pw1 = document.getElementById("pw");
+    var pw2 = document.getElementById("pwagain");
+
+    //check empty password field
+
+    if(pw1.value == "") {
+      document.getElementById("msg").innerHTML = "*Please put your new password!";
+      return;
+    } 
+
+    //minimum password length validation
+    if(pw1.value.length < 8) {
+        document.getElementById("msg").innerHTML = "**Password length must be atleast 8 characters";
+        return;
+    }
+
+    //maximum length of password validation
+    if(pw1.value.length > 15) {
+      document.getElementById("msg").innerHTML = "*Password length must not exceed 15 characters";
+      return;
+    } else {
+      if(pw1.value == pw2.value){
+          document.getElementById("msg").innerHTML=  "Passwords match!";
+          const requestData = {
+            method: 'updateUser',
+            pw: pw1.value
+          };
+    
+          fetch('Components/updateUser.php', {
+            method: 'POST',
+            body: JSON.stringify(requestData),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data["result"] == 1){
+              myModal.toggle();
+            } 
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      }
+    
+      else {
+          document.getElementById("msg").innerHTML=  "Passwords not match!";
+          return;
+      }
+    }
+  });
+}
+
+/*
 function getModal(){
   fetch('Components/getModal.php')
   .then(response => response.text())
@@ -274,7 +335,7 @@ function getModal(){
             .then(response => response.json())
             .then(data => {
               if (data["result"] == 1){
-                myModal.hide();
+                myModal.toggle();
               } 
             })
             .catch(error => {
@@ -294,3 +355,4 @@ function getModal(){
   });
 
 }
+*/
