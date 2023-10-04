@@ -12,9 +12,9 @@ class Conn
     public function __construct()
     {
         try {
-            $servername = "127.0.0.1"; #$servername = "mysql.glasdavid.com";
+            $servername = "mysql.glasdavid.com"; #$servername = "127.0.0.1";
             $username = "root";
-            $password = "admin"; #georgadnanadavid
+            $password = "georgadnandavid"; #admin
             $schema = "dag";
 
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
