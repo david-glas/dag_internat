@@ -98,7 +98,7 @@ function getCardByAdmin($Meal, $day, $Menu)
   $Food = Food::GetFoodByMeal($Meal["meal_id"], $Menu);
   $string =
     '<div class="card-body">
-      <h5 id="xy" class="card-title">' . $Meal["type"] . '</h5>
+      <h5 id="xy" class="card-title">' . $Meal["type"] . ' (' . $Meal["amount"] . ')</h5>
       <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
       <div id="dropi" class="dropdown">
         <button id="drop" class="btn btn-primary dropdown-toggle custom-btn-size" 
