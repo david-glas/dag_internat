@@ -49,8 +49,6 @@
   }
 </style>
 
-
-
 <nav class="navbar sticky-top nav-pills navbar-expand-md">
   <div class="container">
     <a class="navbar-brand" href="?page=landing" style="background-color: transparent">DAG GmbH</a>
@@ -100,8 +98,6 @@
     </div>
   </div>
 </nav>
-
-
 
 <?php function setActive($page)
 {
