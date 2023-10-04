@@ -24,20 +24,29 @@ include "Database/conn.php";
 </head>
 <?php
 if (($_SESSION["user"]["account"] != "webuser")) {
-  include "Components/nav.php";
+
 }
+
+include "Components/nav.php";
 
 ?>
 
 <body>
   <?php
-  if (isset($_GET['page'])) {
+  if (isset($_GET['page']) && ($_SESSION["user"]["account"] != "webuser")) {
     switch ($_GET['page']) {
       case 'dashboard':
-        include "Pages/dashboard.php";
+        if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) { include "Pages/dashboard.php"; }
+        else { echo '<h1>Nice try Hackerman!'; }
         break;
       case 'menu':
         include "Pages/menu.php";
+        break;
+      case 'about':
+        include "Pages/about.php";
+        break;
+      case 'instructions':
+        include "Pages/instructions.php";
         break;
       default:
         include "Pages/landing.php";
