@@ -49,8 +49,6 @@
   }
 </style>
 
-
-
 <nav class="navbar sticky-top nav-pills navbar-expand-md">
   <div class="container">
     <a class="navbar-brand">
@@ -102,8 +100,6 @@
     </div>
   </div>
 </nav>
-
-
 
 <?php function setActive($page)
 {
