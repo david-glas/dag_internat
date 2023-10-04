@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center mb-3">
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cup-hot-fill"></i>  Neues Gericht hinzufügen</button>
+  <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-cup-hot-fill"></i>  Neues Gericht hinzufügen</button>
 </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
