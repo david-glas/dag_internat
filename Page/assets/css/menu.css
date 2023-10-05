@@ -1,7 +1,12 @@
-  .card,
-  .card-header {
+  .card {
     border-color: rgb(70, 68, 68);
+  }
 
+  .card-header,
+  .card-footer {
+    border-color: rgb(70, 68, 68);
+    background-color: rgba(62, 61, 68, 0.813);
+    color: #ffc107;
   }
 
   .blabla{
@@ -12,6 +17,10 @@
     font-size: 13px!important;
     margin-left: -5px!important;
     margin-top: -5px;
+  }
+
+  #past{
+    background-color: rgb(128, 127, 129);
   }
 
   /* Style for the parent div */
