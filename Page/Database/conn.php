@@ -397,13 +397,12 @@ class Menu extends Conn
     function GetMenuByDateAndUser($date, $userId)
     {
 
-        $query = "select * 
-                    from menu_v mv left join user_menu um using (menu_id)
-                    where day = ?
-                      and (user_id = ?
-                           or user_id is null)
-                    order by meal_id";
-        $stmt = $this->makeStatement($query, array(date('Y-m-d', $date), $userId));
+        $query = "select *, (select user_id from user_menu 
+                                where menu_id = mv.menu_id 
+                                and user_id = ?) user_id
+                        from menu_v mv
+                        where day = ?;";
+        $stmt = $this->makeStatement($query, array($userId, date('Y-m-d', $date)));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($result) == 0) {
             $this->Breakfast = null;

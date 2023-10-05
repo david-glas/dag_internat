@@ -99,7 +99,7 @@ function getCardByUser($Meal, $day, $tooLate)
     $button .
     'data-menu-id="' . nvl($Meal["menu_id"]) . '"
            data-meal-id="' . nvl($Meal["meal_id"]) . '"
-           data-user-id="1">
+           data-user-id="' . $_SESSION["user"]["userid"] . '">
     ' . $text . '
     </button>
     </div>';
@@ -145,17 +145,16 @@ function GetCardsByWeek($week)
     $tooLate = tooLateToOrder($currDate);
     $pastStyle = pastStyle($currDate);
     $day = getDateString($currDate, $i);
-    $Menu = $Menu->GetMenuByDateAndUser($currDate, 1);
+    $Menu = $Menu->GetMenuByDateAndUser($currDate, $_SESSION["user"]["userid"]);
 
     if (isset($Menu->Breakfast)) {
       $cards = $cards .
-        '<div class="swiper-slide">
-        <div class="col">
+        '<div class="swiper-slide" style="z-index: -1;">
           <div class="card" '. $pastStyle["card"] .' style="z-index:-1;">
             <div class="card-header" '. $pastStyle["header"] .'>
               <small class="text-muted">' . $day . '</small>
               </div>' .
-        getCardByUser($Menu->Breakfast, $currDate, $tooLate, ) . '<hr class="hr" />' .
+        getCardByUser($Menu->Breakfast, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->Starter, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->FirstMainMeal, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->SecondMainMeal, $currDate, $tooLate) . '<hr class="hr" />' .
@@ -165,12 +164,10 @@ function GetCardsByWeek($week)
         '<div class="card-footer" '. $pastStyle["header"] .'>
                   <small class="text-muted">' . $day . '</small>
                 </div>
-                </div>
             </div></div>';
     } else {
       $cards = $cards .
-        '<div class="col">
-          <div class="card">
+        '<div class="card">
             <div class="card-header">
               <small class="text-muted">' . $day . '</small>
                 </div>
@@ -180,7 +177,6 @@ function GetCardsByWeek($week)
                 <div class="card-footer"'. $pastStyle["header"] .'>
                   <small class="text-muted">' . $day . '</small>
                 </div>
-              </div>
             </div>';
     }
 
