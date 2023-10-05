@@ -4,31 +4,7 @@
 
 <div class="container marketing">
 
-<div class="row justify-content-between">
-  <div class="col-lg-4">
-    <div class="d-flex flex-column align-items-center">
-      <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\davidglas.png" alt="David Glas">
-      <h2 class="fw-normal">David Glas</h2>
-      <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-    </div>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-    <div class="d-flex flex-column align-items-center">
-      <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\adnanmehic.png" alt="Adnan Mehic">
-      <h2 class="fw-normal">Adnan Mehic</h2>
-      <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-    </div>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-    <div class="d-flex flex-column align-items-center">
-      <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\georgwolf.png" alt="Georg Wolf">
-      <h2 class="fw-normal">Georg Wolf</h2>
-      <p>And lastly this, the third column of representative placeholder content.</p>
-    </div>
-  </div><!-- /.col-lg-4 -->
-</div><!-- /.row -->
+  
 
 
 
@@ -38,11 +14,11 @@
 
 <div class="row featurette">
   <div class="col-md-7">
-    <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-body-secondary">It’ll blow your mind.</span></h2>
+    <h2 class="featurette-heading fw-normal lh-1">Heimische Hausmannskost. <span class="text-body-secondary">It’ll blow your mind.</span></h2>
     <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
   </div>
   <div class="col-md-5">
-    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="assets\img\food.jpeg" alt="Beschreibung des Bildes">
   </div>
 </div>
 
@@ -50,11 +26,11 @@
 
 <div class="row featurette">
   <div class="col-md-7 order-md-2">
-    <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span class="text-body-secondary">See for yourself.</span></h2>
+    <h2 class="featurette-heading fw-normal lh-1">Gesunde Alternativen. <span class="text-body-secondary">See for yourself.</span></h2>
     <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
   </div>
   <div class="col-md-5 order-md-1">
-    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="assets\img\food2.jpg" alt="Beschreibung des Bildes">
   </div>
 </div>
 
@@ -62,16 +38,41 @@
 
 <div class="row featurette">
   <div class="col-md-7">
-    <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
+    <h2 class="featurette-heading fw-normal lh-1">Vegane und Vegetarische Speisen. <span class="text-body-secondary">Checkmate.</span></h2>
     <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
   </div>
   <div class="col-md-5">
-    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+    <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" src="assets\img\food3.png" alt="Beschreibung des Bildes">
   </div>
 </div>
 
 <hr class="featurette-divider">
 
+  <div class="row justify-content-between">
+    <div class="col-lg-4">
+      <div class="d-flex flex-column align-items-center">
+        <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\davidglas.png" alt="David Glas">
+        <h2 class="fw-normal">David Glas</h2>
+        <p style="text-align: center">David ist ein energiegeladener und sehr kreativer Geist. Seine Ideen und die Umsetzung dieser waren in jeglicher Hinsicht eine Berreicherung.</p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+
+    <div class="col-lg-4">
+      <div class="d-flex flex-column align-items-center">
+        <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\adnanmehic.png" alt="Adnan Mehic">
+        <h2 class="fw-normal">Adnan Mehic</h2>
+        <p style="text-align: center">Adnan war im Frontend tätig und außerdem der Projektmanager und sorgte fürs Organisatorische. Von der Gestaltung des Projektplans bis hin zum treffen schwieriger Entscheidungen war alles dabei.</p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+
+    <div class="col-lg-4">
+      <div class="d-flex flex-column align-items-center">
+        <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\georgwolf.png" alt="Georg Wolf">
+        <h2 class="fw-normal">Georg Wolf</h2>
+        <p style="text-align: center">Georg ist ein junger Entwickler mit einer sehr ausgereiften Logik und auch unser Datenbankexperte. Durch sein Fachwissen konnten wir Ideen umsetzen von denen andere nur träumen können.</p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+  </div><!-- /.row -->
 <!-- /END THE FEATURETTES -->
 
 </div><!-- /.container -->
