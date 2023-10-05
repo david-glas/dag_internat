@@ -21,6 +21,7 @@ include "Database/conn.php";
   <link href="assets/css/navbars.css" rel="stylesheet">
 
   <title>Document</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/DAG72.png">
 </head>
 <?php
 if (($_SESSION["user"]["account"] != "webuser")) {
