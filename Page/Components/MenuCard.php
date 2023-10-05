@@ -112,12 +112,10 @@ function getCardByAdmin($Meal, $day, $Menu)
   $Food = Food::GetFoodByMeal($Meal["meal_id"], $Menu);
   $string =
     '<div class="card-body">
-      <h5 id="xy" class="card-title">' . $Meal["type"] . ' (' . $Meal["amount"] . ')</h5>
-      <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
       <div id="dropi" class="dropdown-center">
         <button id="drop" class="btn btn-primary-outline dropdown-toggle  custom-btn-size" 
         type="menubutton" data-bs-toggle="dropdown" aria-expanded="false">
-        ' . $Meal["type"] . '
+        ' . $Meal["type"] . ' (' . $Meal["amount"] . ')
         </button>
         <ul class="dropdown-menu dropdown-custom">';
   foreach ($Food as $entry) {
@@ -129,6 +127,7 @@ function getCardByAdmin($Meal, $day, $Menu)
   $string .= '        
             </ul>
           </div>
+          <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
         </div>';
   return $string;
 
