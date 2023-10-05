@@ -4,31 +4,7 @@
 
 <div class="container marketing">
 
-<div class="row justify-content-between">
-  <div class="col-lg-4">
-    <div class="d-flex flex-column align-items-center">
-      <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\davidglas.png" alt="David Glas">
-      <h2 class="fw-normal">David Glas</h2>
-      <p style="text-align: center">David ist ein energiegeladener und sehr kreativer Geist. Seine Ideen und die Umsetzung dieser waren in jeglicher Hinsicht eine Berreicherung.</p>
-    </div>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-    <div class="d-flex flex-column align-items-center">
-      <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\adnanmehic.png" alt="Adnan Mehic">
-      <h2 class="fw-normal">Adnan Mehic</h2>
-      <p style="text-align: center">Adnan war im Frontend tätig und außerdem der Projektmanager und sorgte fürs Organisatorische. Von der Gestaltung des Projektplans bis hin zum treffen schwieriger Entscheidungen war alles dabei.</p>
-    </div>
-  </div><!-- /.col-lg-4 -->
-
-  <div class="col-lg-4">
-    <div class="d-flex flex-column align-items-center">
-      <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\georgwolf.png" alt="Georg Wolf">
-      <h2 class="fw-normal">Georg Wolf</h2>
-      <p style="text-align: center">Georg ist ein junger Entwickler mit einer sehr ausgereiften Logik und auch unser Datenbankexperte. Durch sein Fachwissen konnten wir Ideen umsetzen von denen andere nur träumen können.</p>
-    </div>
-  </div><!-- /.col-lg-4 -->
-</div><!-- /.row -->
+  
 
 
 
@@ -72,6 +48,31 @@
 
 <hr class="featurette-divider">
 
+  <div class="row justify-content-between">
+    <div class="col-lg-4">
+      <div class="d-flex flex-column align-items-center">
+        <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\davidglas.png" alt="David Glas">
+        <h2 class="fw-normal">David Glas</h2>
+        <p style="text-align: center">David ist ein energiegeladener und sehr kreativer Geist. Seine Ideen und die Umsetzung dieser waren in jeglicher Hinsicht eine Berreicherung.</p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+
+    <div class="col-lg-4">
+      <div class="d-flex flex-column align-items-center">
+        <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\adnanmehic.png" alt="Adnan Mehic">
+        <h2 class="fw-normal">Adnan Mehic</h2>
+        <p style="text-align: center">Adnan war im Frontend tätig und außerdem der Projektmanager und sorgte fürs Organisatorische. Von der Gestaltung des Projektplans bis hin zum treffen schwieriger Entscheidungen war alles dabei.</p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+
+    <div class="col-lg-4">
+      <div class="d-flex flex-column align-items-center">
+        <img class="bd-placeholder-img rounded-circle" width="225" height="225" src="assets\img\georgwolf.png" alt="Georg Wolf">
+        <h2 class="fw-normal">Georg Wolf</h2>
+        <p style="text-align: center">Georg ist ein junger Entwickler mit einer sehr ausgereiften Logik und auch unser Datenbankexperte. Durch sein Fachwissen konnten wir Ideen umsetzen von denen andere nur träumen können.</p>
+      </div>
+    </div><!-- /.col-lg-4 -->
+  </div><!-- /.row -->
 <!-- /END THE FEATURETTES -->
 
 </div><!-- /.container -->
