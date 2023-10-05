@@ -51,7 +51,7 @@
 
 <nav class="navbar sticky-top nav-pills navbar-expand-md">
   <div class="container">
-    <a class="navbar-brand">
+    <a class="navbar-brand" href="?page=landing">
       <img class="me-3" src="assets\img\DAG72.png" alt="Dagobert DAG">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
@@ -85,21 +85,48 @@
         <?php
         if ($_SESSION["user"]["account"] != "webuser") {
           echo
-          '<li class="nav-item">
-            <a class="nav-link" href="Components/logout.php">Logout</a>
-          </li>';
+          '<form action="Components/logout.php">
+            <button type="submit" class="btn btn-light">
+              <i class="bi bi-door-closed-fill"></i> Logout
+            </button>
+          </form>';
         }
         else {
           echo
-          '<li class="nav-item">
-            <a class="nav-link" href="index.php">Login</a>
-          </li>';
+          '<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-person-fill"></i> Login
+          </button>';
         }
         ?>
+        
       </ul>
     </div>
   </div>
 </nav>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content rounded-4 shadow">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">Anmelden</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-5 pt-0">
+        <form method="POST" action="Components/login.php">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="0000000000" name="svnr">
+            <label for="floatingInput">SV-Nummer</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" name="password">
+            <label for="floatingPassword">Passwort</label>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <?php function setActive($page)
 {
