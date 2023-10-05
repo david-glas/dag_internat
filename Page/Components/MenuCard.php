@@ -115,9 +115,9 @@ function getCardByAdmin($Meal, $day, $Menu)
       <h5 id="xy" class="card-title">' . $Meal["type"] . ' (' . $Meal["amount"] . ')</h5>
       <p id="Menu' . nvl($Meal["menu_id"]) . '" class="card-text">' . nvl($Meal["name"]) . '</p>
       <div id="dropi" class="dropdown-center">
-        <button id="drop" class="btn btn-warning dropdown-toggle custom-btn-size" 
+        <button id="drop" class="btn btn-primary-outline dropdown-toggle  custom-btn-size" 
         type="menubutton" data-bs-toggle="dropdown" aria-expanded="false">
-          Mahlzeit ändern
+        ' . $Meal["type"] . '
         </button>
         <ul class="dropdown-menu dropdown-custom">';
   foreach ($Food as $entry) {

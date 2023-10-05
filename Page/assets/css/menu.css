@@ -10,7 +10,8 @@
 
   .card-title{
     font-size: 13px!important;
-    margin-left: -10px!important;
+    margin-left: -5px!important;
+    margin-top: -5px;
   }
 
   /* Style for the parent div */
@@ -40,19 +41,17 @@
 
   /* Style for the button */
   #dropi {
-    position: absolute;
     /* Position it absolutely within the parent */
-    top: 10%;
+    top: 0%;
     width: 45%;
     height: 30%;
     /* Margin from the bottom */
-    right: 5px;
+    margin-left: -10px!important;
     /* Margin from the right */
     opacity: 100%;
   }
 
   .dropdown-custom{
-    position: fixed;
     overflow-y: visible;
     z-index: 9999!important; /* Adjust this value as needed */
   }
@@ -63,7 +62,12 @@
   }
 
   .custom-btn-size {
-    font-size: 10px;
+    font-size: 13px;
+    margin-left: -5px;
+    margin-top: -20px;
+    font-weight: bold;
+    border: none;
+    /* color: #ffc107; */
   }
 
   hr {
