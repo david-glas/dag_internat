@@ -5,8 +5,24 @@
   .card-header,
   .card-footer {
     border-color: rgb(70, 68, 68);
-    background-color: rgba(62, 61, 68, 0.813);
+    background-color: rgba(62, 61, 68, 0.283);
     color: #ffc107;
+  }
+
+  #normalheader{
+    background-color: rgba(62, 61, 68, 0.813);
+
+  }
+  #todayheader{
+    background-color: #ffc107;
+    color: rgba(62, 61, 68, 0.813);
+  }
+
+  #toolateheader{
+    background-color: rgba(62, 61, 68, 0.557);
+  }
+  #emptyheader{
+    background-color: rgba(62, 61, 68, 0.557);
   }
 
   .blabla{
@@ -21,6 +37,7 @@
 
   #past{
     background-color: rgb(128, 127, 129);
+    border-color:rgb(128, 127, 129);
   }
 
   /* Style for the parent div */
@@ -81,7 +98,7 @@
 
   hr {
     margin: 0rem;
-    border-color: rgb(70, 68, 68);
+    border-color:rgb(128, 127, 129);
     opacity: 1;
   }
 
