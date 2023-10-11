@@ -1,5 +1,31 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-<canvas id="myChart" style="width:100%"></canvas>
+<div class="container">
+  <canvas id="myChart" style="width:100%"></canvas>
+
+  <table class="table table-striped table-hover table-responsive mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Essen ID</th>
+        <th scope="col">Essensname</th>
+        <th scope="col">Gericht</th>
+        <th scope="col">Datum</th>
+        <th scope="col">Wochentag</th>
+        <th scope="col">Anzahl</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+</div>
+
+<?php
+
+function fillMenuData() {
+  $menuConn = new Menu();
+  
+}
+
+?>
 
 <script>
 const xValues = ['11.03.1996','12.03.1996','13.03.1996','14.03.1996'];

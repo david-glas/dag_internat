@@ -495,4 +495,20 @@ class Menu extends Conn
                     where menu_id = ? and user_id = ?";
         $stmt = $this->makeStatement($query, array($menuId, $userId));
     }
+    function GetMenuForWeek() {
+        try {
+            $query = "select mv.food_id, mv.name, mv.meal_id, mv.type, date_format(mv.day, '%d.%m.%Y') `day`, mv.day_name, count(user_id) amount
+                        from menu_v mv 
+                        left join user_menu um using (menu_id)
+                        where day between current_date() and current_date()+7
+                        group by menu_id
+                        order by `day`, meal_id;";
+            
+            $stmt = $this->makeStatement($query);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
+    }
 }
