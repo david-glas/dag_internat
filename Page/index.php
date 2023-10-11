@@ -20,6 +20,9 @@ include "Database/conn.php";
   <!-- Navbar -->
   <link href="assets/css/navbars.css" rel="stylesheet">
 
+  <!-- Scan -->
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
   <title>Document</title>
   <link rel="icon" type="image/x-icon" href="assets/img/DAG72.png">
 </head>
