@@ -2,13 +2,9 @@
 ================================================== -->
 <!-- Wrap the rest of the page in another container to center all the content. -->
 
-<div class="container marketing">
-
-
-
-
-
-<div class="row featurette">
+<div class="container marketing mt-5">
+<h1 class="display-3">About us</h1>
+<div class="row featurette mt-3">
   <div class="col-md-7">
     <h2 class="featurette-heading fw-normal lh-1">Heimische Hausmannskost. <span class="text-body-secondary">Tradition trifft auf Geschmack!</span></h2>
     <p class="lead">Genieße herzhafte Hausmannskost, die Erinnerungen an familiäre Mahlzeiten weckt. Unsere traditionellen Gerichte sind reich an Geschmack und Wärme. Jeder Bissen ist ein Hauch von Gemütlichkeit und Geborgenheit.</p>
@@ -20,7 +16,7 @@
 
 <hr class="featurette-divider">
 
-<div class="row featurette">
+<div class="row featurette mt-3">
   <div class="col-md-7 order-md-2">
     <h2 class="featurette-heading fw-normal lh-1">Gesunde Alternativen. <span class="text-body-secondary">Gesund genießen, ohne Kompromisse!</span></h2>
     <p class="lead">Entdecke unsere gesunden Alternativen, die das Beste aus beiden Welten vereinen. Diese Gerichte sind reich an Nährstoffen und Geschmack, perfekt für diejenigen, die einen ausgewogenen Lebensstil suchen. Hier findest du saftige Fleischgerichte, die in köstliche gesunde Optionen verwandelt wurden.</p>
@@ -32,7 +28,7 @@
 
 <hr class="featurette-divider">
 
-<div class="row featurette">
+<div class="row featurette mt-3">
   <div class="col-md-7">
     <h2 class="featurette-heading fw-normal lh-1">Vegane und Vegetarische Speisen. <span class="text-body-secondary">Sag Ja zum grünen Genuss!</span></h2>
     <p class="lead">Tauche ein in eine Welt voller köstlicher pflanzlicher Genüsse. Unsere vegane und vegetarische Auswahl bietet Geschmacksexplosionen, die deine Sinne verzaubern werden. Erlebe frische, bunte Aromen und zarte Texturen, die für ein kulinarisches Abenteuer sorgen.</p>
@@ -44,7 +40,7 @@
 
 <hr class="featurette-divider">
 
-<div class="row justify-content-between">
+<div class="row justify-content-between mt-3">
     <div class="col-lg-4">
       <div class="d-flex flex-column align-items-center">
         <div class="bd-placeholder-img rounded-circle" width="300" height="300" style="border:12px solid rgba(63,62,68,0.88);">
@@ -75,6 +71,4 @@
       </div>
     </div>
   </div>
-  
-
-</div><!-- /.container -->
+</div>

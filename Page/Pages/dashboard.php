@@ -26,6 +26,8 @@
 <div class="container">
 <div class="nav-scroller bg-body shadow-sm">
   <nav class="nav" aria-label="Secondary navigation">
+    <a class="nav-link <?php setActiveSub('overview') ?>" href="?page=dashboard&subpage=overview">Übersicht</a>
+    <a class="nav-link <?php setActiveSub('scan') ?>" href="?page=dashboard&subpage=scan">Scan</a>
     <a class="nav-link <?php setActiveSub('users') ?>" href="?page=dashboard&subpage=users">Benutzerverwaltung</a>  
     <a class="nav-link <?php setActiveSub('dishes') ?>" href="?page=dashboard&subpage=dishes">Gerichte</a>
   </nav>
@@ -41,12 +43,18 @@
       case 'dishes':
         include "Pages/dishes.php";
         break;
+      case 'scan':
+        include "Pages/scan.php";
+        break;
+      case 'overview':
+        include "Pages/overview.php";
+        break;
       default:
-        include "Pages/users.php";
+        include "Pages/overview.php";
         break;
     }
   } else {
-    include "Pages/users.php";
+    include "Pages/overview.php";
   }
   function setActiveSub($subpage)
   {
@@ -55,7 +63,7 @@
         echo "active";
       }
     }
-    else if ($subpage == 'users') {
+    else if ($subpage == 'overview') {
       echo "active";
     }
   }

@@ -93,7 +93,7 @@
         }
         else {
           echo
-          '<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          '<button type="button" class="btn btn-light mx-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="bi bi-person-fill"></i> Login
           </button>';
         }
