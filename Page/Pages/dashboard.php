@@ -28,7 +28,7 @@
   <nav class="nav" aria-label="Secondary navigation">
     <a class="nav-link <?php setActiveSub('overview') ?>" href="?page=dashboard&subpage=overview">Übersicht</a>
     <a class="nav-link <?php setActiveSub('scan') ?>" href="?page=dashboard&subpage=scan">Scan</a>
-    <a class="nav-link <?php setActiveSub('users') ?>" href="?page=dashboard&subpage=users">Benutzerverwaltung</a>  
+    <a class="nav-link <?php setActiveSub('users') ?>" href="?page=dashboard&subpage=users">Benutzer</a>  
     <a class="nav-link <?php setActiveSub('dishes') ?>" href="?page=dashboard&subpage=dishes">Gerichte</a>
   </nav>
 </div>

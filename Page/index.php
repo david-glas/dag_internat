@@ -13,6 +13,9 @@ include "Database/conn.php";
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
+  <!-- Chart -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
   <!-- Swiper -->
   <script src="assets/Swiper/swiper-bundle.min.js"></script>
   <link rel="stylesheet" type="text/css" href="assets/Swiper/swiper-bundle.min.css">
