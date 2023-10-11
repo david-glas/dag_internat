@@ -238,23 +238,23 @@ function getModal(){
     //check empty password field
 
     if(pw1.value == "") {
-      document.getElementById("msg").innerHTML = "*Please put your new password!";
+      document.getElementById("msg").innerHTML = "Bitte geben sie Ihr neues Passwort ein.";
       return;
     } 
 
     //minimum password length validation
-    if(pw1.value.length < 8) {
-        document.getElementById("msg").innerHTML = "**Password length must be atleast 8 characters";
+    if(pw1.value.length < 6) {
+        document.getElementById("msg").innerHTML = "Das Passwort muss mindestens 6 Zeichen lang sein.";
         return;
     }
 
     //maximum length of password validation
     if(pw1.value.length > 15) {
-      document.getElementById("msg").innerHTML = "*Password length must not exceed 15 characters";
+      document.getElementById("msg").innerHTML = "Passwort darf maximal 15 Zeichen lang sein.";
       return;
     } else {
       if(pw1.value == pw2.value){
-          document.getElementById("msg").innerHTML=  "Passwords match!";
+          document.getElementById("msg").innerHTML=  "Passwörter stimmen überein!";
           const requestData = {
             method: 'updateUser',
             pw: pw1.value

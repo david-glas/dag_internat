@@ -55,8 +55,21 @@ function pastStyle($date)
 function isPast($date){
   if($date < strtotime("today")){
     return true;
-  }
+  } else
   return false;
+}
+
+function getHeaderShade($date, $tooLate){
+  if (is_null($tooLate)){
+    return 'id="emptyheader"';
+  }
+  else if ($tooLate){
+    if($date == strtotime("today")){
+      return 'id="todayheader"';
+    } 
+    return 'id="toolateheader"';
+  }
+  return 'id="normalheader"';
 }
 
 function getDateString($day, $index)
@@ -75,12 +88,12 @@ function getDateString($day, $index)
   return $germanDays[$index] . ' ' . date('d.m.Y', $day);
 }
 
-function pastCard($day){
+function emptyCard($day){
 
   return 
     '<div class="swiper-slide" style="z-index: -1;">
       <div class="card" style="z-index:-1;">
-        <div class="card-header">
+        <div class="card-header" '. getHeaderShade($day, null) .'>
           <small>'. $day .'</small>
         </div>
         <div id="past" class="card-body position-relative" data-ordered="0"></div>
@@ -96,7 +109,7 @@ function pastCard($day){
         <div id="past" class="card-body position-relative" data-ordered="0"></div>
         <hr class="hr" />
         <div id="past" class="card-body position-relative" data-ordered="0"></div>
-        <div class="card-footer">
+        <div class="card-footer" '. getHeaderShade($day, null) .'>
               <small>'. $day .'</small>
             </div>
         </div></div>';
@@ -118,8 +131,9 @@ function getCardByUser($Meal, $day, $tooLate)
               data-ordered="1"';
     $button = '<button name="userbutton" type="menubutton" class="stretched-link" ';
   } else if (is_null($Meal["user_id"]) and $tooLate) {
-    $button = '<button hidden name="userbutton" disabled type="menubutton" style="background-color:  rgb(196, 196, 196);"
+    $button = '<button hidden name="userbutton" disabled type="menubutton"
                 class="btn btn-secondary stretched-link custom-btn-size" ';
+    $card = '<div class="card-body position-relative" style="background-color: rgba(62, 61, 68, 0.1);"';
     $text = "nicht angemeldet";
   } else if (!is_null($Meal["user_id"]) and $tooLate) {
     $button = '<button hidden name="userbutton" disabled type="menubutton" class="btn btn-primary stretched-link custom-btn-size" ';
@@ -182,13 +196,13 @@ function GetCardsByWeek($week)
     $Menu = $Menu->GetMenuByDateAndUser($currDate, $_SESSION["user"]["userid"]);
 
     if ($past){
-      $cards = $cards . pastCard($day);
+      $cards = $cards . emptyCard($day);
     }
     else if (isset($Menu->Breakfast)) {
       $cards = $cards .
         '<div class="swiper-slide" style="z-index: -1;">
           <div class="card" style="z-index:-1;">
-            <div class="card-header">
+            <div class="card-header"'. getHeaderShade($currDate, $tooLate) .'>
               <small>' . $day . '</small>
               </div>' .
         getCardByUser($Menu->Breakfast, $currDate, $tooLate) . '<hr class="hr" />' .
@@ -198,23 +212,12 @@ function GetCardsByWeek($week)
         getCardByUser($Menu->Dessert, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->FirstDinner, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->SecondDinner, $currDate, $tooLate) .
-        '<div class="card-footer">
+        '<div class="card-footer" '. getHeaderShade($currDate, $tooLate) .'>
                   <small>' . $day . '</small>
                 </div>
             </div></div>';
     } else {
-      $cards = $cards .
-        '<div class="card">
-            <div class="card-header">
-              <small>' . $day . '</small>
-                </div>
-                <div class="card-body">
-                  <h5 id="xy" class="card-title" data-meal-id="' . 'NoId' . '">Es wurde noch kein Essen hinzugefügt.</h5>
-                </div>
-                <div class="card-footer">
-                  <small>' . $day . '</small>
-                </div>
-            </div>';
+      $cards = $cards . emptyCard($day);
     }
 
   }
@@ -234,17 +237,18 @@ function GetCardsByWeekAdmin($week)
     $currDate = getCurrentDay($lastMonday, $i);
     $day = getDateString($currDate, $i);
     $past = isPast($currDate);
+    $tooLate = tooLateToOrder($currDate);
     $Menu = $Menu->GetMenuByDateAdmin($currDate);
 
     if ($past){
-      $cards = $cards . pastCard($day);
+      $cards = $cards . emptyCard($day);
     }
     else if (isset($Menu->Breakfast)) {
       $cards = $cards .
       '<div class="swiper-slide">
         <div class="col">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" '. getHeaderShade($currDate, $tooLate) .'>
               <small>' . $day . '</small>
               </div>' .
         getCardByAdmin($Menu->Breakfast, $day, $Menu) . '<hr class="hr" />' .
@@ -254,7 +258,7 @@ function GetCardsByWeekAdmin($week)
         getCardByAdmin($Menu->Dessert, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->FirstDinner, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->SecondDinner, $day, $Menu) .
-        '<div class="card-footer">
+        '<div class="card-footer" '. getHeaderShade($currDate, $tooLate) .'>
                   <small>' . $day . '</small>
                 </div>
               </div>
@@ -264,7 +268,7 @@ function GetCardsByWeekAdmin($week)
       '<div class="swiper-slide">
       <div class="col">
       <div class="card">
-      <div class="card-header">
+      <div class="card-header" '. getHeaderShade($currDate, $tooLate) .'>>
               <small>' . $day . '</small>
                 </div>
                 <div class="card-body">
@@ -274,7 +278,7 @@ function GetCardsByWeekAdmin($week)
                 Hinzufügen
               </button>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer" '. getHeaderShade($currDate, $tooLate) .'>>
                   <small>' . $day . '</small>
                 </div>
               </div>
