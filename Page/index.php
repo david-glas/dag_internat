@@ -23,6 +23,9 @@ include "Database/conn.php";
   <!-- Scan -->
   <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
+  <!-- QR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <title>Document</title>
   <link rel="icon" type="image/x-icon" href="assets/img/DAG72.png">
 </head>
