@@ -1,5 +1,5 @@
 CREATE VIEW menu_v AS
-	SELECT m.menu_id, f.*, me.meal_id, me.type, tod.description, m.day, 
+	SELECT m.menu_id, f.*, me.meal_id, me.type,  m.day, tod.description, tod.tod_id,
 		   DAYNAME(m.day) AS day_name, 
            WEEKDAY(m.day) AS weekday
 		FROM food f
@@ -11,6 +11,10 @@ CREATE VIEW menu_v AS
 select * from menu_v where day = '2023-10-13';
 
 select * from user_menu;
+
+drop view menu_v;
+
+use dag;
 
 select mv.*, um.*
                     from menu_v mv left join user_menu um using (menu_id)
@@ -32,3 +36,5 @@ select *
 	  and (user_id = 4
 		   or user_id is null)
 	order by meal_id;
+
+    

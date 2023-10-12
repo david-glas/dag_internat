@@ -212,7 +212,7 @@
 
     // Define the time ranges
     const ranges = [
-        { startHour: 6, startMinute: 30, endHour: 8, endMinute: 0, todId: 1},
+        { startHour: 6, startMinute: 30, endHour: 10, endMinute: 0, todId: 1},
         { startHour: 11, startMinute: 30, endHour: 14, endMinute: 0, todId: 2 },
         { startHour: 15, startMinute: 0, endHour: 18, endMinute: 0, todId: 3 }
     ];
