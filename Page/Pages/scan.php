@@ -3,6 +3,26 @@
         <div class="section"> 
           <div id="my-qr-reader"> 
           </div> 
+          <div class="modal fade" id="scanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">QR Code</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body mt-3 mb-3">
+                <div id="qrcode" hidden style="  text-align: center;
+                                                    display: flex;
+                                                    flex-direction: column;
+                                                    justify-content: center;
+                                                    align-items: center;
+                                                    height: 100%;">
+                </div>
+                <div id="qrtext" hidden></div>
+                </div>
+                </div>
+            </div>
+            </div>
       </div> 
   </div> 
 <script>
@@ -18,14 +38,40 @@ function domReady(fn) {
 } 
   
 domReady(function () { 
+    var scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
+    scanModal.toggle();
   
     // If found you qr code 
     function onScanSuccess(decodeText, decodeResult) { 
-        const data = JSON.parse(decodeText);
-        console.log('userId:', data.userId);
-        console.log('tod:', data.tod);
-        console.log('day:', data.day);
-    } 
+        //const data = JSON.parse(decodeText);
+        //console.log('userId:', data.userId);
+        //console.log('tod:', data.tod);
+        //console.log('day:', data.day);
+
+    requestData ={
+    action: "decrypt"
+    }
+
+    fetch("Components/encrypt.php", {
+    method: 'POST',
+    body: JSON.stringify(requestData),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+      })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+        
+        var scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
+        scanModal.toggle();
+    
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+    }    
   
     let htmlscanner = new Html5QrcodeScanner( 
         "my-qr-reader", 
