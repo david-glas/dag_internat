@@ -6,16 +6,18 @@
     $requestData = json_decode(file_get_contents('php://input'));
     // Retrieve form data
     $action = $requestData->action;
-    $tod = $requestData->tod;
-    $date = $requestData->day;
+
 
     if ($action == "encrypt"){
+      $tod = $requestData->tod;
+      $date = $requestData->day;
       $text = '{"userid":'. $userId .',"tod":'. $tod .',"date":'. $date .'}';
 
       $test = encrypt_decrypt($action, $text);
 
       echo $test;
     } else if ($action == "decrypt"){
+      $text = $requestData->text;
       $test = encrypt_decrypt($action, $text);
       echo $test;
     }

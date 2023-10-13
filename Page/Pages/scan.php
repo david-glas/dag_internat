@@ -49,7 +49,8 @@ domReady(function () {
         //console.log('day:', data.day);
 
     requestData ={
-    action: "decrypt"
+    action: "decrypt",
+    text: decodeText
     }
 
     fetch("Components/encrypt.php", {
