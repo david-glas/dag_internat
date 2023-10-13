@@ -32,16 +32,8 @@ function domReady(fn) {
   
 domReady(function () { 
     const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
-    const closeButton = document.getElementById('closeButtonId');
 
-    closeButton.addEventListener('click', function(){
-        let htmlscanner = new Html5QrcodeScanner( 
-        "my-qr-reader", 
-        { fps: 10, qrbos: 250 } 
-        ); 
-        htmlscanner.render(onScanSuccess); 
-    });
-
+    var modal =document.getElementById("scanModal");
     modal.addEventListener('click', function(){
         let htmlscanner = new Html5QrcodeScanner( 
         "my-qr-reader", 
