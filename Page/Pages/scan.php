@@ -8,7 +8,7 @@
                 <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Qr scan</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button id="closeButtonId" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mt-3 mb-3">
                 <p id="scanText"></p>
@@ -31,7 +31,25 @@ function domReady(fn) {
 } 
   
 domReady(function () { 
-  
+    const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
+    const closeButton = document.getElementById('closeButtonId');
+
+    closeButton.addEventListener('click', function(){
+        let htmlscanner = new Html5QrcodeScanner( 
+        "my-qr-reader", 
+        { fps: 10, qrbos: 250 } 
+        ); 
+        htmlscanner.render(onScanSuccess); 
+    });
+
+    modal.addEventListener('click', function(){
+        let htmlscanner = new Html5QrcodeScanner( 
+        "my-qr-reader", 
+        { fps: 10, qrbos: 250 } 
+    ); 
+    htmlscanner.render(onScanSuccess); 
+    });
+
     // If found you qr code 
     function onScanSuccess(decodeText, decodeResult) { 
         //const data = JSON.parse(decodeText);
