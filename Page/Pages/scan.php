@@ -6,16 +6,16 @@
           <div class="modal fade" id="scanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Qr scan</h1>
-                    <button id="closeButtonId" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body mt-3 mb-3">
-                <p id="scanText"></p>
-                </div>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Qr scan</h1>
+                        <button id="closeButtonId" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body mt-3 mb-3">
+                        <p id="scanText"></p>
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
       </div> 
   </div> 
 <script>
@@ -44,6 +44,9 @@ domReady(function () {
 
     // If found you qr code 
     function onScanSuccess(decodeText, decodeResult) { 
+        htmlscanner.clear();
+        scanModal.toggle();
+
         requestData ={
         action: "decrypt",
         text: decodeText
@@ -60,15 +63,16 @@ domReady(function () {
         .then(data => {
             var scanText = document.getElementById("scanText");
             scanText.innerHTML = data;
-            htmlscanner.clear();
-            scanModal.toggle();
-        
+            setModal(data);        
         })
         .catch(error => {
             console.error('Error:', error);
         });
-
     }    
+
+    function setModal(data){
+
+    }
   
     let htmlscanner = new Html5QrcodeScanner( 
         "my-qr-reader", 
