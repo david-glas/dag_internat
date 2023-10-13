@@ -34,14 +34,7 @@ domReady(function () {
     const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
     const closeButton = document.getElementById('closeButtonId');
 
-    closeButton.addEventListener('click', function(){
-        let htmlscanner = new Html5QrcodeScanner( 
-        "my-qr-reader", 
-        { fps: 10, qrbos: 250 } 
-        ); 
-        htmlscanner.render(onScanSuccess); 
-    });
-
+    var modal = document.getElementById("scanModal");
     modal.addEventListener('click', function(){
         let htmlscanner = new Html5QrcodeScanner( 
         "my-qr-reader", 
@@ -52,11 +45,6 @@ domReady(function () {
 
     // If found you qr code 
     function onScanSuccess(decodeText, decodeResult) { 
-        //const data = JSON.parse(decodeText);
-        //console.log('userId:', data.userId);
-        //console.log('tod:', data.tod);
-        //console.log('day:', data.day);
-
         requestData ={
         action: "decrypt",
         text: decodeText
