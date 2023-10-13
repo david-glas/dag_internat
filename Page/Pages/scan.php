@@ -32,7 +32,6 @@ function domReady(fn) {
   
 domReady(function () { 
     const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
-    const closeButton = document.getElementById('closeButtonId');
 
     var modal = document.getElementById("scanModal");
     modal.addEventListener('click', function(){
@@ -59,8 +58,6 @@ domReady(function () {
         })
         .then(response => response.text())
         .then(data => {
-            console.log(data);
-            
             var scanText = document.getElementById("scanText");
             scanText.innerHTML = data;
             htmlscanner.clear();
