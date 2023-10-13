@@ -40,7 +40,8 @@ domReady(function () {
         //console.log('day:', data.day);
 
         requestData ={
-        action: "decrypt"
+        action: "decrypt",
+        text: decodeText
         }
 
         fetch("Components/encrypt.php", {
@@ -55,7 +56,8 @@ domReady(function () {
             console.log(data);
             
             var scanText = document.getElementById("scanText");
-            scanText.innerHTML = 'data';
+            scanText.innerHTML = data;
+            htmlscanner.clear();
             var scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
             scanModal.toggle();
         
