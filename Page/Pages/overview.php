@@ -1,7 +1,7 @@
 <div class="container">
   <canvas id="myChart" style="width:100%"></canvas>
 
-  <div class="container table-responsive my-5">
+  <div class="container table-responsive my-3">
     <table class="table table-striped table-hover table-responsive">
       <thead>
         <tr>
