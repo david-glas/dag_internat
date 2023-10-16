@@ -34,42 +34,51 @@
 
     domReady(function () {
         const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
-
+        var flag = true;
         var modal = document.getElementById("scanModal");
-        modal.addEventListener('click', function () {
-            let htmlscanner = new Html5QrcodeScanner(
-                "my-qr-reader",
-                { fps: 10, qrbos: 250 }
-            );
-            htmlscanner.render(onScanSuccess);
+
+        modal.addEventListener('hidden.bs.modal', function () {
+            flag = true;
+
+            // let htmlscanner = new Html5QrcodeScanner(
+            //     "my-qr-reader",
+            //     { fps: 10, qrbos: 250 }
+            // );
+            // htmlscanner.render(onScanSuccess);
+
         });
 
-        // If found you qr code 
-        function onScanSuccess(decodeText, decodeResult) {
-            htmlscanner.clear();
-            scanModal.toggle();
+        function onScanSuccess(decodedText, decodedResult) {
+            if (flag) {
+                //htmlscanner.clear();
+                scanModal.toggle();
+                console.log(i++);
 
-            requestData = {
-                action: "decrypt",
-                text: decodeText
+                requestData = {
+                    action: "decrypt",
+                    text: decodeText
+                }
+
+                fetch("Components/encrypt.php", {
+                    method: 'POST',
+                    body: JSON.stringify(requestData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        //var scanText = document.getElementById("scanText");
+                        //scanText.innerHTML = data;
+                        setModal(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                flag = false;
+                setTimeout(() => flag = true, 2000);
             }
 
-            fetch("Components/encrypt.php", {
-                method: 'POST',
-                body: JSON.stringify(requestData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    //var scanText = document.getElementById("scanText");
-                    //scanText.innerHTML = data;
-                    setModal(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
         }
 
         function setModal(data) {
