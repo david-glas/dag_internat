@@ -7,11 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
     $userid = $requestData->userid;
     $tod = $requestData->tod;
-    $date = $requestData->date;
+    $date = "2023-10-18"; //$requestData->date;
 
     $User = new User();
     $result = $User->GetUserMenu($userid, $tod, $date);
+    $result = json_encode($result);
 
-    echo 'hi';
+    echo $result;
 }
 ?>

@@ -12,6 +12,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body mt-3 mb-3">
+                        <p id="symbol"></p>
                         <p id="scanText"></p>
                     </div>
                 </div>
@@ -72,6 +73,9 @@
         }
 
         function setModal(data) {
+            var symbol = document.getElementById("symbol");
+            var scan = document.getElementById("scanText");
+
             request = {
                 action: "getUserMenu",
                 userid: data["userid"],
@@ -80,14 +84,27 @@
             }
             fetch("Components/getUserMenu.php", {
                 method: 'POST',
-                body: JSON.stringify(requestData),
+                body: JSON.stringify(request),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
                 .then(response => response.json())
                 .then(result => {
+                    if (result.length == 0) {
 
+                        symbol.style.color = "red";
+                        symbol.style.fontSize = 30;
+                        symbol.innerHTML = "X";
+                    } else {
+                        symbol.style.color = "green";
+                        symbol.style.fontSize = 30;
+                        symbol.innerHTML = "Y";
+                        scan.innerHTML = "";
+                        result.forEach(function (order) {
+                            scan.innerHTML += "<p>" + order['type'] + "</p>";
+                        })
+                    };
                 })
                 .catch(error => {
                     console.error('Error:', error);
