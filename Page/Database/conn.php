@@ -140,6 +140,20 @@ class User extends Conn
         }
         return "webuser";
     }
+
+    function GetUserMenu($userid, $tod, $date)
+    {
+
+        $query = "select * from user_menu 
+                    join menu using (menu_id)
+                    join meal using (meal_id)
+                    where user_id = ?
+                    and tod_id = ?
+                    and day = ?;";
+        $stmt = $this->makeStatement($query, array($userid, $tod, $date));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     function GetAllRoles() {
         try {
             $query = "select role_id, name from role";

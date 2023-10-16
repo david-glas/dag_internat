@@ -59,10 +59,10 @@ domReady(function () {
             'Content-Type': 'application/json'
         }
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            var scanText = document.getElementById("scanText");
-            scanText.innerHTML = data;
+            //var scanText = document.getElementById("scanText");
+            //scanText.innerHTML = data;
             setModal(data);        
         })
         .catch(error => {
@@ -71,7 +71,26 @@ domReady(function () {
     }    
 
     function setModal(data){
-
+         request = {
+        action: "getUserMenu",
+        userid: data.userid,
+        tod: data.tod,
+        date: data.date
+        } 
+        fetch("Components/getUserMenu.php", {
+        method: 'POST',
+        body: JSON.stringify(requestData),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(response => response.json())
+        .then(result => {
+            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
   
     let htmlscanner = new Html5QrcodeScanner( 
