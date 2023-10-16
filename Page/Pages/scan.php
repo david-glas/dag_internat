@@ -55,7 +55,7 @@
 
                 requestData = {
                     action: "decrypt",
-                    text: decodeText
+                    text: decodedText
                 }
 
                 fetch("Components/encrypt.php", {
@@ -75,7 +75,6 @@
                         console.error('Error:', error);
                     });
                 flag = false;
-                setTimeout(() => flag = true, 2000);
             }
 
         }
