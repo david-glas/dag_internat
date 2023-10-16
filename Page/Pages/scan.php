@@ -52,7 +52,6 @@
             if (flag) {
                 //htmlscanner.clear();
                 scanModal.toggle();
-                console.log(i++);
 
                 requestData = {
                     action: "decrypt",
