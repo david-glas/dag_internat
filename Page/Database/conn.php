@@ -498,7 +498,7 @@ class Menu extends Conn
     function AddUserToMenu($menuId, $userId)
     {
 
-        $query = "insert into user_menu
+        $query = "insert into user_menu(menu_id, user_id)
                     values (?, ?);";
         $stmt = $this->makeStatement($query, array($menuId, $userId));
     }
