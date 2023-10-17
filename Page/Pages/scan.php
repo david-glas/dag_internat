@@ -12,6 +12,7 @@
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body mt-3 mb-3">
+                        <p id="symbol"></p>
                         <p id="scanText"></p>
                     </div>
                 </div>
@@ -33,45 +34,55 @@
 
     domReady(function () {
         const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
-
+        var flag = true;
         var modal = document.getElementById("scanModal");
-        modal.addEventListener('click', function () {
-            let htmlscanner = new Html5QrcodeScanner(
-                "my-qr-reader",
-                { fps: 10, qrbos: 250 }
-            );
-            htmlscanner.render(onScanSuccess);
+
+        modal.addEventListener('hidden.bs.modal', function () {
+            flag = true;
+
+            // let htmlscanner = new Html5QrcodeScanner(
+            //     "my-qr-reader",
+            //     { fps: 10, qrbos: 250 }
+            // );
+            // htmlscanner.render(onScanSuccess);
+
         });
 
-        // If found you qr code 
-        function onScanSuccess(decodeText, decodeResult) {
-            htmlscanner.clear();
-            scanModal.toggle();
+        function onScanSuccess(decodedText, decodedResult) {
+            if (flag) {
+                //htmlscanner.clear();
+                scanModal.toggle();
 
-            requestData = {
-                action: "decrypt",
-                text: decodeText
+                requestData = {
+                    action: "decrypt",
+                    text: decodedText
+                }
+
+                fetch("Components/encrypt.php", {
+                    method: 'POST',
+                    body: JSON.stringify(requestData),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        //var scanText = document.getElementById("scanText");
+                        //scanText.innerHTML = data;
+                        setModal(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                flag = false;
             }
 
-            fetch("Components/encrypt.php", {
-                method: 'POST',
-                body: JSON.stringify(requestData),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    //var scanText = document.getElementById("scanText");
-                    //scanText.innerHTML = data;
-                    setModal(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
         }
 
         function setModal(data) {
+            var symbol = document.getElementById("symbol");
+            var scan = document.getElementById("scanText");
+
             request = {
                 action: "getUserMenu",
                 userid: data["userid"],
@@ -80,14 +91,27 @@
             }
             fetch("Components/getUserMenu.php", {
                 method: 'POST',
-                body: JSON.stringify(requestData),
+                body: JSON.stringify(request),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             })
                 .then(response => response.json())
                 .then(result => {
+                    if (result.length == 0) {
 
+                        symbol.style.color = "red";
+                        symbol.style.fontSize = 30;
+                        symbol.innerHTML = "X";
+                    } else {
+                        symbol.style.color = "green";
+                        symbol.style.fontSize = 30;
+                        symbol.innerHTML = "Y";
+                        scan.innerHTML = "";
+                        result.forEach(function (order) {
+                            scan.innerHTML += "<p>" + order['type'] + "</p>";
+                        })
+                    };
                 })
                 .catch(error => {
                     console.error('Error:', error);
