@@ -32,6 +32,9 @@
     }
 
     domReady(function () {
+        var scan = document.getElementById("scanText");
+        var title = document.getElementById("modalTitle");
+
         const scanModal = new bootstrap.Modal(document.getElementById("scanModal"), {});
         var flag = true;
         var modal = document.getElementById("scanModal");
@@ -50,7 +53,6 @@
         function onScanSuccess(decodedText, decodedResult) {
             if (flag) {
                 //htmlscanner.clear();
-                scanModal.toggle();
 
                 requestData = {
                     action: "decrypt",
@@ -69,7 +71,11 @@
                         setModal(data);
                     })
                     .catch(error => {
-                        console.error('Error:', error);
+                        title.style.color = "red";
+                        title.innerHTML = "Ungültiger QR Code!";
+                        scan.style.color = "red";
+                        scan.innerHTML += "<h5>Der QR Code ist falsch.</h5>";
+                        scanModal.toggle();
                     });
                 flag = false;
             }
@@ -77,8 +83,6 @@
         }
 
         function setModal(data) {
-            var scan = document.getElementById("scanText");
-            var title = document.getElementById("modalTitle");
             request = {
                 action: "getUserMenu",
                 userid: data["userid"],
@@ -94,10 +98,13 @@
             })
                 .then(response => response.json())
                 .then(result => {
-                    var curDate = new Date().toISOString().slice(0, 10);
-                    if (curDate != data["date"]){
-                        scan.innerHTML = "<h5>Falsches Datum! (" + data["date"] + ")";
-                    }else{
+                    var enteredDate = new Date().toISOString().slice(0, 10);
+                    var curDate = enteredDate;
+                    if (curDate != data["date"]) {
+                        const parts = enteredDate.split('-');
+                        const formattedDate = parts[2] + '.' + parts[1] + '.' + parts[0];
+                        scan.innerHTML = "<h5>Falsches Datum! (" + formattedDate + ")";
+                    } else {
                         scan.innerHTML = "";
                     }
                     if (result.length == 0) {
@@ -121,7 +128,8 @@
                             scan.innerHTML = "<h5>Essen von " + data['name'] + " wurde bereits abgeholt.</h5>";
                         }
 
-                    };
+                    }
+                    scanModal.toggle();
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -133,6 +141,7 @@
             { fps: 10, qrbos: 250 }
         );
         htmlscanner.render(onScanSuccess);
+
     });
 </script>
 <style>
@@ -159,7 +168,11 @@
         height: 100px !important;
     }
 
-    button {
+    #html5-qrcode-anchor-scan-type-change {
+        display: none !important;
+    }
+
+    [id^=html5-qrcode] {
         padding: 10px 20px;
         border: 1px solid #b2b2b2;
         outline: none;
@@ -173,7 +186,7 @@
         transition: 0.3s background-color;
     }
 
-    button:hover {
+    [id^=html5-qrcode]:hover {
         background-color: #008000;
     }
 
