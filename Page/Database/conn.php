@@ -89,7 +89,8 @@ class User extends Conn
         }
     }
 
-    function DeleteUser($user_id) {
+    function DeleteUser($user_id)
+    {
         try {
             $query = "delete from user_menu where user_id = ?;";
             $arr = array($user_id);
@@ -132,29 +133,54 @@ class User extends Conn
                 /* The password is correct. */
                 if (isset($result["name"]) and $result["name"] != "") {
                     return array(
-                          "name" => $result["name"],
-                          "userid" => $result["user_id"]
+                        "name" => $result["name"],
+                        "userid" => $result["user_id"]
                     );
                 }
             }
         }
         return "webuser";
     }
+    function GetUserNameById($userid)
+    {
+
+        $query = "select concat(firstname, ' ', lastname) name 
+                    from user 
+                    where user_id = ?";
+        $stmt = $this->makeStatement($query, array($userid));
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        /* If there is a result, check if the password matches using password_verify(). */
+        if (is_array($result)) {
+            return $result["name"];
+        }
+        return "None";
+    }
 
     function GetUserMenu($userid, $tod, $date)
     {
 
-        $query = "select * from user_menu 
-                    join menu using (menu_id)
-                    join meal using (meal_id)
+        $query = "select mv.*, time, user_id from user_menu 
+                    join menu_v mv using (menu_id)
+                    join meal m using (meal_id)
                     where user_id = ?
-                    and tod_id = ?
+                    and m.tod_id = ?
                     and day = ?;";
         $stmt = $this->makeStatement($query, array($userid, $tod, $date));
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) != 0) {
+            if (is_null($result[0]["time"])) {
+                $query = 'update user_menu set time = current_time()
+                            where user_id = ?
+                            and menu_id in (select menu_id from menu_v
+                                                where tod_id = ?
+                                                and day = ?);';
+                $stmt = $this->makeStatement($query, array($userid, $tod, $date));
+            }
+        }
         return $result;
     }
-    function GetAllRoles() {
+    function GetAllRoles()
+    {
         try {
             $query = "select role_id, name from role";
             $stmt = $this->makeStatement($query);
@@ -198,16 +224,17 @@ class Food extends Conn
             return false;
         }
     }
-    function UpdateFood($food_id, $food_name, $mealArr) {
+    function UpdateFood($food_id, $food_name, $mealArr)
+    {
         try {
             $query = "update food set name = ? where food_id = ?";
             $arr = array($food_name, $food_id);
             $stmt = $this->makeStatement($query, $arr);
-            
+
             $query1 = "delete from food_meal where food_id = ?;";
             $arr1 = array($food_id);
             $stmt = $this->makeStatement($query1, $arr1);
-        
+
             foreach ($mealArr as $meal) {
                 $query2 = "insert into food_meal(food_id, meal_id) values (?, ?)";
                 $arr2 = array($food_id, $meal);
@@ -221,7 +248,8 @@ class Food extends Conn
         }
     }
 
-    function DeleteFood($food_id) {
+    function DeleteFood($food_id)
+    {
         try {
             $query = "delete from food_meal where food_id = ?;";
             $arr = array($food_id);
@@ -278,19 +306,19 @@ class Food extends Conn
     {
         try {
             $query =
-           "select food_id, `name`, trim(group_concat(' ', `type`)) menu_names, (".
-                " select trim(group_concat(' ', `meal_id`))".
-                " from food_meal".
-                " where food_id = fm.food_id".
-                " group by food_id".
-                " ) as meal_ids".
-            " from food".
-            " inner join food_meal fm using(food_id)".
-            " inner join meal using(meal_id)".
-            " inner join time_of_day using(tod_id)".
-            " where tod_id = ?".
-            " group by food_id".
-            " order by food_id";
+                "select food_id, `name`, trim(group_concat(' ', `type`)) menu_names, (" .
+                " select trim(group_concat(' ', `meal_id`))" .
+                " from food_meal" .
+                " where food_id = fm.food_id" .
+                " group by food_id" .
+                " ) as meal_ids" .
+                " from food" .
+                " inner join food_meal fm using(food_id)" .
+                " inner join meal using(meal_id)" .
+                " inner join time_of_day using(tod_id)" .
+                " where tod_id = ?" .
+                " group by food_id" .
+                " order by food_id";
 
 
             $arr = array($timeOfDay);
@@ -301,7 +329,8 @@ class Food extends Conn
             echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
         }
     }
-    function GetAllMeals() {
+    function GetAllMeals()
+    {
         try {
             $query = "select meal_id, type from meal";
             $stmt = $this->makeStatement($query);
@@ -509,7 +538,8 @@ class Menu extends Conn
                     where menu_id = ? and user_id = ?";
         $stmt = $this->makeStatement($query, array($menuId, $userId));
     }
-    function GetMenuForWeek() {
+    function GetMenuForWeek()
+    {
         try {
             $query = "select mv.food_id, mv.name, mv.meal_id, mv.type, date_format(mv.day, '%d.%m.%Y') `day`, mv.day_name, count(user_id) amount
                         from menu_v mv 
@@ -517,7 +547,7 @@ class Menu extends Conn
                         where day between current_date() and current_date()+7
                         group by menu_id
                         order by `day`, meal_id;";
-            
+
             $stmt = $this->makeStatement($query);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
