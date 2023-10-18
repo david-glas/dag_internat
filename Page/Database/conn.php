@@ -131,13 +131,16 @@ class User extends Conn
             if (password_verify($password, $result['pw'])) {
                 /* The password is correct. */
                 if (isset($result["name"]) and $result["name"] != "") {
+                    $_SESSION['login_failed'] = 'no';
                     return array(
                           "name" => $result["name"],
                           "userid" => $result["user_id"]
                     );
                 }
+                else { $_SESSION['login_failed'] = 'yes'; }
             }
         }
+        $_SESSION['login_failed'] = 'yes';
         return "webuser";
     }
 
