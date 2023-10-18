@@ -10,7 +10,7 @@
   }
 
   #normalheader{
-    background-color: rgba(62, 61, 68, 0.813);
+    background-color: rgba(52, 53, 65, 0.9);
 
   }
   #todayheader{
@@ -19,10 +19,10 @@
   }
 
   #toolateheader{
-    background-color: rgba(62, 61, 68, 0.557);
+    background-color: rgba(68, 70, 84, 0.8);
   }
   #emptyheader{
-    background-color: rgba(62, 61, 68, 0.557);
+    background-color: rgba(68, 70, 84, 0.8);
   }
 
   .blabla{

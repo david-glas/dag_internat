@@ -12,7 +12,7 @@
   }
   /* Hintergrundfarbe und Höhe der Navbar*/
   .navbar{
-    background: rgb(63,62,68);
+    background: rgb(52, 53, 65);
     /*background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);*/
     height: 84px;
   }
@@ -42,7 +42,7 @@
   }
   @media (max-width: 768px) {
   .navbar-collapse{
-    background: rgb(63,62,68);
+    background: rgb(52, 53, 65);
     /*background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);*/
     box-shadow: 100px;
   }
@@ -67,29 +67,29 @@
         <?php 
         if ($_SESSION["user"]["account"] != "webuser") {
           echo
-          '<li class="nav-item">
+          '<li class="nav-item mx-3">
             <a class="nav-link btn-secondary'. setActive('menu') .'" href="?page=menu">Menu</a>
           </li>';
 
           if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
             echo
-            '<li class="nav-item">
+            '<li class="nav-item mx-3">
               <a class="nav-link'. setActive('dashboard') .'" href="?page=dashboard">Dashboard</a>
             </li>';
           }
 
           if (in_array($_SESSION["user"]["account"], array("student"))) {
             echo
-            '<li class="nav-item">
+            '<li class="nav-item mx-3">
               <a class="nav-link" id="qrnav">QR</a>
             </li>';
           }
         }
         ?>
-        <li class="nav-item">
+        <li class="nav-item mx-3">
           <a class="<?php echo 'nav-link'. setActive('instructions') ?>" href="?page=instructions">Instructions</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-3">
           <a class="<?php echo 'nav-link'. setActive('about') ?>" href="?page=about">About</a>
         </li>
         <?php
