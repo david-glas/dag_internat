@@ -136,7 +136,6 @@ function updateTabs(user) {
   var spinner = document.getElementById("spinner");
   spinner.style.display = "none";
   const tabs = document.querySelectorAll('[name="Week"]');
-  var user;
 
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
