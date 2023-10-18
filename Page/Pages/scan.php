@@ -110,7 +110,7 @@
                             title.style.color = "green";
                             title.innerHTML = "Gültig!";
                             scan.style.color = "green";
-                            scan.innerHTML = "<h5>" + data['name'] + " hat folgendes Essen bestellt:</h5>";
+                            scan.innerHTML += "<h5>" + data['name'] + " hat folgendes Essen bestellt:</h5>";
                             result.forEach(function (order) {
                                 scan.innerHTML += "<p><b>   ▸   " + order['name'] + "</b></p>";
                             })
