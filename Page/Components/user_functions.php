@@ -6,16 +6,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $firstname = $_POST['firstname_input'];
   $lastname = $_POST['lastname_input'];
   $svnr = $_POST['svnr_input'];
-  $password = $_POST['password_input'];
   $role_id = $_POST['role_select'];
   $action = $_POST['action'];
+  $password_change = false;
+  $password = "";
+
+  if (isset($_POST['password_change'])) {
+    $password = $_POST['password_input'];
+    $password_change = true;
+  }
 
   $user = new User();
   if ($action == 'create') {
     $user->AddUser($svnr, $firstname, $lastname, $password, $role_id);
   }
   else if ($action == 'change') {
-    $user->UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $role_id);
+    $user->UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $password_change, $role_id);
   }
   else if ($action == 'delete') {
     $user->DeleteUser($user_id);

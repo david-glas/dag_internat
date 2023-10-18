@@ -104,10 +104,28 @@
                         <label for="lastname_input">Nachname</label>
                       </div>
                       <div class="form-floating mb-2">
-                        <input type="password" class="form-control" id="password_input" name="password_input">
-                        <label for="password_input">Passwort</label>
+                        <input type="password" class="form-control" id="password_input'.$user['user_id'].'" name="password_input" disabled>
+                        <label for="password_input'.$user['user_id'].'">Passwort</label>
                       </div>
-                      <div class="form-floating mb-2">
+                      <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="password_change'.$user['user_id'].'" name="password_change" value="set">
+                        <label class="form-check-label" for="password_change'.$user['user_id'].'">
+                            Passwort ändern
+                        </label>
+                      </div>
+                      <script>
+                      const disablePasswordCheckbox'.$user['user_id'].' = document.getElementById("password_change'.$user['user_id'].'");
+                      const passwordInput'.$user['user_id'].' = document.getElementById("password_input'.$user['user_id'].'");
+
+                      disablePasswordCheckbox'.$user['user_id'].'.addEventListener("click", function () {
+                        if (disablePasswordCheckbox'.$user['user_id'].'.checked) {
+                            passwordInput'.$user['user_id'].'.disabled = false;
+                        } else {
+                            passwordInput'.$user['user_id'].'.disabled = true;
+                        }
+                      });
+                      </script>
+                      <div class="form-floating mb-2 mt-3">
                         <select class="form-select" id="role_select" name="role_select">';
                           fillRoleSelect($user['role_id']);
           echo          '</select>
