@@ -146,7 +146,7 @@ function updateTabs(user) {
       spinner.style.display = "block";
       const url = 'Components/MenuCard.php';
       var method = 'getCardsByWeek';
-      if (user == "admin") {
+      if (user == "admin" || user == "cantine") {
         method = 'getCardsByWeekAdmin';
       }
       const requestData = {
