@@ -4,3 +4,6 @@
     der Verpflegung für Internatsschüler. Diese Anleitung erklärt, wie verschiedene 
     Benutzergruppen die Funktionen der Anwendung nutzen können.</p>
 </div>
+<?php
+  include("Pages\instructionsadmin.php");
+?>
