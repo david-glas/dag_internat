@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
   modalBtn.addEventListener('click', function () {
     var qrModal = new bootstrap.Modal(document.getElementById("qrModal"), {});
     var tod = getQR();
-    if ([1, 2, 3].includes(tod)){
+    if ([1, 2, 3].includes(tod)) {
 
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().slice(0, 10);
 
-      requestData ={
+      requestData = {
         action: "encrypt",
         tod: tod,
         day: formattedDate
@@ -22,18 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
           'Content-Type': 'application/json'
         }
       })
-      .then(response => response.text())
-      .then(data => {
-        var qrcode = new QRCode("qrcode", data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then(response => response.text())
+        .then(data => {
+          var qrcode = new QRCode("qrcode", data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
       var qrcode = document.querySelector("#qrcode");
       qrcode.innerHTML = "";
       qrcode.removeAttribute("hidden");
-      
-    }else{
+
+    } else {
       var qrtext = document.querySelector("#qrtext");
       qrtext.removeAttribute("hidden");
       qrtext.innerHTML = "Not Ok";
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-function getQR(){
+function getQR() {
   const now = new Date();
 
   const currentHour = now.getHours();
@@ -51,22 +51,22 @@ function getQR(){
 
   // Define the time ranges
   const ranges = [
-      { startHour: 6, startMinute: 30, endHour: 12, endMinute: 0, todId: 1},
-      { startHour: 11, startMinute: 30, endHour: 14, endMinute: 0, todId: 2 },
-      { startHour: 15, startMinute: 0, endHour: 18, endMinute: 0, todId: 3 }
+    { startHour: 6, startMinute: 30, endHour: 12, endMinute: 0, todId: 1 },
+    { startHour: 11, startMinute: 30, endHour: 14, endMinute: 0, todId: 2 },
+    { startHour: 15, startMinute: 0, endHour: 20, endMinute: 0, todId: 3 }
   ];
 
   // Function to check if the current time is within any of the specified ranges
   for (const range of ranges) {
-      const { startHour, startMinute, endHour, endMinute, todId } = range;
-      if (
-          (currentHour > startHour || (currentHour === startHour && currentMinute >= startMinute)) &&
-          (currentHour < endHour || (currentHour === endHour && currentMinute < endMinute))
-      ) { 
-          return todId;
-      }
+    const { startHour, startMinute, endHour, endMinute, todId } = range;
+    if (
+      (currentHour > startHour || (currentHour === startHour && currentMinute >= startMinute)) &&
+      (currentHour < endHour || (currentHour === endHour && currentMinute < endMinute))
+    ) {
+      return todId;
+    }
   }
-  
+
   return 0;
 
 }

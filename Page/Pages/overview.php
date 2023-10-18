@@ -5,11 +5,11 @@
     <table class="table table-striped table-hover table-responsive">
       <thead>
         <tr>
-          <th scope="col">Essen ID</th>
-          <th scope="col">Essensname</th>
-          <th scope="col">Gericht</th>
           <th scope="col">Datum</th>
           <th scope="col">Wochentag</th>
+          <th scope="col">Gericht</th>
+          <th scope="col">Essen ID</th>
+          <th scope="col">Essensname</th>
           <th scope="col">Anzahl</th>
         </tr>
       </thead>
@@ -28,17 +28,31 @@ function fillMenuData() {
   $menuConn = new Menu();
   $menus = $menuConn->GetMenuForWeek();
 
+  $lastDay = '';
+
   if ($menus != null) {
     foreach ($menus as $menu) {
-      echo
-      '<tr>
-        <td>'.$menu['food_id'].'</td>
-        <td>'.$menu['name'].'</td>
-        <td>'.$menu['type'].'</td>
-        <td>'.$menu['day'].'</td>
-        <td>'.$menu['day_name'].'</td>
-        <th>'.$menu['amount'].'</td>
-      </tr>';
+      if ($lastDay != $menu['day']) {
+        echo
+        '<tr>
+          <th rowspan="7" class="align-middle">'.$menu['day'].'</th>
+          <th rowspan="7" class="align-middle">'.$menu['day_name'].'</th>
+          <td>'.$menu['type'].'</td>  
+          <td>'.$menu['food_id'].'</td>
+          <td>'.$menu['name'].'</td>
+          <th>'.$menu['amount'].'</td>
+        </tr>';
+      }
+      else {
+        echo
+        '<tr>
+          <td>'.$menu['type'].'</td>  
+          <td>'.$menu['food_id'].'</td>
+          <td>'.$menu['name'].'</td>
+          <th>'.$menu['amount'].'</td>
+        </tr>';
+      }
+      $lastDay = $menu['day'];
     }
   }
 }

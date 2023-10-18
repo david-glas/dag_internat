@@ -32,29 +32,32 @@ include "Database/conn.php";
   <title>Document</title>
   <link rel="icon" type="image/x-icon" href="assets/img/DAG72.png">
 </head>
+
 <?php
-if (($_SESSION["user"]["account"] != "webuser")) {
-
-}
-
 include "Components/nav.php";
-
 ?>
 
 <body>
-<!--button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button-->
   <?php
+  if (isset($_SESSION['login_failed']) && $_SESSION['login_failed'] == 'yes') {
+    drawAlert();
+    $_SESSION['login_failed'] = 'no';
+  }
   if (isset($_GET['page'])) {
     switch ($_GET['page']) {
       case 'dashboard':
-        if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) { include "Pages/dashboard.php"; }
-        else { echo '<div class="container"><h1>Nice try Hackerman!</h1></div>'; }
+        if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
+          include "Pages/dashboard.php";
+        } else {
+          echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
+        }
         break;
       case 'menu':
-        if ($_SESSION["user"]["account"] != "webuser") { include "Pages/menu.php"; }
-        else { echo '<div class="container"><h1>Nice try Hackerman!</h1></div>'; }
+        if ($_SESSION["user"]["account"] != "webuser") {
+          include "Pages/menu.php";
+        } else {
+          echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
+        }
         break;
       case 'about':
         include "Pages/about.php";
@@ -75,3 +78,15 @@ include "Components/nav.php";
 </body>
 
 </html>
+
+<?php
+
+function drawAlert() {
+  echo
+  '<div class="container">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Login fehlgeschlagen!</strong> Überprüfen Sie bitte Ihre Eingaben.
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>';
+}
