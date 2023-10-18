@@ -281,7 +281,7 @@ function getModal() {
       }
 
       else {
-        document.getElementById("msg").innerHTML = "Passwords not match!";
+        document.getElementById("msg").innerHTML = "Passwörter stimmen nicht überein!";
         return;
       }
     }
