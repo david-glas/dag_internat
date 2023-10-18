@@ -57,20 +57,35 @@ class User extends Conn
         }
     }
 
-    function UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $roleId)
+    function UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $password_change, $roleId)
     {
         try {
-            $query = "update user 
-                        set firstname = ?, 
-                            lastName = ?, 
-                            pw = ?,
-                            role_id = ?,
-                            svnr = ?
-                        where user_id = ?;";
-            $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $svnr, $user_id);
-            $stmt = $this->makeStatement($query, $arr);
+            if ($password_change) {
+                $query = "update user 
+                            set firstname = ?, 
+                                lastName = ?, 
+                                pw = ?,
+                                role_id = ?,
+                                svnr = ?
+                            where user_id = ?;";
+                $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $svnr, $user_id);
+                $stmt = $this->makeStatement($query, $arr);
 
-            return true;
+                return true;
+            }
+            else {
+                $query = "update user 
+                            set firstname = ?, 
+                                lastName = ?, 
+                                role_id = ?,
+                                svnr = ?
+                            where user_id = ?;";
+                $arr = array($firstname, $lastname, $roleId, $svnr, $user_id);
+                $stmt = $this->makeStatement($query, $arr);
+
+                return true;
+            }
+            
         } catch (Exception $e) {
             echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
             return false;

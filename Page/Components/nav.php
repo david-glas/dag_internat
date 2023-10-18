@@ -13,7 +13,7 @@
   /* Hintergrundfarbe und Höhe der Navbar*/
   .navbar{
     background: rgb(63,62,68);
-    background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);
+    /*background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);*/
     height: 84px;
   }
 
@@ -37,10 +37,13 @@
     font-weight: bold; /* Fetter Text */
     font-family: 'Arial', sans-serif; /* Schriftart, ersetzen Sie 'Arial' durch die gewünschte Schriftart */ 
   }
+  .navbar-toggler{
+    margin-right: 5px;
+  }
   @media (max-width: 768px) {
   .navbar-collapse{
     background: rgb(63,62,68);
-    background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);
+    /*background: linear-gradient(0deg, rgba(63,62,68,0.94) 0%, rgba(63,62,68,0.92) 48%, rgba(63,62,68,0.8830705705705706) 94%);*/
     box-shadow: 100px;
   }
   .navbar>.container{
@@ -93,14 +96,14 @@
         if ($_SESSION["user"]["account"] != "webuser") {
           echo
           '<form action="Components/logout.php">
-            <button type="submit" class="btn btn-light">
+            <button type="submit" class="btn btn-warning mx-3 btn-sm p-2">
               <i class="bi bi-door-closed-fill"></i> Logout
             </button>
-          </form>';
+            </form>';
         }
         else {
           echo
-          '<button type="button" class="btn btn-light mx-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          '<button type="button" class="btn btn-warning mx-3 btn-sm p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="bi bi-person-fill"></i> Login
           </button>';
         }
