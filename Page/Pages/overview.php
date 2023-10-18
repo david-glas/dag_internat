@@ -1,6 +1,6 @@
 <div class="container">
   <canvas id="myChart" style="width:100%"></canvas>
-
+  <?php printWeekButtons(); ?>
   <div class="container table-responsive my-3">
     <table class="table table-striped table-hover table-responsive">
       <thead>
@@ -22,17 +22,18 @@
 </div>
 
 <?php
+printWeekButtons();
 
 makeChartScript();
 
 function fillMenuData() {
   $week_offset = 0;
-  if (isset($_POST['week_offset'])) {
-    $week_offset = $_POST['week_offset'];
+  if (isset($_GET['week'])) {
+    $week_offset = $_GET['week'];
   }
 
   $menuConn = new Menu();
-  $menus = $menuConn->GetMenuForWeek();
+  $menus = $menuConn->GetMenuForWeek($week_offset);
   $userConn = new User();
   $allUsers = $userConn->GetAllUsers('where role_id in (2,3)');
 
@@ -125,6 +126,10 @@ function fillMenuData() {
 function printUsersByMenuID(User $userConn, $menu_id) {
   $users = $userConn->GetUsersByMenuID($menu_id);
   $used_userIds = [];
+  $week = 0;
+  if (isset($_GET['week'])) {
+    $week = $_GET['week'];
+  }
   
   foreach ($users as $user) {
     echo
@@ -133,6 +138,7 @@ function printUsersByMenuID(User $userConn, $menu_id) {
         <div class="col-2">
           <button type="submit" name="delete" value="'.$user['user_id'].'_'.$menu_id.'" class="btn btn-sm btn-danger"><i class="bi bi-x"></i></button>
         </div>
+        <input value ="'.$week.'" name="week" hidden>
       </form>
       <div class="col-4">'.$user['name'].'</div>
       <div class="col-6">'.printZusage($user['time']).'</div>
@@ -151,7 +157,11 @@ function printZusage($time) : string {
 }
 function makeChartScript() {
   $menuConn = new Menu();
-  $menus = $menuConn->GetMenuForWeek();
+  $week_offset = 0;
+  if (isset($_GET['week'])) {
+    $week_offset = $_GET['week'];
+  }
+  $menus = $menuConn->GetMenuForWeek($week_offset);
 
   if ($menus != null) {
     echo
@@ -258,6 +268,24 @@ function fillDatasetData($menus, $meal_id) {
   $output = rtrim($output, ',');
   $output .= '],';
   echo $output;
+}
+
+function printWeekButtons() {
+  $week = 0;
+  if(isset($_GET['week'])) {
+    $week = $_GET['week'];
+  }
+  $weekdec = $week + 7;
+  $weekinc = $week - 7;
+
+  echo
+  '<div class="container text-center mt-2"
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <a href="?page=dashboard&week='.$weekdec.'" class="btn btn-primary"><i class="bi bi-caret-left-fill"></i></a>
+      <a href="?page=dashboard&week=0" class="btn btn-primary">Aktuelle Woche</a>
+      <a href="?page=dashboard&week='.$weekinc.'" class="btn btn-primary"><i class="bi bi-caret-right-fill"></i></a>
+    </div>
+  </div>';
 }
 
 ?>

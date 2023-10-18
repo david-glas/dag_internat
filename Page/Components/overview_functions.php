@@ -26,6 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $menu->RemoveUserFromMenu($menu_id, $user_id);
   }
 }
-
-  header("Location: ../index.php?page=dashboard");
+  if (isset($_POST['week'])) {
+    header("Location: ../index.php?page=dashboard&week=".$_POST['week']);
+  }
+  else {
+    header("Location: ../index.php?page=dashboard");
+  }
 ?>

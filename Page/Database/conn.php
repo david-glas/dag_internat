@@ -585,13 +585,13 @@ class Menu extends Conn
                     where menu_id = ? and user_id = ?";
         $stmt = $this->makeStatement($query, array($menuId, $userId));
     }
-    function GetMenuForWeek()
+    function GetMenuForWeek($week_offset = 0)
     {
         try {
             $query = "select menu_id, mv.food_id, mv.name, mv.meal_id, mv.type, date_format(mv.day, '%d.%m.%Y') `day`, mv.day_name, count(user_id) amount
                         from menu_v mv 
                         left join user_menu um using (menu_id)
-                        where day between current_date() and current_date()+7
+                        where day between current_date()-".$week_offset." and current_date()+7-".$week_offset."
                         group by menu_id
                         order by `day`, meal_id;";
 
