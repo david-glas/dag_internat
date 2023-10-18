@@ -15,15 +15,19 @@
     <h2>Bootstrap 5 Form</h2>
     <form id="myForm">
         <div class="mb-3">
-            <label for="userId" class="form-label">User ID (int):</label>
+            <label for="userId" class="form-label">User ID:</label>
             <input type="number" class="form-control" id="userId" name="userId" required>
         </div>
         <div class="mb-3">
-            <label for="date" class="form-label">Date (php date):</label>
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date :</label>
             <input type="date" class="form-control" id="date" name="date" required>
         </div>
         <div class="mb-3">
-            <label for="tod" class="form-label">Time of Day (int):</label>
+            <label for="tod" class="form-label">Time of Day:</label>
             <input type="number" class="form-control" id="tod" name="tod" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
