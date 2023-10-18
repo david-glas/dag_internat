@@ -3,7 +3,13 @@
 <!-- Wrap the rest of the page in another container to center all the content. -->
 
 <div class="container marketing mt-5">
+
 <h1 class="display-3">About us</h1>
+
+
+<hr class="featurette-divider">
+<hr class="featurette-divider">
+
 <div class="row featurette mt-3">
   <div class="col-md-7">
     <h2 class="featurette-heading fw-normal lh-1">Heimische Hausmannskost. <span class="text-body-secondary">Tradition trifft auf Geschmack!</span></h2>

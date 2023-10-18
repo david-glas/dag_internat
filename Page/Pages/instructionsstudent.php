@@ -1,9 +1,8 @@
 <div class="container marketing mt-5">
 
+  <h1 class="display-3">Anleitung für Internatsschüler</h1>
+
   <hr class="featurette-divider">
-
-  <h1 class="display-2">Anleitung für Internatsschüler</h1>
-
   <hr class="featurette-divider">
 
   <div class="row featurette mt-3">
