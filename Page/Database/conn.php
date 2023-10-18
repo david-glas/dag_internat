@@ -12,16 +12,16 @@ class Conn
     public function __construct()
     {
         try {
-            //$servername = "127.0.0.1";
-            //$username = "root";
-            //$password = "admin";
-            //$schema = "dag";
-
             $servername = "mysql.glasdavid.com";
             $username = "root";
             $password = "georgadnandavid";
             $schema = "dag";
-
+            /*
+            $servername = "127.0.0.1";
+            $username = "root";
+            $password = "admin";
+            $schema = "dag";
+            */
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
