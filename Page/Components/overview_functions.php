@@ -2,7 +2,6 @@
 include "../Database/conn.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $test = $_POST;
   $action = "";
   $values = "";
   $set_time = false;

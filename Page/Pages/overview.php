@@ -26,6 +26,11 @@
 makeChartScript();
 
 function fillMenuData() {
+  $week_offset = 0;
+  if (isset($_POST['week_offset'])) {
+    $week_offset = $_POST['week_offset'];
+  }
+
   $menuConn = new Menu();
   $menus = $menuConn->GetMenuForWeek();
   $userConn = new User();
@@ -80,7 +85,7 @@ function fillMenuData() {
                   <div class="col-4"><b>Name</b></div>
                   <div class="col-6"><b>Abgeholt</b></div>
                 </div>';
-                printUsersByMenuID($userConn, $menu['menu_id']);
+                $used_userIds = printUsersByMenuID($userConn, $menu['menu_id']);
         echo    '
               </div>
               <hr class="divider">
@@ -94,7 +99,9 @@ function fillMenuData() {
                       <select class="form-select form-select-sm" name="add">
                         <option value="-1_-1" selected>Name</option>';
                         foreach ($allUsers as $user) {
-                          echo '<option value="'.$user['user_id'].'_'.$menu['menu_id'].'">'.$user['firstname'].' '.$user['lastname'].'</option>';
+                          if (!in_array($user['user_id'], $used_userIds)) {
+                            echo '<option value="'.$user['user_id'].'_'.$menu['menu_id'].'">'.$user['firstname'].' '.$user['lastname'].'</option>';
+                          }
                         }
         echo          '</select>
                     </div>
@@ -117,6 +124,7 @@ function fillMenuData() {
 }
 function printUsersByMenuID(User $userConn, $menu_id) {
   $users = $userConn->GetUsersByMenuID($menu_id);
+  $used_userIds = [];
   
   foreach ($users as $user) {
     echo
@@ -129,7 +137,9 @@ function printUsersByMenuID(User $userConn, $menu_id) {
       <div class="col-4">'.$user['name'].'</div>
       <div class="col-6">'.printZusage($user['time']).'</div>
     </div>';
+    $used_userIds[] = $user['user_id'];
   }
+  return $used_userIds;
 }
 function printZusage($time) : string {
   if ($time == null) {
