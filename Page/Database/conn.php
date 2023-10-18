@@ -16,7 +16,12 @@ class Conn
             $username = "root";
             $password = "georgadnandavid";
             $schema = "dag";
-
+            /*
+            $servername = "127.0.0.1";
+            $username = "root";
+            $password = "admin";
+            $schema = "dag";
+            */
             $this->conn = new PDO('mysql:host=' . $servername . ';dbname=' . $schema . ';charset=utf8', $username, $password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
@@ -527,7 +532,7 @@ class Menu extends Conn
     function AddUserToMenu($menuId, $userId)
     {
 
-        $query = "insert into user_menu
+        $query = "insert into user_menu(menu_id, user_id)
                     values (?, ?);";
         $stmt = $this->makeStatement($query, array($menuId, $userId));
     }

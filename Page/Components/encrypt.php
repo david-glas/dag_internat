@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo $test;
   }
 }
-;
+
 
 function encrypt_decrypt($action, $string)
 {
