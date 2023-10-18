@@ -399,6 +399,13 @@ class Menu extends Conn
 
     }
 
+    function RemoveUserFromMenuByDelete($menuId)
+    {
+        $query = "delete from user_menu
+                    where menu_id = ?";
+        $stmt = $this->makeStatement($query, array($menuId));
+    }
+
     static function GetMenuByDate($date)
     {
 
