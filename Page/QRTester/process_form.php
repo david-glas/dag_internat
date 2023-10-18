@@ -1,5 +1,4 @@
 <?php
-$output = false;
 $encrypt_method = "AES-256-CBC";
 $secret_key = 'your_secret_key_here'; // Replace with your actual secret key
 $secret_iv = 'your_secret_iv_here'; // Replace with your actual secret IV
