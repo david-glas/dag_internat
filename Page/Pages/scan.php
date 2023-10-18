@@ -94,12 +94,17 @@
             })
                 .then(response => response.json())
                 .then(result => {
-                    scan.innerHTML = "";
+                    var curDate = new Date().toISOString().slice(0, 10);
+                    if (curDate != data["date"]){
+                        scan.innerHTML = "<h5>Falsches Datum! (" + data["date"] + ")";
+                    }else{
+                        scan.innerHTML = "";
+                    }
                     if (result.length == 0) {
                         title.style.color = "red";
                         title.innerHTML = "Ungültig!";
                         scan.style.color = "red";
-                        scan.innerHTML = "<h5>" + data['name'] + " hat kein Essen bestellt.</h5>";
+                        scan.innerHTML += "<h5>" + data['name'] + " hat kein Essen bestellt.</h5>";
                     } else {
                         if (result[0]["time"] == null) {
                             title.style.color = "green";

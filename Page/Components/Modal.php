@@ -5,7 +5,7 @@ echo '
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">Passwort ändern</h1>
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Passwort muss geändert werden!</h1>
             </div>
             <div class="modal-body">
             <form>

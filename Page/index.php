@@ -55,6 +55,7 @@ include "Components/nav.php";
       case 'menu':
         if ($_SESSION["user"]["account"] != "webuser") {
           include "Pages/menu.php";
+          include "Components/Modal.php";
         } else {
           echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
         }
@@ -73,7 +74,6 @@ include "Components/nav.php";
     include "Pages/landing.php";
   }
   include "Components/footer.php";
-  include "Components/Modal.php";
   ?>
 </body>
 
