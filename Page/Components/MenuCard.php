@@ -93,8 +93,8 @@ function emptyCard($day)
 {
 
   return
-    '<div class="swiper-slide" style="z-index: -1;">
-      <div class="card" style="z-index:-1;">
+    '<div class="swiper-slide">
+      <div class="card">
         <div class="card-header" ' . getHeaderShade($day, null) . '>
           <small>' . $day . '</small>
         </div>
@@ -207,8 +207,8 @@ function GetCardsByWeek($week)
       $cards = $cards . emptyCard($day);
     } else if (isset($Menu->Breakfast)) {
       $cards = $cards .
-        '<div class="swiper-slide" style="z-index: -1;">
-          <div class="card" style="z-index:-1;">
+        '<div class="swiper-slide">
+          <div class="card">
             <div class="card-header"' . getHeaderShade($currDate, $tooLate) . '>
               <small>' . $day . '</small>
               </div>' .

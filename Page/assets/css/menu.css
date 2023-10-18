@@ -75,15 +75,28 @@
     margin-left: -10px!important;
     /* Margin from the right */
     opacity: 100%;
+    position: relative!important;
+  }
+
+  .dropdown-menu{
+    overflow-y: visible;
+    position: absolute;
+    z-index: 9999!important; /* Adjust this value as needed */
+    max-height: 280px;
+    overflow-y: auto;
   }
 
   .dropdown-custom{
     overflow-y: visible;
+    position: absolute;
     z-index: 9999!important; /* Adjust this value as needed */
+    max-height: 280px;
+    overflow-y: auto;
   }
 
   .dropdown-item {
     z-index: 9999!important; /* Adjust this value as needed */
+    position: relative;
     overflow-y: visible;
   }
 
