@@ -45,28 +45,29 @@ function pastStyle($date)
     "card" => "",
     "header" => ""
   );
-  if($date < strtotime("today")){
+  if ($date < strtotime("today")) {
     $arr["card"] = 'style="background-color: rgba(196, 196, 196, 0.686);"';
     $arr["header"] = 'style="background-color:  rgb(196, 196, 196);"';
   }
   return $arr;
 }
 
-function isPast($date){
-  if($date < strtotime("today")){
+function isPast($date)
+{
+  if ($date < strtotime("today")) {
     return true;
   } else
-  return false;
+    return false;
 }
 
-function getHeaderShade($date, $tooLate){
-  if (is_null($tooLate)){
+function getHeaderShade($date, $tooLate)
+{
+  if (is_null($tooLate)) {
     return 'id="emptyheader"';
-  }
-  else if ($tooLate){
-    if($date == strtotime("today")){
+  } else if ($tooLate) {
+    if ($date == strtotime("today")) {
       return 'id="todayheader"';
-    } 
+    }
     return 'id="toolateheader"';
   }
   return 'id="normalheader"';
@@ -88,13 +89,14 @@ function getDateString($day, $index)
   return $germanDays[$index] . ' ' . date('d.m.Y', $day);
 }
 
-function emptyCard($day){
+function emptyCard($day)
+{
 
-  return 
+  return
     '<div class="swiper-slide" style="z-index: -1;">
       <div class="card" style="z-index:-1;">
-        <div class="card-header" '. getHeaderShade($day, null) .'>
-          <small>'. $day .'</small>
+        <div class="card-header" ' . getHeaderShade($day, null) . '>
+          <small>' . $day . '</small>
         </div>
         <div id="past" class="card-body position-relative" data-ordered="0"></div>
         <hr class="hr" />
@@ -109,8 +111,8 @@ function emptyCard($day){
         <div id="past" class="card-body position-relative" data-ordered="0"></div>
         <hr class="hr" />
         <div id="past" class="card-body position-relative" data-ordered="0"></div>
-        <div class="card-footer" '. getHeaderShade($day, null) .'>
-              <small>'. $day .'</small>
+        <div class="card-footer" ' . getHeaderShade($day, null) . '>
+              <small>' . $day . '</small>
             </div>
         </div></div>';
 
@@ -125,7 +127,11 @@ function getCardByUser($Meal, $day, $tooLate)
   if (is_null($Meal["user_id"]) and !$tooLate) {
     $card = '<div class="card-body position-relative"
               data-ordered="0"';
-    $button = '<button name="userbutton" type="menubutton" class="stretched-link" ';
+    if (is_null($Meal["food_id"])) {
+      $button = '<button hidden name="userbutton" disabled type="menubutton" class="stretched-link" ';
+    } else {
+      $button = '<button name="userbutton" type="menubutton" class="stretched-link" ';
+    }
   } else if (!is_null($Meal["user_id"]) and !$tooLate) {
     $card = '<div class="card-body position-relative" style="background-color: rgba(154, 211, 154, 0.51);"
               data-ordered="1"';
@@ -167,6 +173,8 @@ function getCardByAdmin($Meal, $day, $Menu)
         ' . $Meal["type"] . ' (' . $Meal["amount"] . ')
         </button>
         <ul class="dropdown-menu dropdown-custom">';
+  $string .= '<li><a id="drop" class="dropdown-item" type="button"
+        data-menu-id="' . nvl($Meal["menu_id"]) . '" data-food-id="">Entfernen</a></li>';
   foreach ($Food as $entry) {
     $string .= '<li><a id="drop" class="dropdown-item" type="button"
           data-menu-id="' . nvl($Meal["menu_id"]) . '" data-food-id="' . nvl($entry["food_id"]) . '">'
@@ -195,14 +203,13 @@ function GetCardsByWeek($week)
     $day = getDateString($currDate, $i);
     $Menu = $Menu->GetMenuByDateAndUser($currDate, $_SESSION["user"]["userid"]);
 
-    if ($past){
+    if ($past) {
       $cards = $cards . emptyCard($day);
-    }
-    else if (isset($Menu->Breakfast)) {
+    } else if (isset($Menu->Breakfast)) {
       $cards = $cards .
         '<div class="swiper-slide" style="z-index: -1;">
           <div class="card" style="z-index:-1;">
-            <div class="card-header"'. getHeaderShade($currDate, $tooLate) .'>
+            <div class="card-header"' . getHeaderShade($currDate, $tooLate) . '>
               <small>' . $day . '</small>
               </div>' .
         getCardByUser($Menu->Breakfast, $currDate, $tooLate) . '<hr class="hr" />' .
@@ -212,7 +219,7 @@ function GetCardsByWeek($week)
         getCardByUser($Menu->Dessert, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->FirstDinner, $currDate, $tooLate) . '<hr class="hr" />' .
         getCardByUser($Menu->SecondDinner, $currDate, $tooLate) .
-        '<div class="card-footer" '. getHeaderShade($currDate, $tooLate) .'>
+        '<div class="card-footer" ' . getHeaderShade($currDate, $tooLate) . '>
                   <small>' . $day . '</small>
                 </div>
             </div></div>';
@@ -240,15 +247,14 @@ function GetCardsByWeekAdmin($week)
     $tooLate = tooLateToOrder($currDate);
     $Menu = $Menu->GetMenuByDateAdmin($currDate);
 
-    if ($past){
+    if ($past) {
       $cards = $cards . emptyCard($day);
-    }
-    else if (isset($Menu->Breakfast)) {
+    } else if (isset($Menu->Breakfast)) {
       $cards = $cards .
-      '<div class="swiper-slide">
+        '<div class="swiper-slide">
         <div class="col">
         <div class="card">
-          <div class="card-header" '. getHeaderShade($currDate, $tooLate) .'>
+          <div class="card-header" ' . getHeaderShade($currDate, $tooLate) . '>
               <small>' . $day . '</small>
               </div>' .
         getCardByAdmin($Menu->Breakfast, $day, $Menu) . '<hr class="hr" />' .
@@ -258,17 +264,17 @@ function GetCardsByWeekAdmin($week)
         getCardByAdmin($Menu->Dessert, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->FirstDinner, $day, $Menu) . '<hr class="hr" />' .
         getCardByAdmin($Menu->SecondDinner, $day, $Menu) .
-        '<div class="card-footer" '. getHeaderShade($currDate, $tooLate) .'>
+        '<div class="card-footer" ' . getHeaderShade($currDate, $tooLate) . '>
                   <small>' . $day . '</small>
                 </div>
               </div>
             </div></div>';
     } else {
       $cards = $cards .
-      '<div class="swiper-slide">
+        '<div class="swiper-slide">
       <div class="col">
       <div class="card">
-      <div class="card-header" '. getHeaderShade($currDate, $tooLate) .'>>
+      <div class="card-header" ' . getHeaderShade($currDate, $tooLate) . '>>
               <small>' . $day . '</small>
                 </div>
                 <div class="card-body">
@@ -278,7 +284,7 @@ function GetCardsByWeekAdmin($week)
                 Hinzufügen
               </button>
                 </div>
-                <div class="card-footer" '. getHeaderShade($currDate, $tooLate) .'>>
+                <div class="card-footer" ' . getHeaderShade($currDate, $tooLate) . '>>
                   <small>' . $day . '</small>
                 </div>
               </div>

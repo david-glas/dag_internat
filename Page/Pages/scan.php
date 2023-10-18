@@ -7,12 +7,11 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Qr scan</h1>
+                        <h1 class="modal-title fs-5" id="modalTitle">Qr scan</h1>
                         <button id="closeButtonId" type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body mt-3 mb-3">
-                        <p id="symbol"></p>
                         <p id="scanText"></p>
                     </div>
                 </div>
@@ -67,8 +66,6 @@
                 })
                     .then(response => response.json())
                     .then(data => {
-                        //var scanText = document.getElementById("scanText");
-                        //scanText.innerHTML = data;
                         setModal(data);
                     })
                     .catch(error => {
@@ -80,9 +77,8 @@
         }
 
         function setModal(data) {
-            var symbol = document.getElementById("symbol");
             var scan = document.getElementById("scanText");
-
+            var title = document.getElementById("modalTitle");
             request = {
                 action: "getUserMenu",
                 userid: data["userid"],
@@ -98,19 +94,28 @@
             })
                 .then(response => response.json())
                 .then(result => {
+                    scan.innerHTML = "";
                     if (result.length == 0) {
-
-                        symbol.style.color = "red";
-                        symbol.style.fontSize = 30;
-                        symbol.innerHTML = "X";
+                        title.style.color = "red";
+                        title.innerHTML = "Ungültig!";
+                        scan.style.color = "red";
+                        scan.innerHTML = "<h5>" + data['name'] + " hat kein Essen bestellt.</h5>";
                     } else {
-                        symbol.style.color = "green";
-                        symbol.style.fontSize = 30;
-                        symbol.innerHTML = "Y";
-                        scan.innerHTML = "";
-                        result.forEach(function (order) {
-                            scan.innerHTML += "<p>" + order['type'] + "</p>";
-                        })
+                        if (result[0]["time"] == null) {
+                            title.style.color = "green";
+                            title.innerHTML = "Gültig!";
+                            scan.style.color = "green";
+                            scan.innerHTML = "<h5>" + data['name'] + " hat folgendes Essen bestellt:</h5>";
+                            result.forEach(function (order) {
+                                scan.innerHTML += "<p><b>   ▸   " + order['name'] + "</b></p>";
+                            })
+                        } else {
+                            title.style.color = "red";
+                            title.innerHTML = "Ungültig!";
+                            scan.style.color = "red";
+                            scan.innerHTML = "<h5>Essen von " + data['name'] + " wurde bereits abgeholt.</h5>";
+                        }
+
                     };
                 })
                 .catch(error => {

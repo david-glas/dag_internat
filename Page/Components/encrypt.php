@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "../Database/conn.php";
 $userId = $_SESSION["user"]["userid"];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -7,11 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Retrieve form data
   $action = $requestData->action;
 
-
   if ($action == "encrypt") {
     $tod = $requestData->tod;
     $date = $requestData->day;
-    $text = '{"userid":"' . $userId . '","tod":"' . $tod . '","date":"' . $date . '"}';
+    $name = (new User())->GetUserNameById($userId);
+    $text = '{"userid":"' . $userId . '","name":"' . $name . '","tod":"' . $tod . '","date":"' . $date . '"}';
 
     $test = encrypt_decrypt($action, $text);
 
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo $test;
   }
 }
-;
+
 
 function encrypt_decrypt($action, $string)
 {

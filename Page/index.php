@@ -46,12 +46,18 @@ include "Components/nav.php";
   if (isset($_GET['page'])) {
     switch ($_GET['page']) {
       case 'dashboard':
-        if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) { include "Pages/dashboard.php"; }
-        else { echo '<div class="container"><h1>Nice try Hackerman!</h1></div>'; }
+        if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
+          include "Pages/dashboard.php";
+        } else {
+          echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
+        }
         break;
       case 'menu':
-        if ($_SESSION["user"]["account"] != "webuser") { include "Pages/menu.php"; }
-        else { echo '<div class="container"><h1>Nice try Hackerman!</h1></div>'; }
+        if ($_SESSION["user"]["account"] != "webuser") {
+          include "Pages/menu.php";
+        } else {
+          echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
+        }
         break;
       case 'about':
         include "Pages/about.php";

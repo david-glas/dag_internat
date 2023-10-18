@@ -11,8 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = removeUserFromMenu($requestData->menuId, $requestData->userId);
     } else if ($requestData->method == "addFoodToMenu") {
         $result = addFoodToMenu($requestData->foodId, $requestData->menuId);
-    }
-    else if ($requestData->method == "addMenuDay") {
+    } else if ($requestData->method == "addMenuDay") {
         $result = addMenuDay($requestData->day);
     }
     // Hier deine gewünschte Methode ausführen
@@ -41,7 +40,10 @@ function addFoodToMenu($foodId, $menuId)
 {
     $Menu = new Menu();
     $result = $Menu->AddFoodToMenu($foodId, $menuId);
-
+    if (is_null($foodId)) {
+        $Menu->RemoveUserFromMenuByDelete($menuId);
+        return "";
+    }
     return $result["name"];
 }
 

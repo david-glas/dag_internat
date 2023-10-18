@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(response => response.text())
     .then(data => {
       updateTabs(data);
-      if (data == "unverified"){
+      if (data == "unverified") {
         getModal();
       }
     })
@@ -68,10 +68,13 @@ function updateButtons() {
     item.addEventListener('click', function () {
 
       const menuId = item.getAttribute('data-menu-id');
-      const foodId = item.getAttribute('data-food-id');
+      var foodId = item.getAttribute('data-food-id');
       const url = 'Database/MenuHandling.php';
       const method = 'addFoodToMenu';
 
+      if (foodId == "") {
+        foodId = null;
+      }
 
       const requestData = {
         method: method,
@@ -135,8 +138,7 @@ function updateTabs(user) {
 
   var spinner = document.getElementById("spinner");
   spinner.style.display = "none";
-  const tabs = document.querySelectorAll('a');
-  var user;
+  const tabs = document.querySelectorAll('[name="Week"]');
 
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
@@ -202,22 +204,22 @@ function updateSwiper() {
     slidesPerView: 1,
     spaceBetween: 25,
     initialSlide: (new Date()).getDay() - 1,
-    breakpoints:{
-        0: {
-            slidesPerView: 1,
-        },
-        520: {
-            slidesPerView: 2,
-        },
-        950: {
-            slidesPerView: 3,
-        },
-        1200: {
-          slidesPerView: 4,
-        },
-        1400: {
-          slidesPerView: 5,
-       }
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      520: {
+        slidesPerView: 2,
+      },
+      950: {
+        slidesPerView: 3,
+      },
+      1200: {
+        slidesPerView: 4,
+      },
+      1400: {
+        slidesPerView: 5,
+      }
     },
     loop: false,
     centerSlide: 'true',
@@ -226,61 +228,61 @@ function updateSwiper() {
   });
 }
 
-function getModal(){
+function getModal() {
   var myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"), {});
   myModal.show();
 
   var btn = document.getElementById("savepw");
-  btn.addEventListener('click', function(){
+  btn.addEventListener('click', function () {
     var pw1 = document.getElementById("pw");
     var pw2 = document.getElementById("pwagain");
 
     //check empty password field
 
-    if(pw1.value == "") {
+    if (pw1.value == "") {
       document.getElementById("msg").innerHTML = "Bitte geben sie Ihr neues Passwort ein.";
       return;
-    } 
+    }
 
     //minimum password length validation
-    if(pw1.value.length < 6) {
-        document.getElementById("msg").innerHTML = "Das Passwort muss mindestens 6 Zeichen lang sein.";
-        return;
+    if (pw1.value.length < 6) {
+      document.getElementById("msg").innerHTML = "Das Passwort muss mindestens 6 Zeichen lang sein.";
+      return;
     }
 
     //maximum length of password validation
-    if(pw1.value.length > 15) {
+    if (pw1.value.length > 15) {
       document.getElementById("msg").innerHTML = "Passwort darf maximal 15 Zeichen lang sein.";
       return;
     } else {
-      if(pw1.value == pw2.value){
-          document.getElementById("msg").innerHTML=  "Passwörter stimmen überein!";
-          const requestData = {
-            method: 'updateUser',
-            pw: pw1.value
-          };
-    
-          fetch('Components/updateUser.php', {
-            method: 'POST',
-            body: JSON.stringify(requestData),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
+      if (pw1.value == pw2.value) {
+        document.getElementById("msg").innerHTML = "Passwörter stimmen überein!";
+        const requestData = {
+          method: 'updateUser',
+          pw: pw1.value
+        };
+
+        fetch('Components/updateUser.php', {
+          method: 'POST',
+          body: JSON.stringify(requestData),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
           .then(response => response.json())
           .then(data => {
-            if (data["result"] == 1){
+            if (data["result"] == 1) {
               myModal.toggle();
-            } 
+            }
           })
           .catch(error => {
             console.error('Error:', error);
           });
       }
-    
+
       else {
-          document.getElementById("msg").innerHTML=  "Passwords not match!";
-          return;
+        document.getElementById("msg").innerHTML = "Passwords not match!";
+        return;
       }
     }
   });
