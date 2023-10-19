@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(response => response.text())
     .then(data => {
       updateTabs(data);
-      if (data == "unverified") {
+      if (data == "Schüler (ohne Passwort)") {
         getModal();
       }
     })
@@ -146,7 +146,7 @@ function updateTabs(user) {
       spinner.style.display = "block";
       const url = 'Components/MenuCard.php';
       var method = 'getCardsByWeek';
-      if (user == "admin" || user == "cantine") {
+      if (user == "Admin" || user == "Kantine") {
         method = 'getCardsByWeekAdmin';
       }
       const requestData = {
