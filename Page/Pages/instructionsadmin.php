@@ -16,18 +16,18 @@
   <div class="row featurette mt-3">
     <div class="col-md-7 order-md-2">
       <h1 class="display-6">Neuen User anlegen</h1>
-      <p class="fs-5">
+      <h5>1.</h5>
+      <p class="fs-6">
         Im Dashboard kann man unter dem Reiter "Benutzer" neue User anlegen. Der <span style="color: red">ROTE</span> Pfeil zeigt auf einen Button.
       </p>
-      <p class="fs-5">
+      <h5>2.</h5>
+      <p class="fs-6">
         Nach dem betätigen dieses Buttons kommt seitlich ein Menü zum anlegen der User.
-      </p>
-      <p class="fs-5">
-        Hier gibt man die gewünschten Informationen ein und bestätigt mit dem Button auf den der <span style="color: #ffc107">GELBE</span> Pfeil zeigt
       </p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\newUser.png" id="imgNewUser" onclick="changeImage(this)">
+      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\newUser.png" id="imgNewUser" onclick="changeImage(this, 'badgeContainer1')">
+      <div id="badgeContainer1"></div>
     </div>
   </div>
 
@@ -36,17 +36,18 @@
   <div class="row featurette mt-3">
     <div class="col-md-7">
       <h1 class="display-6">Userinformationen ändern</h1>
-      <p class="fs-5">
+      <h5>1.</h5>
+      <p class="fs-6">
         Der <span style="color: red">ROTE</span> Pfeil zeigt auf eine Dropbox die dann verschiedene Menüs enthält.
-      <p class="fs-5">
-        Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
       </p>
-      <p class="fs-5">
-        
+      <h5>2.</h5>
+      <p class="fs-6">
+        Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
       </p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\changeUser.png" id="imgChangeUser" onclick="changeImage(this)">
+      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\changeUser.png" id="imgChangeUser" onclick="changeImage(this, 'badgeContainer2')">
+      <div id="badgeContainer2"></div>
     </div>
   </div>
 
@@ -55,18 +56,18 @@
   <div class="row featurette mt-3">
     <div class="col-md-7 order-md-2">
       <h1 class="display-6">Neue Speise anlegen</h1>
-      <p class="fs-5">
+      <h5>1.</h5>
+      <p class="fs-6">
         Im Dashboard kann man unter dem Reiter "Gerichte" neue Speisen anlegen. Der <span style="color: red">ROTE</span> Pfeil zeigt auf einen Button.
       </p>
-      <p class="fs-5">
+      <h5>2.</h5>
+      <p class="fs-6">
         Nach dem betätigen dieses Buttons kommt seitlich ein Menü zum anlegen der Speisen.
-      </p>
-      <p class="fs-5">
-        Hier legt man die gewünschten Speise an und bestätigt mit dem Button auf den der <span style="color: #ffc107">GELBE</span> Pfeil zeigt
       </p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\newMeal.png" id="imgNewMeal" onclick="changeImage(this)">
+      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\newMeal.png" id="imgNewMeal" onclick="changeImage(this, 'badgeContainer3')">
+      <div id="badgeContainer3"></div>
     </div>
   </div>
 
@@ -75,17 +76,18 @@
   <div class="row featurette mt-3">
     <div class="col-md-7">
       <h1 class="display-6">Menükarte befüllen</h1>
-      <p class="fs-5">
+      <h5>1.</h5>
+      <p class="fs-6">
         Der <span style="color: red">ROTE</span> Pfeil zeigt auf eine Dropbox die dann verschiedene Menüs enthält.
-      <p class="fs-5">
-        Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
       </p>
-      <p class="fs-5">
-        
+      <h5>2.</h5>
+      <p class="fs-6">
+        Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
       </p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\changeMeal.png" id="imgChangeMeal" onclick="changeImage(this)">
+      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\changeMeal.png" id="imgChangeMeal" onclick="changeImage(this, 'badgeContainer4')">
+      <div id="badgeContainer4"></div>
     </div>
   </div>
   
@@ -94,18 +96,22 @@
   <div class="row featurette mt-3">
     <div class="col-md-7 order-md-2">
       <h1 class="display-6">Menükarte befüllen</h1>
-      <p class="fs-5">
+      <h5>1.</h5>
+      <p class="fs-6">
         Der <span style="color: red">ROTE</span> Pfeil zeigt auf eine Dropbox die dann verschiedene Menüs enthält.
-      <p class="fs-5">
+      </p>
+      <h5>2.</h5>
+      <p class="fs-6">
         Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
       </p>
-      <p class="fs-5">
+      <h5>3.</h5>
+      <p class="fs-6">
         
       </p>
     </div>
     <div class="col-md-5">
-      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\changeMenue.png" id="imgChangeMenue" onclick="changeImage(this)">
-      <span class="badge text-bg-warning">1</span>
+      <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto image-with-border" src="assets\img\changeMenue.png" id="imgChangeMenue" onclick="changeImage(this, 'badgeContainer5')">
+      <div id="badgeContainer5"></div>
     </div>
   </div>
 </div>
@@ -113,57 +119,74 @@
 
 
 <script>
-  /*document.addEventListener('DOMContentLoaded', function () {
-    var imgs = document.querySelectorAll("#img");
-    imgs.forEach(function (img, index) {
-      img.addEventListener('click', function(){
-        let str = img.src;
 
-        if (str.includes("2")) {
-            // Remove the '2' if it's present
-            str = str.replace("2", "");
-        } else {
-            // Insert '2' at the end of the string
-            str = str.slice(0, str.lastIndexOf(".")) + "2" + str.slice(str.lastIndexOf("."));
-        }
+  document.addEventListener("DOMContentLoaded", function() {
+    var initialBadgeValue = 1;
+    changeNumber(initialBadgeValue, "badgeContainer1");
+    changeNumber(initialBadgeValue, "badgeContainer2");
+    changeNumber(initialBadgeValue, "badgeContainer3");
+    changeNumber(initialBadgeValue, "badgeContainer4");
+    changeNumber(initialBadgeValue, "badgeContainer5");
+  });
 
-        img.src = str;
-      });
-    });
-  });*/
-  function changeImage(imgElement) {
+
+  function changeImage(imgElement, badgeContainerId) {
+    var x = 1
     if(imgElement.id == "imgNewUser"){
       if (imgElement.src.endsWith("newUser.png")) {
         imgElement.src = "assets\\img\\newUser2.png";
+        x = 2;
       } else {
         imgElement.src = "assets\\img\\newUser.png";
+        x = 1;
       }
     }else if(imgElement.id == "imgChangeUser"){
       if (imgElement.src.endsWith("changeUser.png")) {
         imgElement.src = "assets\\img\\changeUser2.png";
+        x = 2;
       } else {
         imgElement.src = "assets\\img\\changeUser.png";
+        x = 1;
       }
     }else if(imgElement.id == "imgNewMeal"){
       if (imgElement.src.endsWith("newMeal.png")) {
         imgElement.src = "assets\\img\\newMeal2.png";
+        x = 2;
       } else {
         imgElement.src = "assets\\img\\newMeal.png";
+        x = 1;
       }
     }else if(imgElement.id == "imgChangeMeal"){
       if (imgElement.src.endsWith("changeMeal.png")) {
         imgElement.src = "assets\\img\\changeMeal2.png";
+        x = 2;
       } else {
         imgElement.src = "assets\\img\\changeMeal.png";
+        x = 1;
       }
     }else if(imgElement.id == "imgChangeMenue"){
       if (imgElement.src.endsWith("changeMenue.png")) {
         imgElement.src = "assets\\img\\changeMenue2.png";
+        x = 2;
       } else if(imgElement.src.endsWith("changeMenue2.png")){
         imgElement.src = "assets\\img\\changeMenue3.png";
+        x = 3;
       } else {
         imgElement.src = "assets\\img\\changeMenue.png";
+        x = 1;
       }
+    }
+    changeNumber(x, badgeContainerId);
+  }
+
+  function changeNumber(x, badgeContainerId) {
+    var badgeContainer = document.getElementById(badgeContainerId);
+    if (x == 1) {
+      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px">1</span>';
+    } else if (x == 2) {
+      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px">2</span>';
+    } else if (x == 3) {
+      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px">3</span>';
     }
   }
 </script>
