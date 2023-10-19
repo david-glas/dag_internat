@@ -7,7 +7,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalTitle">Qr scan</h1>
+                        <h1 class="modal-title fs-5" id="modalTitle">QR Scan</h1>
                         <button id="closeButtonId" type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -142,7 +142,17 @@
         );
         htmlscanner.render(onScanSuccess);
 
+        setTimeout(makeGerman, 1500)
+
     });
+    
+    function makeGerman(){
+        var btn = document.getElementById("html5-qrcode-button-camera-start");
+        btn.innerHTML = "Starte Scannen";
+
+        var btn = document.getElementById("html5-qrcode-button-camera-stop");
+        btn.innerHTML = "Stoppe Scannen";
+    }
 </script>
 <style>
     .section {

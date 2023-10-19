@@ -68,7 +68,7 @@
         if ($_SESSION["user"]["account"] != "webuser") {
           echo
           '<li class="nav-item mx-3">
-            <a class="nav-link btn-secondary'. setActive('menu') .'" href="?page=menu">Menu</a>
+            <a class="nav-link btn-secondary'. setActive('menu') .'" href="?page=menu">Menü</a>
           </li>';
 
           if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
@@ -87,24 +87,24 @@
         }
         ?>
         <li class="nav-item mx-3">
-          <a class="<?php echo 'nav-link'. setActive('instructions') ?>" href="?page=instructions">Instructions</a>
+          <a class="<?php echo 'nav-link'. setActive('instructions') ?>" href="?page=instructions">Handbuch</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="<?php echo 'nav-link'. setActive('about') ?>" href="?page=about">About</a>
+          <a class="<?php echo 'nav-link'. setActive('about') ?>" href="?page=about">Über uns</a>
         </li>
         <?php
         if ($_SESSION["user"]["account"] != "webuser") {
           echo
           '<form action="Components/logout.php">
             <button type="submit" class="btn btn-warning mx-3 btn-sm p-2">
-              <i class="bi bi-door-closed-fill"></i> Logout
+              <i class="bi bi-door-closed-fill"></i> Abmelden
             </button>
             </form>';
         }
         else {
           echo
           '<button type="button" class="btn btn-warning mx-3 btn-sm p-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="bi bi-person-fill"></i> Login
+            <i class="bi bi-person-fill"></i> Anmelden
           </button>';
         }
         ?>
@@ -131,7 +131,7 @@
             <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password" name="password">
             <label for="floatingPassword">Passwort</label>
           </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" type="submit">Login</button>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary" type="submit">Anmelden</button>
         </form>
       </div>
     </div>
