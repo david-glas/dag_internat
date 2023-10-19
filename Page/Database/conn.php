@@ -127,10 +127,11 @@ class User extends Conn
         }
     }
 
-    function GetAllUsers()
+    function GetAllUsers($where = "")
     {
         try {
-            $query = "select user_id, firstname, lastname, svnr, `name` `role`, role_id from user inner join role using(role_id)";
+            $query = "select user_id, firstname, lastname, svnr, `name` `role`, role_id from user inner join role using(role_id) ";
+            $query .= $where;
             $stmt = $this->makeStatement($query);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
@@ -138,6 +139,17 @@ class User extends Conn
             echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
         }
     }
+    function GetUsersByMenuID($menu_id) {
+        $query = "select concat(firstname, ' ', lastname) 'name', time, user_id, menu_id
+                    from menu
+                    inner join user_menu using(menu_id)
+                    inner join user using(user_id)
+                    where menu_id = ?;";
+        $stmt = $this->makeStatement($query, array($menu_id));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 
     function CheckLogin($svnr, $password)
     {
@@ -181,7 +193,6 @@ class User extends Conn
 
     function GetUserMenu($userid, $tod, $date)
     {
-
         $query = "select mv.*, time, user_id from user_menu 
                     join menu_v mv using (menu_id)
                     join meal m using (meal_id)
@@ -554,12 +565,18 @@ class Menu extends Conn
         return $this;
     }
 
-    function AddUserToMenu($menuId, $userId)
+    function AddUserToMenu($menuId, $userId, $setTime = false)
     {
-
-        $query = "insert into user_menu(menu_id, user_id)
+        if ($setTime) {
+            $query = "insert into user_menu(menu_id, user_id, time)
+                    values (?, ?, current_timestamp());";
+            $stmt = $this->makeStatement($query, array($menuId, $userId));
+        }
+        else {
+            $query = "insert into user_menu(menu_id, user_id)
                     values (?, ?);";
-        $stmt = $this->makeStatement($query, array($menuId, $userId));
+            $stmt = $this->makeStatement($query, array($menuId, $userId));
+        }
     }
 
     function RemoveUserFromMenu($menuId, $userId)
@@ -568,13 +585,13 @@ class Menu extends Conn
                     where menu_id = ? and user_id = ?";
         $stmt = $this->makeStatement($query, array($menuId, $userId));
     }
-    function GetMenuForWeek()
+    function GetMenuForWeek($week_offset = 0)
     {
         try {
-            $query = "select mv.food_id, mv.name, mv.meal_id, mv.type, date_format(mv.day, '%d.%m.%Y') `day`, mv.day_name, count(user_id) amount
+            $query = "select menu_id, mv.food_id, mv.name, mv.meal_id, mv.type, date_format(mv.day, '%d.%m.%Y') `day`, mv.day_name, count(user_id) amount
                         from menu_v mv 
                         left join user_menu um using (menu_id)
-                        where day between current_date() and current_date()+7
+                        where day between current_date()-".$week_offset." and current_date()+7-".$week_offset."
                         group by menu_id
                         order by `day`, meal_id;";
 
