@@ -182,11 +182,11 @@
   function changeNumber(x, badgeContainerId) {
     var badgeContainer = document.getElementById(badgeContainerId);
     if (x == 1) {
-      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px">1</span>';
+      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px; position: relative; bottom: 27px; left: 2px;">1</span>';
     } else if (x == 2) {
-      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px">2</span>';
+      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px; position: relative; bottom: 27px; left: 2px;">2</span>';
     } else if (x == 3) {
-      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px">3</span>';
+      badgeContainer.innerHTML = '<span class="badge text-bg-warning" style="width: 27px; height: 25px; font-size: 15px; position: relative; bottom: 27px; left: 2px;">3</span>';
     }
   }
 </script>
