@@ -71,14 +71,14 @@
             <a class="nav-link btn-secondary'. setActive('menu') .'" href="?page=menu">Menü</a>
           </li>';
 
-          if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
+          if (in_array($_SESSION["user"]["account"], array("Admin", "Kantine"))) {
             echo
             '<li class="nav-item mx-3">
               <a class="nav-link'. setActive('dashboard') .'" href="?page=dashboard">Dashboard</a>
             </li>';
           }
 
-          if (in_array($_SESSION["user"]["account"], array("student"))) {
+          if (in_array($_SESSION["user"]["account"], array("Schüler"))) {
             echo
             '<li class="nav-item mx-3">
               <a class="nav-link" id="qrnav">QR</a>

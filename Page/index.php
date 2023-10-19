@@ -46,7 +46,7 @@ include "Components/nav.php";
   if (isset($_GET['page'])) {
     switch ($_GET['page']) {
       case 'dashboard':
-        if (in_array($_SESSION["user"]["account"], array("admin", "cantine"))) {
+        if (in_array($_SESSION["user"]["account"], array("Admin", "Kantine"))) {
           include "Pages/dashboard.php";
         } else {
           echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
