@@ -1,6 +1,6 @@
 <div class="container marketing mt-5">
 
-  <h1 class="display-3">Anleitung für Internatsschüler</h1>
+  <h1 class="display-3">Handbuch für Internatsschüler</h1>
 
   <hr class="featurette-divider">
   <hr class="featurette-divider">
@@ -9,7 +9,7 @@
     <div class="col-md-7">
       <h1 class="display-6">Speise auswählen</h1>
       <p class="fs-5">
-        Einem Benutzer wird nach dem Login die Menüseite gezeigt. Hier werden die aktuelle Woche und die nächsten zwei Wochen angezeigt. 
+        Einem Benutzer wird nach dem Anmelden die Menüseite gezeigt. Hier werden die aktuelle Woche und die nächsten zwei Wochen angezeigt. 
         Für jeden Tag werden die verfügbaren Mahlzeiten mit den zugehörigen Gerichten angezeigt. Die Anmeldung für eine Mahlzeit muss immer eine Woche im Voraus gemacht werden.
       </p>
       <p class="fs-5">
