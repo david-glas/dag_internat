@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap 5 Form with Modal</title>
+    <title>QR Code Test Generierung</title>
     <!-- Include Bootstrap 5 CSS and JavaScript -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
@@ -12,7 +12,7 @@
 <body>
 
 <div class="container">
-    <h2>Bootstrap 5 Form</h2>
+    <h2>QR Test</h2>
     <form id="myForm">
         <div class="mb-3">
             <label for="userId" class="form-label">User ID:</label>
