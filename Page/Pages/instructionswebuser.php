@@ -2,7 +2,7 @@
 
   <hr class="featurette-divider">
 
-  <h1 class="display-3">Instructions</h1>
+  <h1 class="display-3">Handbuch</h1>
   
   <hr class="featurette-divider">
   

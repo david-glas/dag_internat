@@ -8,9 +8,12 @@
 
 <div class="container marketing mt-5">
 
-  <h1 class="display-3">Anleitung für Administratoren</h1>
+  <h1 class="display-3">Handbuch für Administratoren</h1>
 
   <hr class="featurette-divider">
+    <p class="fs-6">
+       Durch das anklicken der Bilder können Sie das Bild wechseln.
+    </p>
   <hr class="featurette-divider">
 
   <div class="row featurette mt-3">
