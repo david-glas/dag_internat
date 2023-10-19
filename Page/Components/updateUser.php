@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user = new User();
   $result = $user->VerifyUser($userId, $pw, 3);
   $jsonData = json_encode(array('result' => (string)$result));
-  $_SESSION["user"]["account"] ="student";
+  $_SESSION["user"]["account"] ="Schüler";
   echo $jsonData;
 };
 ?>
