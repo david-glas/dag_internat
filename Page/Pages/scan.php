@@ -142,16 +142,25 @@
         );
         htmlscanner.render(onScanSuccess);
 
+        var btn = document.getElementById("html5-qrcode-button-camera-permission");
+        if (btn != null){
+            btn.innerHTML = "Kamerarechte anfragen";
+        }
         setTimeout(makeGerman, 1500)
 
     });
     
     function makeGerman(){
         var btn = document.getElementById("html5-qrcode-button-camera-start");
-        btn.innerHTML = "Starte Scannen";
 
+        if (btn != null){
+            btn.innerHTML = "Starte Scannen";
+        }
         var btn = document.getElementById("html5-qrcode-button-camera-stop");
-        btn.innerHTML = "Stoppe Scannen";
+
+        if (btn != null){
+            btn.innerHTML = "Stoppe Scannen";
+        }
     }
 </script>
 <style>
