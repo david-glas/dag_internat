@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       var qrtext = document.querySelector("#qrtext");
       qrtext.removeAttribute("hidden");
-      qrtext.innerHTML = "Not Ok";
+      qrtext.innerHTML = "Es kann derzeit kein QR-Code generiert werden.";
     }
     qrModal.toggle();
   });

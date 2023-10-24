@@ -74,7 +74,7 @@
                         title.style.color = "red";
                         title.innerHTML = "Ungültiger QR Code!";
                         scan.style.color = "red";
-                        scan.innerHTML += "<h5>Der QR Code ist falsch.</h5>";
+                        scan.innerHTML = "<h5>Der QR Code ist falsch oder der Scanner hat einen Fehler.</h5>";
                         scanModal.toggle();
                     });
                 flag = false;
