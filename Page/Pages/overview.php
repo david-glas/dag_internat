@@ -35,7 +35,7 @@ function fillMenuData() {
   $menuConn = new Menu();
   $menus = $menuConn->GetMenuForWeek($week_offset);
   $userConn = new User();
-  $allUsers = $userConn->GetAllUsers('where role_id in (2,3)');
+  $allUsers = $userConn->GetAllUsers('where role_id in (2,3,4)');
 
   $lastDay = '';
 
