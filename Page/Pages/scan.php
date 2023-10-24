@@ -98,10 +98,9 @@
             })
                 .then(response => response.json())
                 .then(result => {
-                    var enteredDate = new Date().toISOString().slice(0, 10);
-                    var curDate = enteredDate;
+                    var curDate = new Date().toISOString().slice(0, 10);
                     if (curDate != data["date"]) {
-                        const parts = enteredDate.split('-');
+                        const parts = data["date"].split('-');
                         const formattedDate = parts[2] + '.' + parts[1] + '.' + parts[0];
                         scan.innerHTML = "<h5>Falsches Datum! (" + formattedDate + ")";
                     } else {
@@ -117,15 +116,15 @@
                             title.style.color = "green";
                             title.innerHTML = "Gültig!";
                             scan.style.color = "green";
-                            scan.innerHTML += "<h5>" + data['name'] + " hat folgendes Essen bestellt:</h5>";
+                            scan.innerHTML += "<h5>" + data['name'] + " hat folgendes Essen bestellt:</h5><br>";
                             result.forEach(function (order) {
-                                scan.innerHTML += "<p><b>   ▸   " + order['name'] + "</b></p>";
+                                scan.innerHTML += "<p class='mb-1'><b>▸   " + order['type'] + ": " + order['name'] + "</b></p>";
                             })
                         } else {
                             title.style.color = "red";
                             title.innerHTML = "Ungültig!";
                             scan.style.color = "red";
-                            scan.innerHTML = "<h5>Essen von " + data['name'] + " wurde bereits abgeholt.</h5>";
+                            scan.innerHTML += "<h5>Essen von " + data['name'] + " wurde bereits abgeholt.</h5>";
                         }
 
                     }
@@ -143,22 +142,22 @@
         htmlscanner.render(onScanSuccess);
 
         var btn = document.getElementById("html5-qrcode-button-camera-permission");
-        if (btn != null){
+        if (btn != null) {
             btn.innerHTML = "Kamerarechte anfragen";
         }
         setTimeout(makeGerman, 1500)
 
     });
-    
-    function makeGerman(){
+
+    function makeGerman() {
         var btn = document.getElementById("html5-qrcode-button-camera-start");
 
-        if (btn != null){
+        if (btn != null) {
             btn.innerHTML = "Starte Scannen";
         }
         var btn = document.getElementById("html5-qrcode-button-camera-stop");
 
-        if (btn != null){
+        if (btn != null) {
             btn.innerHTML = "Stoppe Scannen";
         }
     }
