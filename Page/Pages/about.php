@@ -4,7 +4,7 @@
 
 <div class="container marketing mt-5">
 
-<h1 class="display-3">About us</h1>
+<h1 class="display-3">Über uns</h1>
 
 
 <hr class="featurette-divider">

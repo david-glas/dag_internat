@@ -4,6 +4,11 @@
     width: 526px;
     height: 300px;
   }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 3px;
+  }
 </style>
 
 <div class="container marketing mt-5">
@@ -21,11 +26,13 @@
       <h1 class="display-6">Neuen Benutzer anlegen</h1>
       <h5>1.</h5>
       <p class="fs-6">
-        Im Dashboard kann man unter dem Reiter "Benutzer" neue Benutzer anlegen. Um einen Benutzer anzulegen muss der Button auf den, der <span style="color: red">ROTE</span> Pfeil zeigt, geklickt werden.
+        Im Dashboard kann man unter dem Reiter "Benutzer" neue Benutzer anlegen. 
+        Um einen Benutzer anzulegen muss der Button auf den, der <span style="color: red">ROTE</span> Pfeil zeigt, geklickt werden.
       </p>
       <h5>2.</h5>
       <p class="fs-6">
-        Nach dem betätigen dieses Buttons kommt seitlich ein Menü zum anlegen der Benutzer. Nach der Eingabe der Daten müssen Sie auf den Button auf den, der <span style="color: #ffc107">GELBE</span> Pfeil zeigt, geklickt werden.
+        Nach dem betätigen dieses Buttons kommt seitlich ein Menü zum anlegen der Benutzer. 
+        Nach der Eingabe der Daten müssen Sie auf den Button auf den, der <span style="color: #ffc107">GELBE</span> Pfeil zeigt, geklickt werden.
       </p>
     </div>
     <div class="col-md-5">
@@ -41,11 +48,17 @@
       <h1 class="display-6">Benutzerinformationen ändern</h1>
       <h5>1.</h5>
       <p class="fs-6">
-        Der <span style="color: red">ROTE</span> Pfeil zeigt auf eine Dropbox die dann verschiedene Menüs enthält.
+        Um Benutzerdaten anzupassen müssen Sie im Reiter Benutzer beim Dashboard auf die Oberfläche auf die der <span style="color: red">ROTE</span> Pfeilzeigt klicken. 
+        Dann sollte seitlich ein Menü aufgehen.
       </p>
       <h5>2.</h5>
       <p class="fs-6">
-        Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
+        Um das Passwort zu ändern müssen Sie das Kästchen auf das der <span style="color: blue">BLAUE</span> Pfeil zeigt anhacken. 
+        Dann können Sie im vorgesehenen Feld das neue Passwort eintragen.
+      </p>
+      <p class="fs-6" style="margin-bottom: 1px;">
+        Um die Änderungen zu speichern müssen sie auf die Oberfläche auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt klicken. 
+        Um den Benutzer zu löschen die Oberfläche mit dem <span style="color: red">ROTEN</span> Pfeil.
       </p>
     </div>
     <div class="col-md-5">
@@ -61,11 +74,13 @@
       <h1 class="display-6">Neue Speise anlegen</h1>
       <h5>1.</h5>
       <p class="fs-6">
-        Im Dashboard kann man unter dem Reiter "Gerichte" neue Speisen anlegen. Der <span style="color: red">ROTE</span> Pfeil zeigt auf einen Button.
+        Im Dashboard kann man unter dem Reiter "Gerichte" neue Speisen anlegen. 
+        Der <span style="color: red">ROTE</span> Pfeil zeigt auf eine Oberfläche die nach dem anklicken seitlich ein Menü öffnet.
       </p>
       <h5>2.</h5>
       <p class="fs-6">
-        Nach dem betätigen dieses Buttons kommt seitlich ein Menü zum anlegen der Speisen.
+        In diesem Menü können Sie den Namen und die Art der Speise definieren. 
+        Um zu speichern müssen sie auf die Oberfläche auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt klicken.
       </p>
     </div>
     <div class="col-md-5">
@@ -81,11 +96,13 @@
       <h1 class="display-6">Menükarte befüllen</h1>
       <h5>1.</h5>
       <p class="fs-6">
-        Der <span style="color: red">ROTE</span> Pfeil zeigt auf eine Dropbox die dann verschiedene Menüs enthält.
+        Um die Speisen anzupassen müssen Sie im Reiter Gerichte beim Dashboard auf die Oberfläche auf die der <span style="color: red">ROTE</span> Pfeilzeigt klicken. 
+        Dann sollte seitlich ein Menü aufgehen.
       </p>
       <h5>2.</h5>
-      <p class="fs-6">
-        Durch die Auswahl eines Gerichts können Sie eine Speise zuweisen.
+      <p class="fs-6" style="margin-bottom: 1px;">
+        Um die Änderungen zu speichern müssen sie auf die Oberfläche, auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt klicken. 
+        Um den Benutzer zu löschen die Oberfläche mit dem <span style="color: red">ROTEN</span> Pfeil.
       </p>
     </div>
     <div class="col-md-5">
