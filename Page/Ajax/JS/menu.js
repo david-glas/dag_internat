@@ -251,8 +251,8 @@ function getModal() {
     }
 
     //maximum length of password validation
-    if (pw1.value.length > 15) {
-      document.getElementById("msg").innerHTML = "Passwort darf maximal 15 Zeichen lang sein.";
+    if (pw1.value.length > 30) {
+      document.getElementById("msg").innerHTML = "Passwort darf maximal 30 Zeichen lang sein.";
       return;
     } else {
       if (pw1.value == pw2.value) {
