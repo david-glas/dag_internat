@@ -138,6 +138,7 @@ function updateTabs(user) {
   const tabs = document.querySelectorAll('[name="Week"]');
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
+
       const url = 'Components/MenuCard.php';
       var method = 'getCardsByWeek';
       if (user == "Admin" || user == "Kantine") {
@@ -162,6 +163,11 @@ function updateTabs(user) {
           container.innerHTML = data;
           updateButtons();
           updateSwiper();
+          
+          tabs.forEach(element => {
+            element.classList.remove("active");
+          });
+          tab.classList.add("active");
         })
         .catch(error => {
           console.error('Fehler beim Abrufen der Daten:', error);
