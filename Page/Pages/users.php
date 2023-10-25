@@ -1,14 +1,3 @@
-<style>
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-     -webkit-appearance: none;
-      margin: 0;
-  }
- 
-  input[type=number] {
-    -moz-appearance: textfield;
-  }
-</style>
 <div class="d-flex justify-content-center align-items-center mb-3">
   <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-fill"></i>  Neuen Benutzer hinzufügen</button>
 </div>
@@ -22,7 +11,7 @@
     <div class="container">
       <form class="form-floating" method="POST" action="Components/user_functions.php">
         <div class="form-floating mb-2">
-          <input type="number" class="form-control" id="svnr_input" name="svnr_input" maxlength="10">
+          <input type="text" class="form-control" id="svnr_input" name="svnr_input" maxlength="10">
           <label for="svnr_input">Sozialversicherungsnummer</label>
         </div>
         <div class="form-floating mb-2">
@@ -103,7 +92,7 @@
                         <label for="userID_inputhidden">Benutzer ID</label>
                       </div>
                       <div class="form-floating mb-2">
-                        <input type="number" value="'. $user['svnr'] .'" class="form-control" id="svnr_input" name="svnr_input" maxlength="10">
+                        <input type="text" value="'. $user['svnr'] .'" class="form-control" id="svnr_input" name="svnr_input" maxlength="10">
                         <label for="svnr_input">Sozialversicherungsnummer</label>
                       </div>
                       <div class="form-floating mb-2">

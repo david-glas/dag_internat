@@ -124,7 +124,7 @@
       <div class="modal-body p-5 pt-0">
         <form method="POST" action="Components/login.php">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="0000000000" name="svnr">
+            <input type="text" class="form-control rounded-3" id="floatingInput" maxlength="10" name="svnr">
             <label for="floatingInput">SV-Nummer</label>
           </div>
           <div class="form-floating mb-3">
