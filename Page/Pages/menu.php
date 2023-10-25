@@ -32,10 +32,6 @@
   <a id="0" class="nav-link" name="Week" style="color: #565656; display:inline-block; float: none;">Aktuelle Woche</a>
   <a id="1" class="nav-link" name="Week" style="color: #565656; display:inline-block; float: none;">Nächste Woche</a>
   <a id="2" class="nav-link" name="Week" style="color: #565656; display:inline-block; float: none;">Übernächste Woche</a>
-  <a id="spinner" class="nav-item">
-      <div class="spinner-border text-secondary" role="status">
-      </div>
-  </a> 
   </nav>
 </div>
 </div>
