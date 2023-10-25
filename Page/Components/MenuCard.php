@@ -36,7 +36,7 @@ function getCurrentDay($lastMonday, $addedDays)
 function tooLateToOrder($date)
 {
   #return false;
-  return $date <= strtotime("today + 7 days");
+  return $date <= strtotime("today + 6 days");
 }
 
 function pastStyle($date)

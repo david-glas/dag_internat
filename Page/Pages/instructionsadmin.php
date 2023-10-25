@@ -27,12 +27,12 @@
       <h5>1.</h5>
       <p class="fs-6">
         Im Dashboard kann man unter dem Reiter "Benutzer" neue Benutzer anlegen. 
-        Um einen Benutzer anzulegen muss der Button auf den, der <span style="color: red">ROTE</span> Pfeil zeigt, geklickt werden.
+        Um einen Benutzer anzulegen muss der Button, auf den der <span style="color: red">ROTE</span> Pfeil zeigt, geklickt werden.
       </p>
       <h5>2.</h5>
       <p class="fs-6">
-        Nach dem betätigen dieses Buttons kommt seitlich ein Menü zum anlegen der Benutzer. 
-        Nach der Eingabe der Daten müssen Sie auf den Button auf den, der <span style="color: #ffc107">GELBE</span> Pfeil zeigt, geklickt werden.
+        Nach dem Betätigen des Buttons kommt seitlich ein Menü zum Anlegen der Benutzer. 
+        Nach der Eingabe der Daten müssen Sie auf den Button, auf den der <span style="color: #ffc107">GELBE</span> Pfeil zeigt, klicken.
       </p>
     </div>
     <div class="col-md-5">
@@ -48,16 +48,16 @@
       <h1 class="display-6">Benutzerinformationen ändern</h1>
       <h5>1.</h5>
       <p class="fs-6">
-        Um Benutzerdaten anzupassen müssen Sie im Reiter Benutzer beim Dashboard auf die Oberfläche auf die der <span style="color: red">ROTE</span> Pfeilzeigt klicken. 
-        Dann sollte seitlich ein Menü aufgehen.
+        Um Benutzerdaten anzupassen müssen Sie im Reiter Benutzer im Dashboard auf die Oberfläche, auf die der <span style="color: red">ROTE</span> Pfeil zeigt, klicken. 
+        Dann geht seitlich ein Menü aufgehen.
       </p>
       <h5>2.</h5>
       <p class="fs-6">
-        Um das Passwort zu ändern müssen Sie das Kästchen auf das der <span style="color: blue">BLAUE</span> Pfeil zeigt anhacken. 
+        Um das Passwort zu ändern müssen Sie das Kästchen, auf das der <span style="color: blue">BLAUE</span> Pfeil zeigt, anhacken. 
         Dann können Sie im vorgesehenen Feld das neue Passwort eintragen.
       </p>
       <p class="fs-6" style="margin-bottom: 1px;">
-        Um die Änderungen zu speichern müssen sie auf die Oberfläche auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt klicken. 
+        Um die Änderungen zu speichern müssen Sie auf die Oberfläche, auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt, klicken. 
         Um den Benutzer zu löschen die Oberfläche mit dem <span style="color: red">ROTEN</span> Pfeil.
       </p>
     </div>
@@ -80,7 +80,7 @@
       <h5>2.</h5>
       <p class="fs-6">
         In diesem Menü können Sie den Namen und die Art der Speise definieren. 
-        Um zu speichern müssen sie auf die Oberfläche auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt klicken.
+        Um zu speichern müssen Sie auf die Oberfläche auf die der <span style="color: #ffc107">GELBE</span> Pfeil zeigt klicken.
       </p>
     </div>
     <div class="col-md-5">
