@@ -50,6 +50,12 @@
     padding: 0px;
   }
   }
+
+  .navbar-toggler-icon-custom {
+  color: #ffc107; /* Orange color */
+  background-color: #ffc107; /* Orange color */;
+}
+
 </style>
 
 <nav class="navbar sticky-top nav-pills navbar-expand-md">
@@ -59,7 +65,9 @@
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
       aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler navbar-toggler-icon-custom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarsExample07">
@@ -124,7 +132,7 @@
       <div class="modal-body p-5 pt-0">
         <form method="POST" action="Components/login.php">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" id="floatingInput" placeholder="0000000000" name="svnr">
+            <input type="text" class="form-control rounded-3" id="floatingInput" maxlength="10" name="svnr">
             <label for="floatingInput">SV-Nummer</label>
           </div>
           <div class="form-floating mb-3">

@@ -135,15 +135,9 @@ function updateButtons() {
 };
 
 function updateTabs(user) {
-
-  var spinner = document.getElementById("spinner");
-  spinner.style.display = "none";
   const tabs = document.querySelectorAll('[name="Week"]');
-
   tabs.forEach(function (tab, index) {
     tab.addEventListener('click', function () {
-      var spinner = document.getElementById("spinner");
-      spinner.style.display = "block";
       const url = 'Components/MenuCard.php';
       var method = 'getCardsByWeek';
       if (user == "Admin" || user == "Kantine") {
@@ -166,8 +160,6 @@ function updateTabs(user) {
         .then(data => {
           var container = document.getElementById("card-container");
           container.innerHTML = data;
-          var spinner = document.getElementById("spinner");
-          spinner.style.display = "none";
           updateButtons();
           updateSwiper();
         })
@@ -251,8 +243,8 @@ function getModal() {
     }
 
     //maximum length of password validation
-    if (pw1.value.length > 15) {
-      document.getElementById("msg").innerHTML = "Passwort darf maximal 15 Zeichen lang sein.";
+    if (pw1.value.length > 30) {
+      document.getElementById("msg").innerHTML = "Passwort darf maximal 30 Zeichen lang sein.";
       return;
     } else {
       if (pw1.value == pw2.value) {

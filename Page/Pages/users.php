@@ -11,7 +11,7 @@
     <div class="container">
       <form class="form-floating" method="POST" action="Components/user_functions.php">
         <div class="form-floating mb-2">
-          <input type="text" class="form-control" id="svnr_input" name="svnr_input">
+          <input type="text" class="form-control" id="svnr_input" name="svnr_input" maxlength="10">
           <label for="svnr_input">Sozialversicherungsnummer</label>
         </div>
         <div class="form-floating mb-2">
@@ -92,7 +92,7 @@
                         <label for="userID_inputhidden">Benutzer ID</label>
                       </div>
                       <div class="form-floating mb-2">
-                        <input type="text" value="'. $user['svnr'] .'" class="form-control" id="svnr_input" name="svnr_input">
+                        <input type="text" value="'. $user['svnr'] .'" class="form-control" id="svnr_input" name="svnr_input" maxlength="10">
                         <label for="svnr_input">Sozialversicherungsnummer</label>
                       </div>
                       <div class="form-floating mb-2">
