@@ -50,6 +50,12 @@
     padding: 0px;
   }
   }
+
+  .navbar-toggler-icon-custom {
+  color: #ffc107; /* Orange color */
+  background-color: #ffc107; /* Orange color */;
+}
+
 </style>
 
 <nav class="navbar sticky-top nav-pills navbar-expand-md">
@@ -59,7 +65,9 @@
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
       aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler navbar-toggler-icon-custom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarsExample07">
