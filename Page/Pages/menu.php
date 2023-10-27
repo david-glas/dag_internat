@@ -14,16 +14,20 @@
     padding-bottom: .75rem;
     font-size: .875rem;
     color: #6c757d;
+    cursor: pointer!important;
   }
 
-  .nav-scroller .nav-link:hover {
-    color: #007bff;
+  @media (min-width: 769px) {
+    .nav-scroller .nav-link:hover {
+      color: #007bff!important;
   }
+}
 
   .nav-scroller .active {
     font-weight: 500;
     color: #343a40;
   }
+
 </style>
 
 <div class="container">
