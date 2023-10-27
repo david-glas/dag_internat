@@ -1,6 +1,40 @@
 <div class="d-flex justify-content-center align-items-center mb-3">
-  <button class="btn btn-warning" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-fill"></i>  Neuen Benutzer hinzufügen</button>
+  <button class="btn btn-warning mx-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-person-fill"></i>  Neuen Benutzer hinzufügen</button>
+  <button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal" data-bs-target="#showClasses"><i class="bi bi-house-fill"></i><span>  Klassen</span></button>
 </div>
+
+<div class="modal fade" id="showClasses">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Klassen</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="row mb-3">
+                  <div class="col-2"></div>
+                  <div class="col-8"><b>Name</b></div>
+                </div>
+                <?php fillClassModal() ?>
+              </div>
+              <hr class="divider">
+              <div class="container-fluid">
+                <form method="POST" action="Components/user_functions.php">
+                  <div class="row">
+                    <div class="col-2">
+                      <button type="submit" name="add" class="btn btn-sm btn-success"><i class="bi bi-plus-lg"></i></button>
+                    </div>
+                    <div class="col-8">
+                      <input type="text" class="form-control form-control-sm" placeholder="Neue Klasse" id="class_name" name="class_name">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
@@ -27,9 +61,16 @@
           <input type="password" class="form-control" id="password_input" name="password_input">
           <label for="password_input">Passwort</label>
         </div>
+        <div class="form-floating mb-2">
+          <select class="form-select" id="class_select" name="class_select">
+            <option value="-1">Keine Klasse</option>
+            <?php fillClassSelect(-1) ?>
+          </select>
+          <label for="class_select">Klasse</label>
+        </div>
         <div class="form-floating mb-4">
           <select class="form-select" id="role_select" name="role_select">
-            <?php fillRoleSelect(3) ?>
+            <?php fillRoleSelect(4) ?>
           </select>
           <label for="role_select">Rolle</label>
         </div>
@@ -48,8 +89,9 @@
         <th scope="col" style="width: 5%;">#</th>
         <th scope="col" style="width: 15%;">Vorname</th>
         <th scope="col" style="width: 20%;">Nachname</th>
-        <th scope="col" style="width: 25%;">SV-Nr</th>
-        <th scope="col" style="width: 20%;">Rolle</th>
+        <th scope="col" style="width: 20%;">SV-Nr</th>
+        <th scope="col" style="width: 15%;">Rolle</th>
+        <th scope="col" style="width: 10%;">Klasse</th>
         <th scope="col" style="width: 15%;"></th>
       </tr>
     </thead>
@@ -73,6 +115,7 @@
                 <td>'. $user['lastname'] .'</td>
                 <td>'. $user['svnr'] .'</td>
                 <td>'. $user['role'] .'</td>
+                <td>'. $user['class'] .'</td>
                 <td><button type="button" class="btn btn-warning btn-sm float-end" data-bs-toggle="offcanvas" data-bs-target="#change'. $user['user_id']  .'" aria-controls="change'. $user['user_id']  .'" id="'. $user['user_id'] .'">
                   <i class="bi bi-gear-fill"></i><span>  Ändern</span>
                 </button></td>
@@ -112,6 +155,13 @@
                         <label class="form-check-label" for="password_change'.$user['user_id'].'">
                             Passwort ändern
                         </label>
+                      </div>
+                      <div class="form-floating mb-2">
+                        <select class="form-select" id="class_select" name="class_select">
+                          <option value="-1">Keine Klasse</option>';
+                          fillClassSelect($user['class_id']);
+          echo          '</select>
+                        <label for="class_select">Klasse</label>
                       </div>
                       <script>
                       const disablePasswordCheckbox'.$user['user_id'].' = document.getElementById("password_change'.$user['user_id'].'");
@@ -155,6 +205,37 @@
         }
         echo '>'. $roles[$i]['name'] .'</option>';
       }
+    }
+  }
+  function fillClassSelect($class_id) {
+    $userConn = new User();
+    $classes = $userConn->GetAllClasses();
+
+    if ($classes != null) {
+      for($i=0; $i < count($classes); $i++) {
+        echo '<option value="'. $classes[$i]['class_id'] .'"';
+        if ($class_id == $i+2) { 
+          echo ' selected'; 
+        }
+        echo '>'. $classes[$i]['name'] .'</option>';
+      }
+    }
+  }
+
+  function fillClassModal() {
+    $userConn = new User();
+    $classes = $userConn->GetAllClasses();
+
+    foreach ($classes as $class) {
+      echo 
+      '<div class="row mt-1">
+        <div class="col-2">
+          <form method="POST" action="Components/user_functions.php">
+            <button type="submit" name="delete" value="'.$class['class_id'].'" class="btn btn-sm btn-danger"><i class="bi bi-x"></i></button>
+          </form>
+        </div>
+        <div class="col-8">'.$class['name'].'</div>
+      </div>';
     }
   }
 ?>

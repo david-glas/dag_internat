@@ -43,11 +43,11 @@ class Conn
 
 class User extends Conn
 {
-    function AddUser($svnr, $firstname, $lastname, $password, $roleId)
+    function AddUser($svnr, $firstname, $lastname, $password, $roleId, $classId)
     {
         try {
-            $query = "insert into user(svnr, firstname, lastname, pw, role_id) values (?, ?, ?, ?, ?)";
-            $arr = array($svnr, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId);
+            $query = "insert into user(svnr, firstname, lastname, pw, role_id, class_id) values (?, ?, ?, ?, ?, ?)";
+            $arr = array($svnr, $firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $classId);
             $stmt = $this->makeStatement($query, $arr);
 
             return true;
@@ -57,7 +57,7 @@ class User extends Conn
         }
     }
 
-    function UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $password_change, $roleId)
+    function UpdateUser($user_id, $svnr, $firstname, $lastname, $password, $password_change, $roleId, $classId)
     {
         try {
             if ($password_change) {
@@ -66,9 +66,10 @@ class User extends Conn
                                 lastName = ?, 
                                 pw = ?,
                                 role_id = ?,
+                                class_id = ?,
                                 svnr = ?
                             where user_id = ?;";
-                $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $svnr, $user_id);
+                $arr = array($firstname, $lastname, password_hash($password, PASSWORD_DEFAULT), $roleId, $classId, $svnr, $user_id);
                 $stmt = $this->makeStatement($query, $arr);
 
                 return true;
@@ -78,9 +79,10 @@ class User extends Conn
                             set firstname = ?, 
                                 lastName = ?, 
                                 role_id = ?,
+                                class_id = ?,
                                 svnr = ?
                             where user_id = ?;";
-                $arr = array($firstname, $lastname, $roleId, $svnr, $user_id);
+                $arr = array($firstname, $lastname, $roleId, $classId, $svnr, $user_id);
                 $stmt = $this->makeStatement($query, $arr);
 
                 return true;
@@ -130,7 +132,10 @@ class User extends Conn
     function GetAllUsers($where = "")
     {
         try {
-            $query = "select user_id, firstname, lastname, svnr, `name` `role`, role_id from user inner join role using(role_id) ";
+            $query = "select user_id, class_id, firstname, lastname, svnr, role.name 'role', role_id, coalesce(class.name, 'Keine Klasse') 'class'
+                        from user 
+                        inner join role using(role_id) 
+                        left join class using(class_id) ";
             $query .= $where;
             $stmt = $this->makeStatement($query);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -220,6 +225,35 @@ class User extends Conn
             $stmt = $this->makeStatement($query);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
+    }
+
+    function GetAllClasses() {
+        try {
+            $query = "select class_id, name from class";
+            $stmt = $this->makeStatement($query);
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
+    }
+
+    function DeleteClass($class_id) {
+        try {
+            $query = "delete from class where class_id = ?";
+            $this->makeStatement($query, array($class_id));
+        } catch (Exception $e) {
+            echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
+        }
+    }
+
+    function AddClass($class_name) {
+        try {
+            $query = "insert into class(name) values (?)";
+            $this->makeStatement($query, array($class_name));
         } catch (Exception $e) {
             echo 'Fehler - ' . $e->getCode() . ': ' . $e->getMessage() . '<br>';
         }

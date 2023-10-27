@@ -28,7 +28,11 @@
   <nav class="nav" aria-label="Secondary navigation">
     <a class="nav-link <?php setActiveSub('overview') ?>" href="?page=dashboard&subpage=overview">Übersicht</a>
     <a class="nav-link <?php setActiveSub('scan') ?>" href="?page=dashboard&subpage=scan">Scan</a>
-    <a class="nav-link <?php setActiveSub('users') ?>" href="?page=dashboard&subpage=users">Benutzer</a>  
+    <?php
+      if (in_array($_SESSION["user"]["account"], array("Admin"))) {
+        echo '<a class="nav-link '; setActiveSub('users'); echo '" href="?page=dashboard&subpage=users">Benutzer</a>';
+      }
+    ?>
     <a class="nav-link <?php setActiveSub('dishes') ?>" href="?page=dashboard&subpage=dishes">Gerichte</a>
   </nav>
 </div>
@@ -38,7 +42,12 @@
   if (isset($_GET['subpage'])) {
     switch ($_GET['subpage']) {
       case 'users':
-        include "Pages/users.php";
+        if (in_array($_SESSION["user"]["account"], array("Admin"))) {
+          include "Pages/users.php";
+        }
+        else {
+          echo '<div class="container"><h1>Nice try Hackerman!</h1></div>';
+        }
         break;
       case 'dishes':
         include "Pages/dishes.php";
